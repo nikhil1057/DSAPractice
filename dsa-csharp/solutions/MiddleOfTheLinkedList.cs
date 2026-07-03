@@ -1,48 +1,33 @@
 // 876. Middle of the Linked List
 // https://leetcode.com/problems/middle-of-the-linked-list/
 //
-// APPROACH: Two-pass — first count all nodes, then walk to the middle.
+// APPROACH: Slow/Fast pointer (Floyd's technique)
 //
-// HOW IT WORKS:
-// 1. First pass: count total number of nodes.
-// 2. Second pass: walk count/2 steps from head to reach the middle.
+// KEY INSIGHT: If slow moves 1 step and fast moves 2 steps, when fast reaches
+// the end, slow is at the middle. Fast covers the list in half the iterations.
 //
-// WHY count/2: For odd-length [1,2,3,4,5], count=5, count/2=2 → lands on node 3 (middle).
-// For even-length [1,2,3,4,5,6], count=6, count/2=3 → lands on node 4 (second middle).
-// This matches LeetCode's requirement: "If two middle nodes, return the second one."
+// WHY check `fast` AND `fast.next`: fast moves 2 steps, so both must be non-null.
+// - Odd list [1,2,3,4,5]: fast ends at node 5, slow at node 3 ✓
+// - Even list [1,2,3,4,5,6]: fast ends past the list (null), slow at node 4 ✓
+//   (returns the SECOND middle as LeetCode requires)
 //
-// ALTERNATIVE: Slow/fast pointer (one pass). Fast moves 2 steps, slow moves 1.
-// When fast reaches end, slow is at middle. Same idea as Floyd's cycle detection.
-//
-// TIME: O(n) — two passes through the list
-// SPACE: O(1) — just a counter and a pointer
+// TIME: O(n) — single pass (slow visits n/2 nodes, fast visits n nodes)
+// SPACE: O(1) — just two pointers
 
 public class MiddleOfTheLinkedList
 {
     public ListNode? MiddleNode(ListNode? head)
     {
-        if(head == null || head.next == null) return head;
+        var slow = head;
+        var fast = head;
 
-        // First pass: count total nodes
-        var curr = head;
-        int count = 0;
-
-        while(curr != null)
+        // fast moves 2x speed — when it reaches end, slow is at middle
+        while (fast != null && fast.next != null)
         {
-            curr = curr.next;
-            count++;
+            slow = slow.next;
+            fast = fast.next.next;
         }
 
-        // Second pass: walk to the middle (count/2 steps from head)
-        curr = head;
-        int i = 0;
-
-        while(i < count/2)
-        {
-            curr = curr.next;
-            i++;
-        }
-
-        return curr;
+        return slow;
     }
 }
