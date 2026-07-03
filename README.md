@@ -34,8 +34,9 @@ dotnet test --filter "ClassName"         # Run specific test class
 | # | Problem | Topics |
 |---|---------|--------|
 | 2 | Add Two Numbers | Linked List, Math |
-| 83 | Remove Duplicates from Sorted List | Linked List |
 | 82 | Remove Duplicates from Sorted List II | Linked List, Two Pointers |
+| 83 | Remove Duplicates from Sorted List | Linked List |
+| 141 | Linked List Cycle | Linked List, Two Pointers, Floyd's |
 | 160 | Intersection of Two Linked Lists | Linked List, Two Pointers |
 | 169 | Majority Element | Array, Boyer-Moore Voting |
 | 525 | Contiguous Array | Array, HashMap, Prefix Sum |
