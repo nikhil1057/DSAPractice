@@ -34,6 +34,7 @@ dotnet test --filter "ClassName"         # Run specific test class
 | # | Problem | Topics |
 |---|---------|--------|
 | 2 | Add Two Numbers | Linked List, Math |
+| 21 | Merge Two Sorted Lists | Linked List, Two Pointers |
 | 82 | Remove Duplicates from Sorted List II | Linked List, Two Pointers |
 | 83 | Remove Duplicates from Sorted List | Linked List |
 | 141 | Linked List Cycle | Linked List, Two Pointers, Floyd's |
@@ -41,3 +42,5 @@ dotnet test --filter "ClassName"         # Run specific test class
 | 169 | Majority Element | Array, Boyer-Moore Voting |
 | 525 | Contiguous Array | Array, HashMap, Prefix Sum |
 | 707 | Design Linked List | Linked List |
+| 876 | Middle of the Linked List | Linked List, Two Pointers, Floyd's |
+| 1290 | Convert Binary Number in Linked List | Linked List, Bitwise |
