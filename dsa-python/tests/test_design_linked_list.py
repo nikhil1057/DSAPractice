@@ -1,5 +1,5 @@
 import pytest
-from solutions.design_linked_list import MyLinkedList
+from solutions.linked_list.medium.design_linked_list import MyLinkedList
 
 
 class TestDesignLinkedList:

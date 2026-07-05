@@ -1,4 +1,4 @@
-from solutions.design_hashmap import MyHashMap
+from solutions.design.easy.design_hashmap import MyHashMap
 
 
 class TestDesignHashMap:

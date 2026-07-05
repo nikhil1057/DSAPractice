@@ -1,4 +1,4 @@
-from solutions.majority_element import MajorityElement
+from solutions.array_and_hashing.easy.majority_element import MajorityElement
 
 
 class TestMajorityElement:

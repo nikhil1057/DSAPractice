@@ -1,5 +1,5 @@
 from solutions import build_list, to_array
-from solutions.remove_linked_list_elements import RemoveLinkedListElements
+from solutions.linked_list.easy.remove_linked_list_elements import RemoveLinkedListElements
 
 
 class TestRemoveLinkedListElements:

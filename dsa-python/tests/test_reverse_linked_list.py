@@ -1,5 +1,5 @@
 from solutions import build_list, to_array
-from solutions.reverse_linked_list import ReverseLinkedList
+from solutions.linked_list.easy.reverse_linked_list import ReverseLinkedList
 
 
 class TestReverseLinkedList:

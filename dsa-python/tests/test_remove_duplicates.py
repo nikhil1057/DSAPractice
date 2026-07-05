@@ -1,6 +1,6 @@
 import pytest
 from solutions import build_list, to_array
-from solutions.remove_duplicates_from_sorted_list import (
+from solutions.linked_list.easy.remove_duplicates_from_sorted_list import (
     RemoveDuplicatesFromSortedList,
     RemoveDuplicatesFromSortedListII,
 )
