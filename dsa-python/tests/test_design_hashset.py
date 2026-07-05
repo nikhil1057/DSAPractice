@@ -1,4 +1,4 @@
-from solutions.design_hashset import MyHashSet
+from solutions.design.easy.design_hashset import MyHashSet
 
 
 class TestDesignHashSet:

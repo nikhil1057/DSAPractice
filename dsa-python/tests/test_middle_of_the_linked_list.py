@@ -1,5 +1,5 @@
 from solutions import build_list, to_array
-from solutions.middle_of_the_linked_list import MiddleOfTheLinkedList
+from solutions.linked_list.easy.middle_of_the_linked_list import MiddleOfTheLinkedList
 
 
 class TestMiddleOfTheLinkedList:

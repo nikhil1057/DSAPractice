@@ -1,5 +1,5 @@
 from solutions import build_list, to_array
-from solutions.add_two_numbers import AddTwoNumbers
+from solutions.linked_list.medium.add_two_numbers import AddTwoNumbers
 
 
 class TestAddTwoNumbers:

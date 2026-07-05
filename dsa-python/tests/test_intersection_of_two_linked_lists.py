@@ -1,6 +1,6 @@
 import pytest
 from solutions import ListNode, build_list
-from solutions.intersection_of_two_linked_lists import IntersectionOfTwoLinkedLists
+from solutions.linked_list.easy.intersection_of_two_linked_lists import IntersectionOfTwoLinkedLists
 
 
 def attach(prefix: list[int], intersection: ListNode | None) -> ListNode | None:

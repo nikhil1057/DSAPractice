@@ -1,5 +1,5 @@
 from solutions import build_list
-from solutions.convert_binary_number_in_linked_list import ConvertBinaryNumberInLinkedList
+from solutions.linked_list.easy.convert_binary_number_in_linked_list import ConvertBinaryNumberInLinkedList
 
 
 class TestConvertBinaryNumberInLinkedList:

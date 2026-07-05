@@ -1,5 +1,5 @@
 from solutions import ListNode, build_list
-from solutions.linked_list_cycle import LinkedListCycle
+from solutions.linked_list.easy.linked_list_cycle import LinkedListCycle
 
 
 def build_cycle_list(values: list[int], pos: int) -> ListNode | None:

@@ -1,5 +1,5 @@
 from solutions import build_list
-from solutions.palindrome_linked_list import PalindromeLinkedList
+from solutions.linked_list.easy.palindrome_linked_list import PalindromeLinkedList
 
 
 class TestPalindromeLinkedList:

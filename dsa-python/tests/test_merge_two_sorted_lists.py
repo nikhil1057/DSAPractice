@@ -1,5 +1,5 @@
 from solutions import build_list, to_array
-from solutions.merge_two_sorted_lists import MergeTwoSortedLists
+from solutions.linked_list.medium.merge_two_sorted_lists import MergeTwoSortedLists
 
 
 class TestMergeTwoSortedLists:

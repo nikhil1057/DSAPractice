@@ -1,4 +1,4 @@
-from solutions.contiguous_array import ContiguousArray
+from solutions.array_and_hashing.medium.contiguous_array import ContiguousArray
 
 
 class TestContiguousArray:
