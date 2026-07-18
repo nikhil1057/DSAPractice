@@ -1,0 +1,20 @@
+// 1899. Merge Triplets to Form Target Triplet
+// https://leetcode.com/problems/merge-triplets-to-form-target-triplet/
+//
+// A triplet is an array of three integers. You are given a 2D integer array
+// triplets and an integer array target. Return true if it is possible to obtain
+// target as an element of triplets after applying merge operations.
+//
+// APPROACH:
+// TODO: Describe your approach here
+//
+// TIME: O(?)
+// SPACE: O(?)
+
+public class MergeTripletsToFormTargetTriplet
+{
+    public bool MergeTriplets(int[][] triplets, int[] target)
+    {
+        throw new System.NotImplementedException();
+    }
+}
