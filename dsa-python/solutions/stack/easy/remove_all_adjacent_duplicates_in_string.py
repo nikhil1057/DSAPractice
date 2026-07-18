@@ -22,12 +22,12 @@
 
 class RemoveAllAdjacentDuplicatesInString:
     def remove_duplicates(self, s: str) -> str:
-        stack = []
+        stack = []  # Holds surviving characters
 
         for char in s:
             if stack and stack[-1] == char:
-                stack.pop()
+                stack.pop()           # Adjacent duplicate found → cancel both
             else:
-                stack.append(char)
-        
-        return ''.join(stack)
+                stack.append(char)    # No match → push onto stack
+
+        return ''.join(stack)  # Stack contains remaining chars in order

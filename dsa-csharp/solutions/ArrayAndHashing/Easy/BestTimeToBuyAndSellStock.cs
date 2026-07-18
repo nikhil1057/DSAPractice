@@ -28,13 +28,13 @@ public class BestTimeToBuyAndSellStock
 {
     public int MaxProfit(int[] prices)
     {
-        int maxPro = 0;
-        int min = int.MaxValue;
+        int maxPro = 0;            // Best profit achievable
+        int min = int.MaxValue;    // Lowest price seen so far (best buy day)
 
         for(int i = 0; i < prices.Length; i++)
         {
-            if(prices[i] < min) min = prices[i];
-            maxPro = Math.Max(prices[i] - min, maxPro);
+            if(prices[i] < min) min = prices[i];                   // Found a cheaper buy day
+            maxPro = Math.Max(prices[i] - min, maxPro);            // Check if selling today is best
         }
 
         return maxPro;

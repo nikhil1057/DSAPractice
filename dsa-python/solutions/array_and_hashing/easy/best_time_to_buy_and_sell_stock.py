@@ -26,11 +26,11 @@
 
 class BestTimeToBuyAndSellStock:
     def max_profit(self, prices: list[int]) -> int:
-        min_price = float('inf')
-        max_profit = 0
+        min_price = float('inf')  # Lowest price seen so far (best buy day)
+        max_profit = 0            # Best profit achievable
 
         for price in prices:
-            if min_price > price: min_price = price
-            max_profit = max(price - min_price, max_profit)
+            if min_price > price: min_price = price              # Found a cheaper buy day
+            max_profit = max(price - min_price, max_profit)      # Check if selling today is best
 
         return max_profit

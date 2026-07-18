@@ -38,30 +38,32 @@ public class MajorityElementII
         int count1 = 0;
         int count2 = 0;
 
+        // Pass 1: Find up to 2 potential candidates via three-way cancellation
         foreach(int num in nums)
         {
-            if(num == candidate1) count1++;
-            else if(num == candidate2) count2++;
+            if(num == candidate1) count1++;             // Matches candidate1 → support
+            else if(num == candidate2) count2++;        // Matches candidate2 → support
 
-            else if(count1 == 0)
+            else if(count1 == 0)                       // candidate1 was cancelled, replace
             {
                 candidate1 = num;
                 count1++;
             }
 
-            else if(count2 == 0)
+            else if(count2 == 0)                       // candidate2 was cancelled, replace
             {
                 candidate2 = num;
                 count2++;
             }
 
-            else
+            else                                       // Three-way cancellation
             {
                 count1--;
                 count2--;
             }
         }
 
+        // Pass 2: Verify candidates actually appear > ⌊n/3⌋ times
         count1 = 0;
         count2 = 0;
 
@@ -73,8 +75,8 @@ public class MajorityElementII
 
         List<int> result = new();
 
-        if(count1 > n/3) result.Add(candidate1);
-        if(count2 > n/3 && candidate1 != candidate2) result.Add(candidate2);
+        if(count1 > n/3) result.Add(candidate1);                              // Confirmed majority
+        if(count2 > n/3 && candidate1 != candidate2) result.Add(candidate2);  // Confirmed second majority
 
         return result; 
 
