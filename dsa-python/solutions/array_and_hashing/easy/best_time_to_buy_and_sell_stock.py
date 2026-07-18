@@ -6,12 +6,31 @@
 # buy and a single day to sell in the future. Return the maximum profit you can
 # achieve. If you cannot achieve any profit, return 0.
 #
-# APPROACH:
-# TODO: Describe your approach here
+# APPROACH: Track minimum price, compute max profit greedily
 #
-# TIME: O(?)
-# SPACE: O(?)
+# KEY INSIGHT: As we scan left to right, we always want to buy at the
+# lowest price seen so far and sell at the current price. The best profit
+# is the maximum of (current_price - min_price_so_far) across all days.
+#
+# HOW IT WORKS:
+# - Keep track of the minimum price encountered so far.
+# - At each day, calculate profit if we sold today (price - min_price).
+# - Update max_profit if this is better.
+# - Update min_price if current price is lower.
+#
+# WHY IT WORKS: We're guaranteed to buy before selling because min_price
+# only considers prices from earlier days.
+#
+# TIME: O(n) — single pass
+# SPACE: O(1) — two variables
 
 class BestTimeToBuyAndSellStock:
     def max_profit(self, prices: list[int]) -> int:
-        pass
+        min_price = float('inf')
+        max_profit = 0
+
+        for price in prices:
+            if min_price > price: min_price = price
+            max_profit = max(price - min_price, max_profit)
+
+        return max_profit
