@@ -1,2 +1,19 @@
+# Plan files (keep local only)
 PLAN.md
 plan.html
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# C# build artifacts
+bin/
+obj/
+
+# IDE
+.vscode/
+*.code-workspace
+
+# OS
+.DS_Store
