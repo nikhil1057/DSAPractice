@@ -1,0 +1,67 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/nikhil.tiwari/CodeRepo/practice/dsa-csharp/DsaCsharp.csproj": {}
+  },
+  "projects": {
+    "/Users/nikhil.tiwari/CodeRepo/practice/dsa-csharp/DsaCsharp.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/nikhil.tiwari/CodeRepo/practice/dsa-csharp/DsaCsharp.csproj",
+        "projectName": "DsaCsharp",
+        "projectPath": "/Users/nikhil.tiwari/CodeRepo/practice/dsa-csharp/DsaCsharp.csproj",
+        "packagesPath": "/Users/nikhil.tiwari/.nuget/packages/",
+        "outputPath": "/Users/nikhil.tiwari/CodeRepo/practice/dsa-csharp/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/nikhil.tiwari/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/availityauthai/_packaging/55f7ba44-5335-4ee2-94f6-0c4a5d8d1034/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.405/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+/Users/nikhil.tiwari/CodeRepo/practice/dsa-csharp/bin/Debug/net8.0/DsaCsharp
+/Users/nikhil.tiwari/CodeRepo/practice/dsa-csharp/bin/Debug/net8.0/DsaCsharp.deps.json
+/Users/nikhil.tiwari/CodeRepo/practice/dsa-csharp/bin/Debug/net8.0/DsaCsharp.runtimeconfig.json
+/Users/nikhil.tiwari/CodeRepo/practice/dsa-csharp/bin/Debug/net8.0/DsaCsharp.dll
+/Users/nikhil.tiwari/CodeRepo/practice/dsa-csharp/bin/Debug/net8.0/DsaCsharp.pdb
+/Users/nikhil.tiwari/CodeRepo/practice/dsa-csharp/obj/Debug/net8.0/DsaCsharp.GeneratedMSBuildEditorConfig.editorconfig
+/Users/nikhil.tiwari/CodeRepo/practice/dsa-csharp/obj/Debug/net8.0/DsaCsharp.AssemblyInfoInputs.cache
+/Users/nikhil.tiwari/CodeRepo/practice/dsa-csharp/obj/Debug/net8.0/DsaCsharp.AssemblyInfo.cs
+/Users/nikhil.tiwari/CodeRepo/practice/dsa-csharp/obj/Debug/net8.0/DsaCsharp.csproj.CoreCompileInputs.cache
+/Users/nikhil.tiwari/CodeRepo/practice/dsa-csharp/obj/Debug/net8.0/DsaCsharp.dll
+/Users/nikhil.tiwari/CodeRepo/practice/dsa-csharp/obj/Debug/net8.0/refint/DsaCsharp.dll
+/Users/nikhil.tiwari/CodeRepo/practice/dsa-csharp/obj/Debug/net8.0/DsaCsharp.pdb
+/Users/nikhil.tiwari/CodeRepo/practice/dsa-csharp/obj/Debug/net8.0/DsaCsharp.genruntimeconfig.cache
+/Users/nikhil.tiwari/CodeRepo/practice/dsa-csharp/obj/Debug/net8.0/ref/DsaCsharp.dll
+/Users/nikhil.tiwari/CodeRepo/practice/dsa-csharp/obj/Debug/net8.0/DsaCsharp.sourcelink.json

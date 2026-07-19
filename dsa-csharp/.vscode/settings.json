@@ -1,0 +1,9 @@
+{
+  "dotnet.defaultSolution": "DsaCsharp.csproj",
+  "omnisharp.enableRoslynAnalyzers": true,
+  "omnisharp.enableEditorConfigSupport": true,
+  "[csharp]": {
+    "editor.formatOnSave": true,
+    "editor.tabSize": 4
+  }
+}
