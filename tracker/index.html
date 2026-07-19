@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeetCode 150</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0f0f14;
+            --bg-alt: #16161c;
+            --surface: #1a1a20;
+            --text: #ececf0;
+            --text-muted: #8b8b96;
+            --text-dim: #5a5a66;
+            --border: #2a2a32;
+            --border-strong: #3a3a44;
+            --accent: #5e6ad2;
+            --accent-hover: #4e5acb;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            padding: 48px 24px;
+            line-height: 1.5;
+            max-width: 1200px;
+            margin: 0 auto;
+            font-size: 14px;
+        }
+
+        /* Header */
+        .header { margin-bottom: 32px; }
+        .header h1 { font-size: 28px; font-weight: 600; letter-spacing: -0.5px; margin-bottom: 4px; }
+        .header p { color: var(--text-muted); font-size: 13px; }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 32px;
+            border-bottom: 1px solid var(--border);
+        }
+        .tab {
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: color 0.15s;
+        }
+        .tab:hover { color: var(--text); }
+        .tab.active { color: var(--text); border-bottom-color: var(--accent); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* Stats row */
+        .stats-row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .stat {
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px 20px;
+            flex: 1;
+            min-width: 120px;
+        }
+        .stat:hover { border-color: var(--border-strong); }
+        .stat .value { font-size: 22px; font-weight: 600; margin-bottom: 2px; }
+        .stat .label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+        .stat .value.accent { color: var(--accent); }
+
+        /* Progress bar */
+        .progress-section { margin-bottom: 32px; }
+        .progress-meta { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 13px; }
+        .progress-meta span { color: var(--text-muted); }
+        .progress-meta strong { color: var(--text); }
+        .progress-track { height: 4px; background: var(--surface); border-radius: 2px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width 0.4s ease; }
+
+        /* Week sections */
+        .week {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+        .week:hover { border-color: var(--border-strong); }
+        .week-header {
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            background: var(--bg-alt);
+        }
+        .week-header h3 { font-size: 13px; font-weight: 500; }
+        .week-header .meta { font-size: 12px; color: var(--text-muted); }
+        .week-body { padding: 8px 16px 16px; display: none; }
+        .week.open .week-body { display: block; }
+        .week.open .week-header { border-bottom: 1px solid var(--border); }
+
+        .day-label { font-size: 11px; font-weight: 500; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; padding: 12px 0 6px; }
+
+        .problem {
+            display: flex;
+            align-items: center;
+            padding: 6px 8px;
+            border-radius: 6px;
+            gap: 10px;
+            transition: background 0.1s;
+        }
+        .problem:hover { background: var(--surface); }
+        .problem input[type="checkbox"] {
+            width: 16px; height: 16px;
+            accent-color: var(--accent);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .problem .name { flex: 1; font-size: 13px; font-weight: 400; }
+        .problem.done .name { color: var(--text-dim); text-decoration: line-through; }
+        .problem .tag {
+            font-size: 11px;
+            color: var(--text-dim);
+            background: var(--surface);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        .problem .diff {
+            font-size: 11px;
+            font-weight: 500;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+        .diff-easy { color: #34d399; background: rgba(52,211,153,0.1); }
+        .diff-medium { color: #fbbf24; background: rgba(251,191,36,0.1); }
+        .diff-hard { color: #f87171; background: rgba(248,113,113,0.1); }
+
+        /* Categories */
+        .cat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 12px;
+        }
+        .cat-card {
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+        }
+        .cat-card:hover { border-color: var(--border-strong); }
+        .cat-card h4 { font-size: 13px; font-weight: 500; margin-bottom: 8px; }
+        .cat-bar { height: 4px; background: var(--surface); border-radius: 2px; overflow: hidden; margin-bottom: 6px; }
+        .cat-bar-fill { height: 100%; border-radius: 2px; }
+        .cat-meta { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); }
+
+        /* Revision */
+        .sr-info {
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+        }
+        .sr-info h3 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+        .sr-info p { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
+        .sr-intervals { display: flex; gap: 8px; flex-wrap: wrap; }
+        .sr-interval {
+            font-size: 12px;
+            padding: 4px 10px;
+            background: var(--surface);
+            border-radius: 4px;
+            color: var(--text-muted);
+        }
+        .sr-interval span { color: var(--accent); font-weight: 500; }
+
+        .rev-group { margin-bottom: 24px; }
+        .rev-group h4 { font-size: 12px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .rev-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 12px;
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            margin-bottom: 6px;
+        }
+        .rev-item:hover { border-color: var(--border-strong); }
+        .rev-item .rev-name { font-size: 13px; font-weight: 500; }
+        .rev-item .rev-actions { display: flex; gap: 6px; align-items: center; }
+        .rev-badge {
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        .rev-badge.overdue { color: #f87171; background: rgba(248,113,113,0.1); }
+        .rev-badge.today { color: #fbbf24; background: rgba(251,191,36,0.1); }
+        .rev-badge.upcoming { color: #34d399; background: rgba(52,211,153,0.1); }
+        .rev-badge.mastered { color: var(--accent); background: rgba(94,106,210,0.1); }
+
+        .rev-btn {
+            padding: 4px 10px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: transparent;
+            cursor: pointer;
+            font-size: 11px;
+            font-family: inherit;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: all 0.15s;
+        }
+        .rev-btn:hover { border-color: var(--border-strong); color: var(--text); }
+        .rev-btn.primary { background: var(--accent); color: white; border-color: var(--accent); }
+        .rev-btn.primary:hover { background: var(--accent-hover); }
+
+        .empty { padding: 32px; text-align: center; color: var(--text-dim); font-size: 13px; }
+
+        /* Footer controls */
+        .footer {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+        }
+        .footer button {
+            padding: 8px 14px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--surface);
+            color: var(--text-muted);
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .footer button:hover { border-color: #f87171; color: #f87171; }
+
+        /* Keyboard hints */
+        kbd {
+            font-family: 'SF Mono', 'Berkeley Mono', monospace;
+            font-size: 11px;
+            padding: 2px 5px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>NeetCode 150</h1>
+        <p>3 problems/day · 48 days · Spaced repetition revision</p>
+    </div>
+
+    <div class="tabs">
+        <button class="tab active" onclick="switchTab('plan')">Plan</button>
+        <button class="tab" onclick="switchTab('revision')">Revision</button>
+        <button class="tab" onclick="switchTab('categories')">Categories</button>
+    </div>
+
+    <div id="tab-plan" class="tab-content active">
+        <div class="progress-section">
+            <div class="progress-meta">
+                <strong id="progress-text">0 / 144</strong>
+                <span id="streak-info">Streak: 0 days</span>
+            </div>
+            <div class="progress-track">
+                <div class="progress-fill" id="progress-bar" style="width:0%"></div>
+            </div>
+        </div>
+
+        <div class="stats-row">
+            <div class="stat"><div class="value accent" id="stat-solved">0</div><div class="label">Solved</div></div>
+            <div class="stat"><div class="value" id="stat-easy">0</div><div class="label">Easy</div></div>
+            <div class="stat"><div class="value" id="stat-medium">0</div><div class="label">Medium</div></div>
+            <div class="stat"><div class="value" id="stat-hard">0</div><div class="label">Hard</div></div>
+            <div class="stat"><div class="value" id="stat-revision">0</div><div class="label">Due Review</div></div>
+        </div>
+
+        <div id="weeks-container"></div>
+    </div>
+
+    <div id="tab-revision" class="tab-content">
+        <div class="sr-info">
+            <h3>Spaced Repetition</h3>
+            <p>Rate each review. Intervals increase with confidence. Three consecutive easy reviews = mastered.</p>
+            <div class="sr-intervals">
+                <div class="sr-interval">Hard → <span>1 day</span></div>
+                <div class="sr-interval">OK → <span>3 days</span></div>
+                <div class="sr-interval">Easy → <span>7 days</span></div>
+                <div class="sr-interval">Mastered → <span>3× easy</span></div>
+            </div>
+        </div>
+        <div class="rev-group"><h4>Overdue</h4><div id="rev-overdue"></div></div>
+        <div class="rev-group"><h4>Due Today</h4><div id="rev-today"></div></div>
+        <div class="rev-group"><h4>Upcoming</h4><div id="rev-upcoming"></div></div>
+        <div class="rev-group"><h4>Mastered</h4><div id="rev-mastered"></div></div>
+    </div>
+
+    <div id="tab-categories" class="tab-content">
+        <div class="cat-grid" id="cat-grid"></div>
+    </div>
+
+    <div class="footer">
+        <button onclick="exportData()">Export</button>
+        <button onclick="document.getElementById('import-file').click()">Import</button>
+        <button onclick="resetProgress()">Reset</button>
+        <input type="file" id="import-file" accept=".json" style="display:none" onchange="importData(event)">
+    </div>
+</body>
+</html>
+
+<script>
+const PLAN = [
+  { week: 1, title: "Arrays & Hashing · Two Pointers · Sliding Window", days: [
+    { day: 1, date: "Jul 18", problems: [{ name: "Contains Duplicate", difficulty: "easy", category: "Arrays & Hashing" },{ name: "Valid Anagram", difficulty: "easy", category: "Arrays & Hashing" },{ name: "Two Sum", difficulty: "easy", category: "Arrays & Hashing" }]},
+    { day: 2, date: "Jul 19", problems: [{ name: "Group Anagrams", difficulty: "medium", category: "Arrays & Hashing" },{ name: "Top K Frequent Elements", difficulty: "medium", category: "Arrays & Hashing" },{ name: "Encode and Decode Strings", difficulty: "medium", category: "Arrays & Hashing" }]},
+    { day: 3, date: "Jul 20", problems: [{ name: "Product of Array Except Self", difficulty: "medium", category: "Arrays & Hashing" },{ name: "Valid Sudoku", difficulty: "medium", category: "Arrays & Hashing" },{ name: "Longest Consecutive Sequence", difficulty: "medium", category: "Arrays & Hashing" }]},
+    { day: 4, date: "Jul 21", problems: [{ name: "Valid Palindrome", difficulty: "easy", category: "Two Pointers" },{ name: "Two Sum II", difficulty: "medium", category: "Two Pointers" },{ name: "3Sum", difficulty: "medium", category: "Two Pointers" }]},
+    { day: 5, date: "Jul 22", problems: [{ name: "Container With Most Water", difficulty: "medium", category: "Two Pointers" },{ name: "Trapping Rain Water", difficulty: "hard", category: "Two Pointers" },{ name: "Longest Substring Without Repeating Characters", difficulty: "medium", category: "Sliding Window" }]},
+    { day: 6, date: "Jul 23", problems: [{ name: "Longest Repeating Character Replacement", difficulty: "medium", category: "Sliding Window" },{ name: "Permutation In String", difficulty: "medium", category: "Sliding Window" },{ name: "Minimum Window Substring", difficulty: "hard", category: "Sliding Window" }]},
+    { day: 7, date: "Jul 24", problems: [{ name: "Sliding Window Maximum", difficulty: "hard", category: "Sliding Window" },{ name: "Valid Parentheses", difficulty: "easy", category: "Stack" },{ name: "Min Stack", difficulty: "medium", category: "Stack" }]}
+  ]},
+  { week: 2, title: "Stack · Binary Search · Linked List", days: [
+    { day: 8, date: "Jul 25", problems: [{ name: "Evaluate Reverse Polish Notation", difficulty: "medium", category: "Stack" },{ name: "Daily Temperatures", difficulty: "medium", category: "Stack" },{ name: "Car Fleet", difficulty: "medium", category: "Stack" }]},
+    { day: 9, date: "Jul 26", problems: [{ name: "Largest Rectangle In Histogram", difficulty: "hard", category: "Stack" },{ name: "Binary Search", difficulty: "easy", category: "Binary Search" },{ name: "Search a 2D Matrix", difficulty: "medium", category: "Binary Search" }]},
+    { day: 10, date: "Jul 27", problems: [{ name: "Koko Eating Bananas", difficulty: "medium", category: "Binary Search" },{ name: "Find Minimum In Rotated Sorted Array", difficulty: "medium", category: "Binary Search" },{ name: "Search In Rotated Sorted Array", difficulty: "medium", category: "Binary Search" }]},
+    { day: 11, date: "Jul 28", problems: [{ name: "Time Based Key Value Store", difficulty: "medium", category: "Binary Search" },{ name: "Median of Two Sorted Arrays", difficulty: "hard", category: "Binary Search" },{ name: "Reorder List", difficulty: "medium", category: "Linked List" }]},
+    { day: 12, date: "Jul 29", problems: [{ name: "Remove Nth Node From End of List", difficulty: "medium", category: "Linked List" },{ name: "Copy List With Random Pointer", difficulty: "medium", category: "Linked List" },{ name: "Find The Duplicate Number", difficulty: "medium", category: "Linked List" }]},
+    { day: 13, date: "Jul 30", problems: [{ name: "LRU Cache", difficulty: "medium", category: "Linked List" },{ name: "Reverse Nodes In K Group", difficulty: "hard", category: "Linked List" },{ name: "Invert Binary Tree", difficulty: "easy", category: "Trees" }]},
+    { day: 14, date: "Jul 31", problems: [{ name: "Maximum Depth of Binary Tree", difficulty: "easy", category: "Trees" },{ name: "Diameter of Binary Tree", difficulty: "easy", category: "Trees" },{ name: "Balanced Binary Tree", difficulty: "easy", category: "Trees" }]}
+  ]},
+  { week: 3, title: "Trees · Tries · Heap", days: [
+    { day: 15, date: "Aug 1", problems: [{ name: "Same Tree", difficulty: "easy", category: "Trees" },{ name: "Subtree of Another Tree", difficulty: "easy", category: "Trees" },{ name: "Lowest Common Ancestor of a BST", difficulty: "medium", category: "Trees" }]},
+    { day: 16, date: "Aug 2", problems: [{ name: "Binary Tree Level Order Traversal", difficulty: "medium", category: "Trees" },{ name: "Binary Tree Right Side View", difficulty: "medium", category: "Trees" },{ name: "Count Good Nodes In Binary Tree", difficulty: "medium", category: "Trees" }]},
+    { day: 17, date: "Aug 3", problems: [{ name: "Validate Binary Search Tree", difficulty: "medium", category: "Trees" },{ name: "Kth Smallest Element In a BST", difficulty: "medium", category: "Trees" },{ name: "Construct Binary Tree From Preorder And Inorder", difficulty: "medium", category: "Trees" }]},
+    { day: 18, date: "Aug 4", problems: [{ name: "Binary Tree Maximum Path Sum", difficulty: "hard", category: "Trees" },{ name: "Serialize And Deserialize Binary Tree", difficulty: "hard", category: "Trees" },{ name: "Implement Trie Prefix Tree", difficulty: "medium", category: "Tries" }]},
+    { day: 19, date: "Aug 5", problems: [{ name: "Design Add And Search Words", difficulty: "medium", category: "Tries" },{ name: "Word Search II", difficulty: "hard", category: "Tries" },{ name: "Kth Largest Element In a Stream", difficulty: "easy", category: "Heap" }]},
+    { day: 20, date: "Aug 6", problems: [{ name: "Last Stone Weight", difficulty: "easy", category: "Heap" },{ name: "K Closest Points to Origin", difficulty: "medium", category: "Heap" },{ name: "Kth Largest Element In An Array", difficulty: "medium", category: "Heap" }]},
+    { day: 21, date: "Aug 7", problems: [{ name: "Task Scheduler", difficulty: "medium", category: "Heap" },{ name: "Design Twitter", difficulty: "medium", category: "Heap" },{ name: "Find Median From Data Stream", difficulty: "hard", category: "Heap" }]}
+  ]},
+  { week: 4, title: "Backtracking · Graphs", days: [
+    { day: 22, date: "Aug 8", problems: [{ name: "Subsets", difficulty: "medium", category: "Backtracking" },{ name: "Combination Sum", difficulty: "medium", category: "Backtracking" },{ name: "Combination Sum II", difficulty: "medium", category: "Backtracking" }]},
+    { day: 23, date: "Aug 9", problems: [{ name: "Permutations", difficulty: "medium", category: "Backtracking" },{ name: "Subsets II", difficulty: "medium", category: "Backtracking" },{ name: "Generate Parentheses", difficulty: "medium", category: "Backtracking" }]},
+    { day: 24, date: "Aug 10", problems: [{ name: "Word Search", difficulty: "medium", category: "Backtracking" },{ name: "Palindrome Partitioning", difficulty: "medium", category: "Backtracking" },{ name: "Letter Combinations of a Phone Number", difficulty: "medium", category: "Backtracking" }]},
+    { day: 25, date: "Aug 11", problems: [{ name: "N Queens", difficulty: "hard", category: "Backtracking" },{ name: "Number of Islands", difficulty: "medium", category: "Graphs" },{ name: "Max Area of Island", difficulty: "medium", category: "Graphs" }]},
+    { day: 26, date: "Aug 12", problems: [{ name: "Clone Graph", difficulty: "medium", category: "Graphs" },{ name: "Walls And Gates", difficulty: "medium", category: "Graphs" },{ name: "Rotting Oranges", difficulty: "medium", category: "Graphs" }]},
+    { day: 27, date: "Aug 13", problems: [{ name: "Pacific Atlantic Water Flow", difficulty: "medium", category: "Graphs" },{ name: "Surrounded Regions", difficulty: "medium", category: "Graphs" },{ name: "Course Schedule", difficulty: "medium", category: "Graphs" }]},
+    { day: 28, date: "Aug 14", problems: [{ name: "Course Schedule II", difficulty: "medium", category: "Graphs" },{ name: "Graph Valid Tree", difficulty: "medium", category: "Graphs" },{ name: "Number of Connected Components", difficulty: "medium", category: "Graphs" }]}
+  ]},
+  { week: 5, title: "Graphs · Advanced Graphs · 1-D DP", days: [
+    { day: 29, date: "Aug 15", problems: [{ name: "Redundant Connection", difficulty: "medium", category: "Graphs" },{ name: "Word Ladder", difficulty: "hard", category: "Graphs" },{ name: "Network Delay Time", difficulty: "medium", category: "Adv. Graphs" }]},
+    { day: 30, date: "Aug 16", problems: [{ name: "Reconstruct Itinerary", difficulty: "hard", category: "Adv. Graphs" },{ name: "Min Cost to Connect All Points", difficulty: "medium", category: "Adv. Graphs" },{ name: "Swim In Rising Water", difficulty: "hard", category: "Adv. Graphs" }]},
+    { day: 31, date: "Aug 17", problems: [{ name: "Alien Dictionary", difficulty: "hard", category: "Adv. Graphs" },{ name: "Cheapest Flights Within K Stops", difficulty: "medium", category: "Adv. Graphs" },{ name: "Climbing Stairs", difficulty: "easy", category: "1-D DP" }]},
+    { day: 32, date: "Aug 18", problems: [{ name: "Min Cost Climbing Stairs", difficulty: "easy", category: "1-D DP" },{ name: "House Robber", difficulty: "medium", category: "1-D DP" },{ name: "House Robber II", difficulty: "medium", category: "1-D DP" }]},
+    { day: 33, date: "Aug 19", problems: [{ name: "Longest Palindromic Substring", difficulty: "medium", category: "1-D DP" },{ name: "Palindromic Substrings", difficulty: "medium", category: "1-D DP" },{ name: "Decode Ways", difficulty: "medium", category: "1-D DP" }]},
+    { day: 34, date: "Aug 20", problems: [{ name: "Coin Change", difficulty: "medium", category: "1-D DP" },{ name: "Maximum Product Subarray", difficulty: "medium", category: "1-D DP" },{ name: "Word Break", difficulty: "medium", category: "1-D DP" }]},
+    { day: 35, date: "Aug 21", problems: [{ name: "Longest Increasing Subsequence", difficulty: "medium", category: "1-D DP" },{ name: "Partition Equal Subset Sum", difficulty: "medium", category: "1-D DP" },{ name: "Unique Paths", difficulty: "medium", category: "2-D DP" }]}
+  ]},
+  { week: 6, title: "2-D DP · Greedy", days: [
+    { day: 36, date: "Aug 22", problems: [{ name: "Longest Common Subsequence", difficulty: "medium", category: "2-D DP" },{ name: "Buy/Sell Stock With Cooldown", difficulty: "medium", category: "2-D DP" },{ name: "Coin Change II", difficulty: "medium", category: "2-D DP" }]},
+    { day: 37, date: "Aug 23", problems: [{ name: "Target Sum", difficulty: "medium", category: "2-D DP" },{ name: "Interleaving String", difficulty: "medium", category: "2-D DP" },{ name: "Longest Increasing Path In a Matrix", difficulty: "hard", category: "2-D DP" }]},
+    { day: 38, date: "Aug 24", problems: [{ name: "Distinct Subsequences", difficulty: "hard", category: "2-D DP" },{ name: "Edit Distance", difficulty: "hard", category: "2-D DP" },{ name: "Burst Balloons", difficulty: "hard", category: "2-D DP" }]},
+    { day: 39, date: "Aug 25", problems: [{ name: "Regular Expression Matching", difficulty: "hard", category: "2-D DP" },{ name: "Maximum Subarray", difficulty: "medium", category: "Greedy" },{ name: "Jump Game", difficulty: "medium", category: "Greedy" }]},
+    { day: 40, date: "Aug 26", problems: [{ name: "Jump Game II", difficulty: "medium", category: "Greedy" },{ name: "Gas Station", difficulty: "medium", category: "Greedy" },{ name: "Hand of Straights", difficulty: "medium", category: "Greedy" }]},
+    { day: 41, date: "Aug 27", problems: [{ name: "Merge Triplets to Form Target Triplet", difficulty: "medium", category: "Greedy" },{ name: "Partition Labels", difficulty: "medium", category: "Greedy" },{ name: "Valid Parenthesis String", difficulty: "medium", category: "Greedy" }]}
+  ]},
+  { week: 7, title: "Intervals · Math · Bit Manipulation", days: [
+    { day: 42, date: "Aug 28", problems: [{ name: "Insert Interval", difficulty: "medium", category: "Intervals" },{ name: "Merge Intervals", difficulty: "medium", category: "Intervals" },{ name: "Non Overlapping Intervals", difficulty: "medium", category: "Intervals" }]},
+    { day: 43, date: "Aug 29", problems: [{ name: "Meeting Rooms", difficulty: "easy", category: "Intervals" },{ name: "Meeting Rooms II", difficulty: "medium", category: "Intervals" },{ name: "Minimum Interval to Include Each Query", difficulty: "hard", category: "Intervals" }]},
+    { day: 44, date: "Aug 30", problems: [{ name: "Rotate Image", difficulty: "medium", category: "Math" },{ name: "Spiral Matrix", difficulty: "medium", category: "Math" },{ name: "Set Matrix Zeroes", difficulty: "medium", category: "Math" }]},
+    { day: 45, date: "Aug 31", problems: [{ name: "Happy Number", difficulty: "easy", category: "Math" },{ name: "Plus One", difficulty: "easy", category: "Math" },{ name: "Pow(x, n)", difficulty: "medium", category: "Math" }]},
+    { day: 46, date: "Sep 1", problems: [{ name: "Multiply Strings", difficulty: "medium", category: "Math" },{ name: "Detect Squares", difficulty: "medium", category: "Math" },{ name: "Single Number", difficulty: "easy", category: "Bits" }]},
+    { day: 47, date: "Sep 2", problems: [{ name: "Number of 1 Bits", difficulty: "easy", category: "Bits" },{ name: "Counting Bits", difficulty: "easy", category: "Bits" },{ name: "Reverse Bits", difficulty: "easy", category: "Bits" }]},
+    { day: 48, date: "Sep 3", problems: [{ name: "Missing Number", difficulty: "easy", category: "Bits" },{ name: "Sum of Two Integers", difficulty: "medium", category: "Bits" },{ name: "Reverse Integer", difficulty: "medium", category: "Bits" }]}
+  ]}
+];
+
+const SR = { hard: 1, medium: 3, easy: 7 };
+const MASTERY = 3;
+let _progress = {};
+let _revision = {};
+const openWeeks = new Set();
+
+// --- Server-backed storage ---
+async function loadFromServer() {
+    try {
+        const res = await fetch('/api/progress');
+        const data = await res.json();
+        _progress = data.progress || {};
+        _revision = data.revision || {};
+    } catch (e) { console.error('Failed to load:', e); }
+}
+
+async function saveToServer() {
+    try {
+        await fetch('/api/progress', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ progress: _progress, revision: _revision })
+        });
+    } catch (e) { console.error('Failed to save:', e); }
+}
+
+const load = (k) => k === STORE ? _progress : _revision;
+const save = (k, v) => { if (k === STORE) _progress = v; else _revision = v; saveToServer(); };
+const STORE = 'progress';
+const REV_STORE = 'revision';
+
+function resetProgress() {
+    if (confirm('Reset all progress?')) { _progress = {}; _revision = {}; saveToServer().then(() => location.reload()); }
+}
+
+function switchTab(t) {
+    document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelector(`[onclick="switchTab('${t}')"]`).classList.add('active');
+    document.getElementById(`tab-${t}`).classList.add('active');
+    if (t === 'revision') renderRevision();
+    if (t === 'categories') renderCategories();
+}
+
+function render() {
+    const progress = load(STORE);
+    const container = document.getElementById('weeks-container');
+    container.innerHTML = '';
+    let total = 0, easy = 0, med = 0, hard = 0, today = 0;
+    const todayStr = new Date().toDateString();
+
+    PLAN.forEach(week => {
+        const el = document.createElement('div');
+        el.className = 'week';
+        let ws = 0, wt = 0, body = '';
+
+        week.days.forEach(day => {
+            body += `<div class="day-label">Day ${day.day} · ${day.date}</div>`;
+            day.problems.forEach((p, i) => {
+                const id = `w${week.week}_d${day.day}_p${i}`;
+                const done = progress[id];
+                if (done) { total++; ws++; if (p.difficulty==='easy') easy++; else if (p.difficulty==='medium') med++; else hard++; if (done.date===todayStr) today++; }
+                wt++;
+                body += `<div class="problem ${done?'done':''}">
+                    <input type="checkbox" ${done?'checked':''} onchange="toggle('${id}',this.checked,'${p.name.replace(/'/g,"\\'")}','${p.difficulty}','${p.category}')">
+                    <span class="name">${p.name}</span>
+                    <span class="tag">${p.category}</span>
+                    <span class="diff diff-${p.difficulty}">${p.difficulty}</span>
+                </div>`;
+            });
+        });
+
+        el.innerHTML = `<div class="week-header" onclick="toggleWeek(${week.week})"><h3>Week ${week.week} — ${week.title}</h3><span class="meta">${ws}/${wt}</span></div><div class="week-body">${body}</div>`;
+        if (openWeeks.has(week.week)) el.classList.add('open');
+        container.appendChild(el);
+    });
+
+    document.getElementById('progress-text').textContent = `${total} / 144`;
+    document.getElementById('progress-bar').style.width = `${(total/144)*100}%`;
+    document.getElementById('stat-solved').textContent = total;
+    document.getElementById('stat-easy').textContent = easy;
+    document.getElementById('stat-medium').textContent = med;
+    document.getElementById('stat-hard').textContent = hard;
+
+    const rev = load(REV_STORE);
+    const due = Object.values(rev).filter(r => !r.mastered && r.nextReview <= Date.now()).length;
+    document.getElementById('stat-revision').textContent = due;
+
+    // Streak
+    const dates = new Set(Object.values(progress).map(v => v.date).filter(Boolean));
+    let streak = 0, d = new Date();
+    if (!dates.has(d.toDateString())) d.setDate(d.getDate()-1);
+    while (dates.has(d.toDateString())) { streak++; d.setDate(d.getDate()-1); }
+    document.getElementById('streak-info').textContent = `Streak: ${streak}d`;
+}
+
+function toggleWeek(n) { if (openWeeks.has(n)) openWeeks.delete(n); else openWeeks.add(n); render(); }
+
+function toggle(id, checked, name, diff, cat) {
+    const progress = load(STORE);
+    const rev = load(REV_STORE);
+    if (checked) {
+        progress[id] = { done: true, date: new Date().toDateString() };
+        if (!rev[name]) rev[name] = { name, difficulty: diff, category: cat, nextReview: Date.now()+(SR.medium*86400000), interval:'medium', easyStreak:0, mastered:false, reviews:0 };
+    } else { delete progress[id]; delete rev[name]; }
+    save(STORE, progress); save(REV_STORE, rev); render();
+}
+
+function renderRevision() {
+    const rev = load(REV_STORE);
+    const now = Date.now();
+    const todayEnd = new Date(); todayEnd.setHours(23,59,59,999);
+    const in3d = todayEnd.getTime() + 3*86400000;
+    const overdue=[], dueToday=[], upcoming=[], mastered=[];
+
+    Object.values(rev).forEach(r => {
+        if (r.mastered) mastered.push(r);
+        else if (r.nextReview <= now) overdue.push(r);
+        else if (r.nextReview <= todayEnd.getTime()) dueToday.push(r);
+        else if (r.nextReview <= in3d) upcoming.push(r);
+    });
+
+    const card = (r, status) => {
+        const days = Math.ceil((r.nextReview - now) / 86400000);
+        const label = status==='overdue' ? `${Math.abs(days)}d overdue` : status==='today' ? 'Today' : `in ${days}d`;
+        return `<div class="rev-item">
+            <span><span class="rev-name">${r.name}</span> <span class="diff diff-${r.difficulty}" style="margin-left:8px">${r.difficulty}</span></span>
+            <div class="rev-actions">
+                <span class="rev-badge ${status}">${label}</span>
+                <button class="rev-btn" onclick="review('${r.name.replace(/'/g,"\\'")}','hard')">Hard</button>
+                <button class="rev-btn" onclick="review('${r.name.replace(/'/g,"\\'")}','medium')">OK</button>
+                <button class="rev-btn primary" onclick="review('${r.name.replace(/'/g,"\\'")}','easy')">Easy</button>
+            </div>
+        </div>`;
+    };
+
+    document.getElementById('rev-overdue').innerHTML = overdue.length ? overdue.map(r=>card(r,'overdue')).join('') : '<div class="empty">Nothing overdue</div>';
+    document.getElementById('rev-today').innerHTML = dueToday.length ? dueToday.map(r=>card(r,'today')).join('') : '<div class="empty">All caught up</div>';
+    document.getElementById('rev-upcoming').innerHTML = upcoming.length ? upcoming.map(r=>card(r,'upcoming')).join('') : '<div class="empty">Nothing upcoming</div>';
+    document.getElementById('rev-mastered').innerHTML = mastered.length ? mastered.map(r=>`<div class="rev-item"><span class="rev-name">${r.name}</span><span class="rev-badge mastered">Mastered</span></div>`).join('') : '<div class="empty">Keep reviewing to master problems</div>';
+}
+
+function review(name, rating) {
+    const rev = load(REV_STORE);
+    const r = rev[name]; if (!r) return;
+    r.reviews++; r.interval = rating;
+    r.nextReview = Date.now() + SR[rating]*86400000;
+    if (rating==='easy') { r.easyStreak++; if (r.easyStreak>=MASTERY) r.mastered=true; } else r.easyStreak=0;
+    save(REV_STORE, rev); renderRevision(); render();
+}
+
+function renderCategories() {
+    const progress = load(STORE);
+    const cats = {};
+    PLAN.forEach(w => w.days.forEach(d => d.problems.forEach((p,i) => {
+        const id = `w${w.week}_d${d.day}_p${i}`;
+        if (!cats[p.category]) cats[p.category] = {total:0,solved:0};
+        cats[p.category].total++;
+        if (progress[id]) cats[p.category].solved++;
+    })));
+
+    document.getElementById('cat-grid').innerHTML = Object.entries(cats).map(([cat, d]) => {
+        const pct = d.total ? (d.solved/d.total*100) : 0;
+        return `<div class="cat-card"><h4>${cat}</h4><div class="cat-bar"><div class="cat-bar-fill" style="width:${pct}%;background:var(--accent)"></div></div><div class="cat-meta"><span>${d.solved}/${d.total}</span><span>${Math.round(pct)}%</span></div></div>`;
+    }).join('');
+}
+
+function exportData() {
+    const data = { progress: _progress, revision: _revision, exported: new Date().toISOString() };
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `neetcode150_backup_${new Date().toISOString().slice(0,10)}.json`;
+    a.click();
+}
+
+function importData(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        try {
+            const data = JSON.parse(e.target.result);
+            if (data.progress) _progress = data.progress;
+            if (data.revision) _revision = data.revision;
+            saveToServer().then(() => location.reload());
+        } catch (err) { alert('Invalid backup file'); }
+    };
+    reader.readAsText(file);
+}
+
+// Seed already-solved problems with correct dates (runs once)
+async function seedIfNeeded() {
+    if (_progress._seeded) return;
+    const day1 = 'Fri Jul 18 2026';
+    const day2 = 'Sat Jul 19 2026';
+    const seeds = {
+        'w1_d1_p0': day1, 'w1_d1_p1': day1, 'w1_d1_p2': day1,
+        'w1_d2_p0': day2, 'w1_d2_p1': day2, 'w1_d2_p2': day2,
+        'w1_d3_p0': day2, 'w1_d3_p1': day2, 'w1_d3_p2': day2,
+    };
+    Object.entries(seeds).forEach(([id, date]) => {
+        if (!_progress[id]) _progress[id] = { done: true, date };
+    });
+    _progress._seeded = true;
+    await saveToServer();
+}
+
+// Init
+(async function init() {
+    await loadFromServer();
+    await seedIfNeeded();
+    render();
+})();
+</script>
