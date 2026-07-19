@@ -1,4 +1,133 @@
 {
-  "progress": {},
-  "revision": {}
+  "progress": {
+    "w1_d1_p0": {
+      "done": true,
+      "date": "Sat Jul 18 2026"
+    },
+    "w1_d1_p1": {
+      "done": true,
+      "date": "Sat Jul 18 2026"
+    },
+    "w1_d1_p2": {
+      "done": true,
+      "date": "Sat Jul 18 2026"
+    },
+    "w1_d2_p0": {
+      "done": true,
+      "date": "Sun Jul 19 2026"
+    },
+    "w1_d2_p1": {
+      "done": true,
+      "date": "Sun Jul 19 2026"
+    },
+    "w1_d2_p2": {
+      "done": true,
+      "date": "Sun Jul 19 2026"
+    },
+    "w1_d3_p0": {
+      "done": true,
+      "date": "Sun Jul 19 2026"
+    },
+    "w1_d3_p1": {
+      "done": true,
+      "date": "Sun Jul 19 2026"
+    },
+    "w1_d3_p2": {
+      "done": true,
+      "date": "Sun Jul 19 2026"
+    },
+    "_seeded": true
+  },
+  "revision": {
+    "Contains Duplicate": {
+      "name": "Contains Duplicate",
+      "difficulty": "easy",
+      "category": "Arrays & Hashing",
+      "nextReview": 1784730801341,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Valid Anagram": {
+      "name": "Valid Anagram",
+      "difficulty": "easy",
+      "category": "Arrays & Hashing",
+      "nextReview": 1784730801341,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Two Sum": {
+      "name": "Two Sum",
+      "difficulty": "easy",
+      "category": "Arrays & Hashing",
+      "nextReview": 1784730801341,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Group Anagrams": {
+      "name": "Group Anagrams",
+      "difficulty": "medium",
+      "category": "Arrays & Hashing",
+      "nextReview": 1784730801341,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Top K Frequent Elements": {
+      "name": "Top K Frequent Elements",
+      "difficulty": "medium",
+      "category": "Arrays & Hashing",
+      "nextReview": 1784730801341,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Encode and Decode Strings": {
+      "name": "Encode and Decode Strings",
+      "difficulty": "medium",
+      "category": "Arrays & Hashing",
+      "nextReview": 1784730801341,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Product of Array Except Self": {
+      "name": "Product of Array Except Self",
+      "difficulty": "medium",
+      "category": "Arrays & Hashing",
+      "nextReview": 1784730801341,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Valid Sudoku": {
+      "name": "Valid Sudoku",
+      "difficulty": "medium",
+      "category": "Arrays & Hashing",
+      "nextReview": 1784730801341,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Longest Consecutive Sequence": {
+      "name": "Longest Consecutive Sequence",
+      "difficulty": "medium",
+      "category": "Arrays & Hashing",
+      "nextReview": 1784730801341,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    }
+  }
 }

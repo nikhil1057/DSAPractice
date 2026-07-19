@@ -583,15 +583,26 @@ function importData(event) {
 // Seed already-solved problems with correct dates (runs once)
 async function seedIfNeeded() {
     if (_progress._seeded) return;
-    const day1 = 'Fri Jul 18 2026';
-    const day2 = 'Sat Jul 19 2026';
-    const seeds = {
-        'w1_d1_p0': day1, 'w1_d1_p1': day1, 'w1_d1_p2': day1,
-        'w1_d2_p0': day2, 'w1_d2_p1': day2, 'w1_d2_p2': day2,
-        'w1_d3_p0': day2, 'w1_d3_p1': day2, 'w1_d3_p2': day2,
-    };
-    Object.entries(seeds).forEach(([id, date]) => {
-        if (!_progress[id]) _progress[id] = { done: true, date };
+    const day1 = 'Sat Jul 18 2026';
+    const day2 = 'Sun Jul 19 2026';
+    const seeds = [
+        { id: 'w1_d1_p0', date: day1, name: 'Contains Duplicate', difficulty: 'easy', category: 'Arrays & Hashing' },
+        { id: 'w1_d1_p1', date: day1, name: 'Valid Anagram', difficulty: 'easy', category: 'Arrays & Hashing' },
+        { id: 'w1_d1_p2', date: day1, name: 'Two Sum', difficulty: 'easy', category: 'Arrays & Hashing' },
+        { id: 'w1_d2_p0', date: day2, name: 'Group Anagrams', difficulty: 'medium', category: 'Arrays & Hashing' },
+        { id: 'w1_d2_p1', date: day2, name: 'Top K Frequent Elements', difficulty: 'medium', category: 'Arrays & Hashing' },
+        { id: 'w1_d2_p2', date: day2, name: 'Encode and Decode Strings', difficulty: 'medium', category: 'Arrays & Hashing' },
+        { id: 'w1_d3_p0', date: day2, name: 'Product of Array Except Self', difficulty: 'medium', category: 'Arrays & Hashing' },
+        { id: 'w1_d3_p1', date: day2, name: 'Valid Sudoku', difficulty: 'medium', category: 'Arrays & Hashing' },
+        { id: 'w1_d3_p2', date: day2, name: 'Longest Consecutive Sequence', difficulty: 'medium', category: 'Arrays & Hashing' },
+    ];
+    seeds.forEach(s => {
+        if (!_progress[s.id]) _progress[s.id] = { done: true, date: s.date };
+        if (!_revision[s.name]) _revision[s.name] = {
+            name: s.name, difficulty: s.difficulty, category: s.category,
+            nextReview: Date.now() + (SR.medium * 86400000),
+            interval: 'medium', easyStreak: 0, mastered: false, reviews: 0
+        };
     });
     _progress._seeded = true;
     await saveToServer();
