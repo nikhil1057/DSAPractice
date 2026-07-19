@@ -100,5 +100,3 @@ dotnet test --filter "ClassName"         # Run specific test class
 ## Progress
 
 **NeetCode 150:** 12 / 150 solved (not counting non-NeetCode problems)
-
-See [PLAN.md](PLAN.md) for the full study schedule, or open [plan.html](plan.html) for an interactive tracker.
