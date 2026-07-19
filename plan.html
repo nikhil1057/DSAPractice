@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeetCode 150 — Study Plan</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0d1117;
+            color: #c9d1d9;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+        h1 { color: #58a6ff; margin-bottom: 0.5rem; }
+        .subtitle { color: #8b949e; margin-bottom: 2rem; }
+        .progress-bar-container {
+            background: #21262d;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid #30363d;
+        }
+        .progress-bar-outer {
+            background: #161b22;
+            border-radius: 6px;
+            height: 24px;
+            overflow: hidden;
+            margin: 0.75rem 0;
+        }
+        .progress-bar-inner {
+            background: linear-gradient(90deg, #238636, #2ea043);
+            height: 100%;
+            border-radius: 6px;
+            transition: width 0.5s ease;
+        }
+        .progress-stats {
+            display: flex;
+            justify-content: space-between;
+            color: #8b949e;
+            font-size: 0.9rem;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: #21262d;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .stat-card .number { font-size: 2rem; font-weight: bold; color: #58a6ff; }
+        .stat-card .label { color: #8b949e; font-size: 0.85rem; }
+        .week-section {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+        .week-header {
+            background: #21262d;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+        .week-header:hover { background: #292e36; }
+        .week-header h2 { font-size: 1.1rem; color: #f0f6fc; }
+        .week-progress { color: #8b949e; font-size: 0.85rem; }
+        .week-body { padding: 1rem 1.5rem; }
+        .day-group { margin-bottom: 1.25rem; }
+        .day-group:last-child { margin-bottom: 0; }
+        .day-label {
+            font-weight: 600;
+            color: #8b949e;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .problem-item {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            margin-bottom: 0.25rem;
+            transition: background 0.2s;
+        }
+        .problem-item:hover { background: #21262d; }
+        .problem-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 0.75rem;
+            cursor: pointer;
+            accent-color: #238636;
+        }
+        .problem-item label {
+            cursor: pointer;
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .problem-item.completed label { text-decoration: line-through; color: #484f58; }
+        .difficulty {
+            font-size: 0.75rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+        .difficulty.easy { background: #1b4332; color: #2ea043; }
+        .difficulty.medium { background: #3d2e00; color: #d29922; }
+        .difficulty.hard { background: #3d1a1a; color: #f85149; }
+        .category-tag {
+            font-size: 0.7rem;
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            background: #1f2937;
+            color: #7c8a99;
+            margin-left: 0.5rem;
+        }
+        .controls {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .btn-reset { background: #da3633; color: white; }
+        .btn-reset:hover { background: #f85149; }
+        .btn-export { background: #238636; color: white; }
+        .btn-export:hover { background: #2ea043; }
+        .collapse-icon { transition: transform 0.3s; }
+        .week-section.collapsed .week-body { display: none; }
+        .week-section.collapsed .collapse-icon { transform: rotate(-90deg); }
+    </style>
+</head>
+<body>
+    <h1>🎯 NeetCode 150 — Study Plan</h1>
+    <p class="subtitle">3 problems/day • 48 days • Jul 18 → Sep 3, 2026</p>
+
+    <div class="progress-bar-container">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <strong>Overall Progress</strong>
+            <span id="progress-text">0 / 144</span>
+        </div>
+        <div class="progress-bar-outer">
+            <div class="progress-bar-inner" id="progress-bar" style="width: 0%"></div>
+        </div>
+        <div class="progress-stats">
+            <span id="days-elapsed">Day 0 of 48</span>
+            <span id="streak-info">🔥 Streak: 0 days</span>
+        </div>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card"><div class="number" id="stat-easy">0</div><div class="label">Easy Solved</div></div>
+        <div class="stat-card"><div class="number" id="stat-medium">0</div><div class="label">Medium Solved</div></div>
+        <div class="stat-card"><div class="number" id="stat-hard">0</div><div class="label">Hard Solved</div></div>
+        <div class="stat-card"><div class="number" id="stat-today">0</div><div class="label">Today</div></div>
+    </div>
+
+    <div id="weeks-container"></div>
+
+    <div class="controls">
+        <button class="btn btn-reset" onclick="resetProgress()">Reset All</button>
+    </div>
+</body>
+</html>
+
+<script>
+const PLAN = [
+  { week: 1, title: "Arrays & Hashing + Two Pointers + Sliding Window", days: [
+    { day: 1, date: "Jul 18", problems: [
+      { name: "Contains Duplicate", difficulty: "easy", category: "Arrays & Hashing" },
+      { name: "Valid Anagram", difficulty: "easy", category: "Arrays & Hashing" },
+      { name: "Two Sum", difficulty: "easy", category: "Arrays & Hashing" }
+    ]},
+    { day: 2, date: "Jul 19", problems: [
+      { name: "Group Anagrams", difficulty: "medium", category: "Arrays & Hashing" },
+      { name: "Top K Frequent Elements", difficulty: "medium", category: "Arrays & Hashing" },
+      { name: "Encode and Decode Strings", difficulty: "medium", category: "Arrays & Hashing" }
+    ]},
+    { day: 3, date: "Jul 20", problems: [
+      { name: "Product of Array Except Self", difficulty: "medium", category: "Arrays & Hashing" },
+      { name: "Valid Sudoku", difficulty: "medium", category: "Arrays & Hashing" },
+      { name: "Longest Consecutive Sequence", difficulty: "medium", category: "Arrays & Hashing" }
+    ]},
+    { day: 4, date: "Jul 21", problems: [
+      { name: "Valid Palindrome", difficulty: "easy", category: "Two Pointers" },
+      { name: "Two Sum II Input Array Is Sorted", difficulty: "medium", category: "Two Pointers" },
+      { name: "3Sum", difficulty: "medium", category: "Two Pointers" }
+    ]},
+    { day: 5, date: "Jul 22", problems: [
+      { name: "Container With Most Water", difficulty: "medium", category: "Two Pointers" },
+      { name: "Trapping Rain Water", difficulty: "hard", category: "Two Pointers" },
+      { name: "Longest Substring Without Repeating Characters", difficulty: "medium", category: "Sliding Window" }
+    ]},
+    { day: 6, date: "Jul 23", problems: [
+      { name: "Longest Repeating Character Replacement", difficulty: "medium", category: "Sliding Window" },
+      { name: "Permutation In String", difficulty: "medium", category: "Sliding Window" },
+      { name: "Minimum Window Substring", difficulty: "hard", category: "Sliding Window" }
+    ]},
+    { day: 7, date: "Jul 24", problems: [
+      { name: "Sliding Window Maximum", difficulty: "hard", category: "Sliding Window" },
+      { name: "Valid Parentheses", difficulty: "easy", category: "Stack" },
+      { name: "Min Stack", difficulty: "medium", category: "Stack" }
+    ]}
+  ]},
+  { week: 2, title: "Stack + Binary Search + Linked List", days: [
+    { day: 8, date: "Jul 25", problems: [
+      { name: "Evaluate Reverse Polish Notation", difficulty: "medium", category: "Stack" },
+      { name: "Daily Temperatures", difficulty: "medium", category: "Stack" },
+      { name: "Car Fleet", difficulty: "medium", category: "Stack" }
+    ]},
+    { day: 9, date: "Jul 26", problems: [
+      { name: "Largest Rectangle In Histogram", difficulty: "hard", category: "Stack" },
+      { name: "Binary Search", difficulty: "easy", category: "Binary Search" },
+      { name: "Search a 2D Matrix", difficulty: "medium", category: "Binary Search" }
+    ]},
+    { day: 10, date: "Jul 27", problems: [
+      { name: "Koko Eating Bananas", difficulty: "medium", category: "Binary Search" },
+      { name: "Find Minimum In Rotated Sorted Array", difficulty: "medium", category: "Binary Search" },
+      { name: "Search In Rotated Sorted Array", difficulty: "medium", category: "Binary Search" }
+    ]},
+    { day: 11, date: "Jul 28", problems: [
+      { name: "Time Based Key Value Store", difficulty: "medium", category: "Binary Search" },
+      { name: "Median of Two Sorted Arrays", difficulty: "hard", category: "Binary Search" },
+      { name: "Reorder List", difficulty: "medium", category: "Linked List" }
+    ]},
+    { day: 12, date: "Jul 29", problems: [
+      { name: "Remove Nth Node From End of List", difficulty: "medium", category: "Linked List" },
+      { name: "Copy List With Random Pointer", difficulty: "medium", category: "Linked List" },
+      { name: "Find The Duplicate Number", difficulty: "medium", category: "Linked List" }
+    ]},
+    { day: 13, date: "Jul 30", problems: [
+      { name: "LRU Cache", difficulty: "medium", category: "Linked List" },
+      { name: "Reverse Nodes In K Group", difficulty: "hard", category: "Linked List" },
+      { name: "Invert Binary Tree", difficulty: "easy", category: "Trees" }
+    ]},
+    { day: 14, date: "Jul 31", problems: [
+      { name: "Maximum Depth of Binary Tree", difficulty: "easy", category: "Trees" },
+      { name: "Diameter of Binary Tree", difficulty: "easy", category: "Trees" },
+      { name: "Balanced Binary Tree", difficulty: "easy", category: "Trees" }
+    ]}
+  ]},
+  { week: 3, title: "Trees + Tries + Heap", days: [
+    { day: 15, date: "Aug 1", problems: [
+      { name: "Same Tree", difficulty: "easy", category: "Trees" },
+      { name: "Subtree of Another Tree", difficulty: "easy", category: "Trees" },
+      { name: "Lowest Common Ancestor of a BST", difficulty: "medium", category: "Trees" }
+    ]},
+    { day: 16, date: "Aug 2", problems: [
+      { name: "Binary Tree Level Order Traversal", difficulty: "medium", category: "Trees" },
+      { name: "Binary Tree Right Side View", difficulty: "medium", category: "Trees" },
+      { name: "Count Good Nodes In Binary Tree", difficulty: "medium", category: "Trees" }
+    ]},
+    { day: 17, date: "Aug 3", problems: [
+      { name: "Validate Binary Search Tree", difficulty: "medium", category: "Trees" },
+      { name: "Kth Smallest Element In a BST", difficulty: "medium", category: "Trees" },
+      { name: "Construct Binary Tree From Preorder And Inorder", difficulty: "medium", category: "Trees" }
+    ]},
+    { day: 18, date: "Aug 4", problems: [
+      { name: "Binary Tree Maximum Path Sum", difficulty: "hard", category: "Trees" },
+      { name: "Serialize And Deserialize Binary Tree", difficulty: "hard", category: "Trees" },
+      { name: "Implement Trie Prefix Tree", difficulty: "medium", category: "Tries" }
+    ]},
+    { day: 19, date: "Aug 5", problems: [
+      { name: "Design Add And Search Words Data Structure", difficulty: "medium", category: "Tries" },
+      { name: "Word Search II", difficulty: "hard", category: "Tries" },
+      { name: "Kth Largest Element In a Stream", difficulty: "easy", category: "Heap" }
+    ]},
+    { day: 20, date: "Aug 6", problems: [
+      { name: "Last Stone Weight", difficulty: "easy", category: "Heap" },
+      { name: "K Closest Points to Origin", difficulty: "medium", category: "Heap" },
+      { name: "Kth Largest Element In An Array", difficulty: "medium", category: "Heap" }
+    ]},
+    { day: 21, date: "Aug 7", problems: [
+      { name: "Task Scheduler", difficulty: "medium", category: "Heap" },
+      { name: "Design Twitter", difficulty: "medium", category: "Heap" },
+      { name: "Find Median From Data Stream", difficulty: "hard", category: "Heap" }
+    ]}
+  ]},
+  { week: 4, title: "Backtracking + Graphs", days: [
+    { day: 22, date: "Aug 8", problems: [
+      { name: "Subsets", difficulty: "medium", category: "Backtracking" },
+      { name: "Combination Sum", difficulty: "medium", category: "Backtracking" },
+      { name: "Combination Sum II", difficulty: "medium", category: "Backtracking" }
+    ]},
+    { day: 23, date: "Aug 9", problems: [
+      { name: "Permutations", difficulty: "medium", category: "Backtracking" },
+      { name: "Subsets II", difficulty: "medium", category: "Backtracking" },
+      { name: "Generate Parentheses", difficulty: "medium", category: "Backtracking" }
+    ]},
+    { day: 24, date: "Aug 10", problems: [
+      { name: "Word Search", difficulty: "medium", category: "Backtracking" },
+      { name: "Palindrome Partitioning", difficulty: "medium", category: "Backtracking" },
+      { name: "Letter Combinations of a Phone Number", difficulty: "medium", category: "Backtracking" }
+    ]},
+    { day: 25, date: "Aug 11", problems: [
+      { name: "N Queens", difficulty: "hard", category: "Backtracking" },
+      { name: "Number of Islands", difficulty: "medium", category: "Graphs" },
+      { name: "Max Area of Island", difficulty: "medium", category: "Graphs" }
+    ]},
+    { day: 26, date: "Aug 12", problems: [
+      { name: "Clone Graph", difficulty: "medium", category: "Graphs" },
+      { name: "Walls And Gates", difficulty: "medium", category: "Graphs" },
+      { name: "Rotting Oranges", difficulty: "medium", category: "Graphs" }
+    ]},
+    { day: 27, date: "Aug 13", problems: [
+      { name: "Pacific Atlantic Water Flow", difficulty: "medium", category: "Graphs" },
+      { name: "Surrounded Regions", difficulty: "medium", category: "Graphs" },
+      { name: "Course Schedule", difficulty: "medium", category: "Graphs" }
+    ]},
+    { day: 28, date: "Aug 14", problems: [
+      { name: "Course Schedule II", difficulty: "medium", category: "Graphs" },
+      { name: "Graph Valid Tree", difficulty: "medium", category: "Graphs" },
+      { name: "Number of Connected Components", difficulty: "medium", category: "Graphs" }
+    ]}
+  ]},
+  { week: 5, title: "Graphs + Advanced Graphs + 1-D DP", days: [
+    { day: 29, date: "Aug 15", problems: [
+      { name: "Redundant Connection", difficulty: "medium", category: "Graphs" },
+      { name: "Word Ladder", difficulty: "hard", category: "Graphs" },
+      { name: "Network Delay Time", difficulty: "medium", category: "Adv. Graphs" }
+    ]},
+    { day: 30, date: "Aug 16", problems: [
+      { name: "Reconstruct Itinerary", difficulty: "hard", category: "Adv. Graphs" },
+      { name: "Min Cost to Connect All Points", difficulty: "medium", category: "Adv. Graphs" },
+      { name: "Swim In Rising Water", difficulty: "hard", category: "Adv. Graphs" }
+    ]},
+    { day: 31, date: "Aug 17", problems: [
+      { name: "Alien Dictionary", difficulty: "hard", category: "Adv. Graphs" },
+      { name: "Cheapest Flights Within K Stops", difficulty: "medium", category: "Adv. Graphs" },
+      { name: "Climbing Stairs", difficulty: "easy", category: "1-D DP" }
+    ]},
+    { day: 32, date: "Aug 18", problems: [
+      { name: "Min Cost Climbing Stairs", difficulty: "easy", category: "1-D DP" },
+      { name: "House Robber", difficulty: "medium", category: "1-D DP" },
+      { name: "House Robber II", difficulty: "medium", category: "1-D DP" }
+    ]},
+    { day: 33, date: "Aug 19", problems: [
+      { name: "Longest Palindromic Substring", difficulty: "medium", category: "1-D DP" },
+      { name: "Palindromic Substrings", difficulty: "medium", category: "1-D DP" },
+      { name: "Decode Ways", difficulty: "medium", category: "1-D DP" }
+    ]},
+    { day: 34, date: "Aug 20", problems: [
+      { name: "Coin Change", difficulty: "medium", category: "1-D DP" },
+      { name: "Maximum Product Subarray", difficulty: "medium", category: "1-D DP" },
+      { name: "Word Break", difficulty: "medium", category: "1-D DP" }
+    ]},
+    { day: 35, date: "Aug 21", problems: [
+      { name: "Longest Increasing Subsequence", difficulty: "medium", category: "1-D DP" },
+      { name: "Partition Equal Subset Sum", difficulty: "medium", category: "1-D DP" },
+      { name: "Unique Paths", difficulty: "medium", category: "2-D DP" }
+    ]}
+  ]},
+  { week: 6, title: "2-D DP + Greedy", days: [
+    { day: 36, date: "Aug 22", problems: [
+      { name: "Longest Common Subsequence", difficulty: "medium", category: "2-D DP" },
+      { name: "Best Time to Buy And Sell Stock With Cooldown", difficulty: "medium", category: "2-D DP" },
+      { name: "Coin Change II", difficulty: "medium", category: "2-D DP" }
+    ]},
+    { day: 37, date: "Aug 23", problems: [
+      { name: "Target Sum", difficulty: "medium", category: "2-D DP" },
+      { name: "Interleaving String", difficulty: "medium", category: "2-D DP" },
+      { name: "Longest Increasing Path In a Matrix", difficulty: "hard", category: "2-D DP" }
+    ]},
+    { day: 38, date: "Aug 24", problems: [
+      { name: "Distinct Subsequences", difficulty: "hard", category: "2-D DP" },
+      { name: "Edit Distance", difficulty: "hard", category: "2-D DP" },
+      { name: "Burst Balloons", difficulty: "hard", category: "2-D DP" }
+    ]},
+    { day: 39, date: "Aug 25", problems: [
+      { name: "Regular Expression Matching", difficulty: "hard", category: "2-D DP" },
+      { name: "Maximum Subarray", difficulty: "medium", category: "Greedy" },
+      { name: "Jump Game", difficulty: "medium", category: "Greedy" }
+    ]},
+    { day: 40, date: "Aug 26", problems: [
+      { name: "Jump Game II", difficulty: "medium", category: "Greedy" },
+      { name: "Gas Station", difficulty: "medium", category: "Greedy" },
+      { name: "Hand of Straights", difficulty: "medium", category: "Greedy" }
+    ]},
+    { day: 41, date: "Aug 27", problems: [
+      { name: "Merge Triplets to Form Target Triplet", difficulty: "medium", category: "Greedy" },
+      { name: "Partition Labels", difficulty: "medium", category: "Greedy" },
+      { name: "Valid Parenthesis String", difficulty: "medium", category: "Greedy" }
+    ]}
+  ]},
+  { week: 7, title: "Intervals + Math & Geometry + Bit Manipulation", days: [
+    { day: 42, date: "Aug 28", problems: [
+      { name: "Insert Interval", difficulty: "medium", category: "Intervals" },
+      { name: "Merge Intervals", difficulty: "medium", category: "Intervals" },
+      { name: "Non Overlapping Intervals", difficulty: "medium", category: "Intervals" }
+    ]},
+    { day: 43, date: "Aug 29", problems: [
+      { name: "Meeting Rooms", difficulty: "easy", category: "Intervals" },
+      { name: "Meeting Rooms II", difficulty: "medium", category: "Intervals" },
+      { name: "Minimum Interval to Include Each Query", difficulty: "hard", category: "Intervals" }
+    ]},
+    { day: 44, date: "Aug 30", problems: [
+      { name: "Rotate Image", difficulty: "medium", category: "Math & Geometry" },
+      { name: "Spiral Matrix", difficulty: "medium", category: "Math & Geometry" },
+      { name: "Set Matrix Zeroes", difficulty: "medium", category: "Math & Geometry" }
+    ]},
+    { day: 45, date: "Aug 31", problems: [
+      { name: "Happy Number", difficulty: "easy", category: "Math & Geometry" },
+      { name: "Plus One", difficulty: "easy", category: "Math & Geometry" },
+      { name: "Pow(x, n)", difficulty: "medium", category: "Math & Geometry" }
+    ]},
+    { day: 46, date: "Sep 1", problems: [
+      { name: "Multiply Strings", difficulty: "medium", category: "Math & Geometry" },
+      { name: "Detect Squares", difficulty: "medium", category: "Math & Geometry" },
+      { name: "Single Number", difficulty: "easy", category: "Bit Manipulation" }
+    ]},
+    { day: 47, date: "Sep 2", problems: [
+      { name: "Number of 1 Bits", difficulty: "easy", category: "Bit Manipulation" },
+      { name: "Counting Bits", difficulty: "easy", category: "Bit Manipulation" },
+      { name: "Reverse Bits", difficulty: "easy", category: "Bit Manipulation" }
+    ]},
+    { day: 48, date: "Sep 3", problems: [
+      { name: "Missing Number", difficulty: "easy", category: "Bit Manipulation" },
+      { name: "Sum of Two Integers", difficulty: "medium", category: "Bit Manipulation" },
+      { name: "Reverse Integer", difficulty: "medium", category: "Bit Manipulation" }
+    ]}
+  ]}
+];
+
+// --- LocalStorage persistence ---
+const STORAGE_KEY = 'neetcode150_progress';
+
+function loadProgress() {
+    const data = localStorage.getItem(STORAGE_KEY);
+    return data ? JSON.parse(data) : {};
+}
+
+function saveProgress(progress) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+}
+
+function resetProgress() {
+    if (confirm('Reset all progress? This cannot be undone.')) {
+        localStorage.removeItem(STORAGE_KEY);
+        location.reload();
+    }
+}
+
+// --- Rendering ---
+function render() {
+    const progress = loadProgress();
+    const container = document.getElementById('weeks-container');
+    container.innerHTML = '';
+
+    let totalSolved = 0, easySolved = 0, mediumSolved = 0, hardSolved = 0;
+    let todaySolved = 0;
+    const today = new Date().toDateString();
+
+    PLAN.forEach(week => {
+        const weekEl = document.createElement('div');
+        weekEl.className = 'week-section';
+
+        let weekSolved = 0, weekTotal = 0;
+
+        let daysHTML = '';
+        week.days.forEach(day => {
+            let problemsHTML = '';
+            day.problems.forEach((p, idx) => {
+                const id = `w${week.week}_d${day.day}_p${idx}`;
+                const checked = progress[id] ? 'checked' : '';
+                const completedClass = progress[id] ? 'completed' : '';
+                if (progress[id]) {
+                    totalSolved++;
+                    weekSolved++;
+                    if (p.difficulty === 'easy') easySolved++;
+                    else if (p.difficulty === 'medium') mediumSolved++;
+                    else hardSolved++;
+                    if (progress[id].date === today) todaySolved++;
+                }
+                weekTotal++;
+                problemsHTML += `
+                    <div class="problem-item ${completedClass}" data-id="${id}">
+                        <input type="checkbox" id="${id}" ${checked} onchange="toggleProblem('${id}', this.checked)">
+                        <label for="${id}">
+                            <span>${p.name} <span class="category-tag">${p.category}</span></span>
+                            <span class="difficulty ${p.difficulty}">${p.difficulty}</span>
+                        </label>
+                    </div>`;
+            });
+            daysHTML += `
+                <div class="day-group">
+                    <div class="day-label">Day ${day.day} — ${day.date}</div>
+                    ${problemsHTML}
+                </div>`;
+        });
+
+        weekEl.innerHTML = `
+            <div class="week-header" onclick="toggleWeek(this)">
+                <h2><span class="collapse-icon">▼</span> Week ${week.week}: ${week.title}</h2>
+                <span class="week-progress">${weekSolved}/${weekTotal}</span>
+            </div>
+            <div class="week-body">${daysHTML}</div>`;
+        container.appendChild(weekEl);
+    });
+
+    // Update stats
+    document.getElementById('progress-text').textContent = `${totalSolved} / 144`;
+    document.getElementById('progress-bar').style.width = `${(totalSolved / 144) * 100}%`;
+    document.getElementById('stat-easy').textContent = easySolved;
+    document.getElementById('stat-medium').textContent = mediumSolved;
+    document.getElementById('stat-hard').textContent = hardSolved;
+    document.getElementById('stat-today').textContent = todaySolved;
+
+    // Calculate streak
+    const streak = calculateStreak(progress);
+    document.getElementById('streak-info').textContent = `🔥 Streak: ${streak} days`;
+
+    // Days elapsed
+    const start = new Date('2026-07-18');
+    const now = new Date();
+    const elapsed = Math.max(0, Math.floor((now - start) / 86400000));
+    document.getElementById('days-elapsed').textContent = `Day ${Math.min(elapsed, 48)} of 48`;
+}
+
+function toggleProblem(id, checked) {
+    const progress = loadProgress();
+    if (checked) {
+        progress[id] = { done: true, date: new Date().toDateString() };
+    } else {
+        delete progress[id];
+    }
+    saveProgress(progress);
+    render();
+}
+
+function toggleWeek(header) {
+    header.parentElement.classList.toggle('collapsed');
+}
+
+function calculateStreak(progress) {
+    const dates = new Set();
+    Object.values(progress).forEach(v => { if (v.date) dates.add(v.date); });
+
+    let streak = 0;
+    let d = new Date();
+    // Check if today has activity, if not start from yesterday
+    if (!dates.has(d.toDateString())) {
+        d.setDate(d.getDate() - 1);
+    }
+    while (dates.has(d.toDateString())) {
+        streak++;
+        d.setDate(d.getDate() - 1);
+    }
+    return streak;
+}
+
+// Initial render
+render();
+</script>

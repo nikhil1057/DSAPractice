@@ -25,19 +25,18 @@ public class RemoveAllAdjacentDuplicatesInString
 {
     public string RemoveDuplicates(string s)
     {
-        // TODO: Implement using a stack
-        Stack<char> charStack = new Stack<char>();
+        Stack<char> charStack = new Stack<char>();  // Holds surviving characters
 
         var arr = s.ToCharArray();
-
-        Array.Reverse(arr);
+        Array.Reverse(arr);            // Reverse so stack output is in correct order
 
         for(int i = 0; i < arr.Length; i++)
         {
-            if(charStack.Count > 0 && charStack.Peek() == arr[i]) charStack.Pop();
-            else charStack.Push(arr[i]);
+            if(charStack.Count > 0 && charStack.Peek() == arr[i]) charStack.Pop();  // Adjacent duplicate → cancel
+            else charStack.Push(arr[i]);                                             // No match → push
         }
 
+        // Pop all remaining chars into result
         List<char> result = new();
 
         while(charStack.Count() != 0)

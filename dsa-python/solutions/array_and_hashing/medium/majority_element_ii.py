@@ -4,12 +4,59 @@
 # Given an integer array of size n, find all elements that appear more than
 # ⌊n/3⌋ times. Return the answer in any order.
 #
-# APPROACH:
-# TODO: Describe your approach here
+# APPROACH: Extended Boyer-Moore Voting Algorithm (two candidates)
 #
-# TIME: O(?)
-# SPACE: O(?)
+# KEY INSIGHT: At most 2 elements can appear more than ⌊n/3⌋ times.
+# We extend Boyer-Moore from 1 candidate to 2 candidates.
+#
+# HOW IT WORKS (two passes):
+# Pass 1 — Find candidates:
+# - Maintain two candidates with two counters.
+# - If current matches candidate1 → increment count1.
+# - If current matches candidate2 → increment count2.
+# - If count1 == 0 → replace candidate1 with current.
+# - If count2 == 0 → replace candidate2 with current.
+# - Otherwise → decrement both counts (three-way cancellation).
+#
+# Pass 2 — Verify candidates:
+# - Count actual occurrences of each candidate.
+# - Only include those with count > ⌊n/3⌋.
+#
+# WHY TWO PASSES: Unlike Majority Element (>n/2), the >n/3 version
+# doesn't guarantee candidates are valid — we must verify.
+#
+# TIME: O(n) — two passes
+# SPACE: O(1) — constant extra space
 
 class MajorityElementII:
     def majority_element(self, nums: list[int]) -> list[int]:
-        pass
+        candidate1, candidate2, count1, count2 = 0, 0, 0, 0
+
+        # Pass 1: Find up to 2 potential candidates via three-way cancellation
+        for num in nums:
+            if num == candidate1: count1 += 1           # Matches candidate1 → support
+            elif num == candidate2: count2 += 1         # Matches candidate2 → support
+            elif count1 == 0:                           # candidate1 was cancelled, replace
+                candidate1 = num
+                count1 += 1
+            elif count2 == 0:                           # candidate2 was cancelled, replace
+                candidate2 = num
+                count2 += 1
+            else:                                       # Three-way cancellation
+                count1 -= 1
+                count2 -= 1
+
+        # Pass 2: Verify candidates actually appear > ⌊n/3⌋ times
+        count1, count2 = 0, 0
+
+        for num in nums:
+            if num == candidate1: count1 += 1
+            if num == candidate2: count2 += 1
+
+        n = len(nums)
+        result = []
+        if count1 > n // 3: result.append(candidate1)                          # Confirmed majority
+        if count2 > n // 3 and candidate2 != candidate1: result.append(candidate2)  # Confirmed second majority
+
+        return result
+
