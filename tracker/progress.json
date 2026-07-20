@@ -36,7 +36,11 @@
       "done": true,
       "date": "Sun Jul 19 2026"
     },
-    "_seeded": true
+    "_seeded": true,
+    "w1_d4_p0": {
+      "done": true,
+      "date": "Sun Jul 19 2026"
+    }
   },
   "revision": {
     "Contains Duplicate": {
@@ -124,6 +128,16 @@
       "difficulty": "medium",
       "category": "Arrays & Hashing",
       "nextReview": 1784730801341,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Valid Palindrome": {
+      "name": "Valid Palindrome",
+      "difficulty": "easy",
+      "category": "Two Pointers",
+      "nextReview": 1784731848965,
       "interval": "medium",
       "easyStreak": 0,
       "mastered": false,

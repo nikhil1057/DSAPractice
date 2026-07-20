@@ -6,16 +6,33 @@
 // target number. Return the indices of the two numbers (1-indexed) as an
 // integer array of length 2.
 //
-// APPROACH:
-// TODO: Describe your approach here
+// APPROACH: Two Pointers converging from both ends
 //
-// TIME: O(?)
-// SPACE: O(?)
+// KEY INSIGHT: Array is sorted → use two pointers.
+// If sum > target → move right inward (need smaller number).
+// If sum < target → move left inward (need bigger number).
+//
+// WHY NOT HASHMAP: Sorted array + O(1) space constraint → two pointers is optimal.
+//
+// TIME: O(n) — each pointer moves at most n times total
+// SPACE: O(1) — just two variables
 
 public class TwoSumIIInputArrayIsSorted
 {
     public int[] TwoSum(int[] numbers, int target)
     {
-        throw new System.NotImplementedException();
+        int left = 0;
+        int right = numbers.Length - 1;
+
+        while(left < right)
+        {
+            int sum = numbers[left] + numbers[right];   // Sum of current pair
+            if(sum == target)
+                return new int[] {left + 1, right + 1}; // Found! (1-indexed)
+            else if(sum > target) right--;              // Too big → shrink from right
+            else left++;                                // Too small → grow from left
+        }
+
+        return new int[] {};
     }
 }
