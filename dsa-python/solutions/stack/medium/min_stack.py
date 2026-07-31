@@ -10,14 +10,9 @@
 # - top() gets the top element of the stack.
 # - get_min() retrieves the minimum element in the stack.
 #
-# You must implement a solution with O(1) time complexity for each function.
-#
-# CATEGORY: Stack (Medium)
-#
-# HINTS:
-# - Use two stacks: one for values and one to track minimums.
-# - Each time you push, also push the current minimum onto the min stack.
-# - When you pop, pop from both stacks.
+# APPROACH: Two stacks — one for values, one for tracking minimums.
+# Only push to min_stack when val <= current min. Only pop from min_stack
+# when popped value equals current min. Saves space.
 #
 # TIME: O(1) for all operations
 # SPACE: O(n) — for storing elements and minimums
@@ -25,21 +20,21 @@
 
 class MinStack:
     def __init__(self):
-        # TODO: Initialize data structures
-        pass
+        self.stack = []
+        self.min_stack = []
 
     def push(self, val: int) -> None:
-        # TODO: Implement push
-        pass
+        self.stack.append(val)
+        if not self.min_stack or val <= self.min_stack[-1]:
+            self.min_stack.append(val)
 
     def pop(self) -> None:
-        # TODO: Implement pop
-        pass
+        val = self.stack.pop()
+        if val == self.min_stack[-1]:
+            self.min_stack.pop()
 
     def top(self) -> int:
-        # TODO: Implement top
-        pass
+        return self.stack[-1]
 
     def get_min(self) -> int:
-        # TODO: Implement get_min
-        pass
+        return self.min_stack[-1]

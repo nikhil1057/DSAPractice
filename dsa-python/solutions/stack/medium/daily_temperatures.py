@@ -6,13 +6,9 @@
 # after the ith day to get a warmer temperature. If there is no future day for which
 # this is possible, keep answer[i] == 0 instead.
 #
-# CATEGORY: Stack (Medium)
-#
-# HINTS:
-# - Use a monotonic decreasing stack of indices.
-# - Iterate through temperatures. For each temp, pop indices from the stack
-#   while the current temp is greater than the temp at the stack's top index.
-# - For each popped index, the answer is current_index - popped_index.
+# APPROACH: Monotonic decreasing stack. Stack holds indices of days we haven't
+# found a warmer day for yet. When a warmer day comes, it resolves all the
+# cooler days waiting on the stack — distance between indices is the answer.
 #
 # TIME: O(n) — each element is pushed/popped at most once
 # SPACE: O(n) — stack space
@@ -20,5 +16,17 @@
 
 class DailyTemperatures:
     def daily_temperatures(self, temperatures: list[int]) -> list[int]:
-        # TODO: Implement using a monotonic stack
-        pass
+        stack = []  # stores indices of days waiting for a warmer day
+        answer = [0] * len(temperatures)  # default 0 means no warmer day found
+
+        for i in range(len(temperatures)):
+            # If current temp is warmer than what's on top of stack,
+            # it means we found the warmer day for those waiting indices
+            while stack and temperatures[stack[-1]] < temperatures[i]:
+                index = stack.pop()  # this day has been resolved
+                answer[index] = i - index  # distance = how many days waited
+            # Push current day — it's waiting for its warmer day
+            stack.append(i)
+
+        # Anything left in stack never found a warmer day → stays 0
+        return answer
