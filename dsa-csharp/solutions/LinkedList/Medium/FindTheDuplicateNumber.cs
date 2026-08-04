@@ -5,16 +5,19 @@
 // the range [1, n] inclusive. There is only one repeated number in nums, return this
 // repeated number.
 //
-// You must solve the problem without modifying the array nums and using only constant
-// extra space.
+// APPROACH: Floyd's Cycle Detection (Tortoise and Hare).
+// Treat array as a linked list: nums[i] = next pointer.
+// Duplicate means two indices point to the same "node" → cycle exists.
 //
-// CATEGORY: Linked List (Medium)
+// Phase 1: Find meeting point inside the cycle.
+//   slow moves one hop: slow = nums[slow]
+//   fast moves two hops: fast = nums[nums[fast]]
+//   They meet somewhere INSIDE the cycle (not necessarily at entrance).
 //
-// HINTS:
-// - Treat the array as a linked list where nums[i] is the next pointer.
-// - Since there's a duplicate, there must be a cycle.
-// - Use Floyd's cycle detection (tortoise and hare) to find the cycle.
-// - Then find the entrance to the cycle, which is the duplicate number.
+// Phase 2: Find cycle entrance (= the duplicate).
+//   One pointer from start, one from meeting point, both one hop at a time.
+//   They meet at the entrance because:
+//   distance(start → entrance) == distance(meeting point → entrance going around)
 //
 // TIME: O(n) — Floyd's algorithm
 // SPACE: O(1) — constant extra space
@@ -23,7 +26,27 @@ public class FindTheDuplicateNumber
 {
     public int FindDuplicate(int[] nums)
     {
-        // TODO: Implement using Floyd's cycle detection
-        throw new NotImplementedException();
+        // Phase 1: Find meeting point inside the cycle
+        int slow = nums[0];
+        int fast = nums[0];
+
+        while (true)
+        {
+            slow = nums[slow];          // one hop
+            fast = nums[nums[fast]];    // two hops
+            if (slow == fast) break;    // met somewhere inside the cycle
+        }
+
+        // Phase 2: Find cycle entrance (= the duplicate)
+        // One from start, one from meeting point, same speed → meet at entrance
+        int slow2 = nums[0];
+
+        while (slow2 != slow)
+        {
+            slow = nums[slow];
+            slow2 = nums[slow2];
+        }
+
+        return slow;  // entrance of cycle = duplicate number
     }
 }

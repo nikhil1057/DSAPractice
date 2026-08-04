@@ -136,6 +136,22 @@
     "w2_d12_p0": {
       "done": true,
       "date": "Tue Aug 04 2026"
+    },
+    "w2_d12_p1": {
+      "done": true,
+      "date": "Tue Aug 04 2026"
+    },
+    "w2_d12_p2": {
+      "done": true,
+      "date": "Tue Aug 04 2026"
+    },
+    "w2_d13_p0": {
+      "done": true,
+      "date": "Tue Aug 04 2026"
+    },
+    "w2_d13_p1": {
+      "done": true,
+      "date": "Tue Aug 04 2026"
     }
   },
   "revision": {
@@ -474,6 +490,46 @@
       "difficulty": "medium",
       "category": "Linked List",
       "nextReview": 1786087344783,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Copy List With Random Pointer": {
+      "name": "Copy List With Random Pointer",
+      "difficulty": "medium",
+      "category": "Linked List",
+      "nextReview": 1786089081689,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Find The Duplicate Number": {
+      "name": "Find The Duplicate Number",
+      "difficulty": "medium",
+      "category": "Linked List",
+      "nextReview": 1786092240836,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "LRU Cache": {
+      "name": "LRU Cache",
+      "difficulty": "medium",
+      "category": "Linked List",
+      "nextReview": 1786106178463,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Reverse Nodes In K Group": {
+      "name": "Reverse Nodes In K Group",
+      "difficulty": "hard",
+      "category": "Linked List",
+      "nextReview": 1786117595666,
       "interval": "medium",
       "easyStreak": 0,
       "mastered": false,

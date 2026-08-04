@@ -24,23 +24,81 @@
 // TIME: O(1) for both Get and Put
 // SPACE: O(capacity) — for storing cache entries
 
+using System.Data;
+
 public class LRUCache
 {
-    public LRUCache(int capacity)
+    private class DoubleNode
     {
-        // TODO: Initialize dictionary and doubly linked list
-        throw new NotImplementedException();
+            public int Key;
+            public int Val;
+            public DoubleNode? Prev;
+            public DoubleNode? Next;
+            public DoubleNode(int key, int val)
+        {
+            Key = key;
+            Val = val;
+        }
+    }
+
+    Dictionary<int, DoubleNode> map;
+    private DoubleNode head;
+    private DoubleNode tail;
+    private int capacity;
+    public LRUCache(int capacity) //Head ->DoublyLinkedList <- Tail
+    {
+        this.capacity = capacity;
+        map = new Dictionary<int, DoubleNode>();
+        head = new DoubleNode(0,0);
+        tail = new DoubleNode(0,0);
+        head.Next = tail;
+        tail.Prev = head;
     }
 
     public int Get(int key)
     {
-        // TODO: Return value if exists, move to front, else return -1
-        throw new NotImplementedException();
+        if(!map.ContainsKey(key)) return -1;
+        DoubleNode node = map[key];
+        Remove(node);
+        AddToFront(node);
+        return node.Val;
+        
     }
 
     public void Put(int key, int value)
     {
-        // TODO: Add/update key-value, evict LRU if over capacity
-        throw new NotImplementedException();
+        if(map.ContainsKey(key))
+        {
+            Remove(map[key]);
+        }
+
+        DoubleNode node = new DoubleNode(key, value);
+        AddToFront(node);
+        map[key] = node;
+
+        if(map.Count > capacity)
+        {
+            DoubleNode lru = tail.Prev;
+            Remove(lru);
+            map.Remove(lru.Key); //need key to be saved in node to be removed from map
+        }
+    }
+
+    private void Remove(DoubleNode node)
+    {
+        //Unlink node from it's current position
+        node.Prev.Next = node.Next;
+        node.Next.Prev = node.Prev;
+        
+    }
+    private void AddToFront(DoubleNode node)
+    {
+        //Insert right after dummy head
+        node.Next = head.Next;
+        node.Prev = head;
+        head.Next.Prev = node;
+        head.Next = node;
     }
 }
+
+
