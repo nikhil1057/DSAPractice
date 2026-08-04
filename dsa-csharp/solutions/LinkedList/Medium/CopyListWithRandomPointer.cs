@@ -14,10 +14,10 @@
 //
 // CATEGORY: Linked List (Medium)
 //
-// HINTS:
-// - Use a Dictionary to map original nodes to their copies.
-// - First pass: create all copy nodes and store in the map.
-// - Second pass: set next and random pointers using the map.
+// APPROACH: Two-pass with HashMap.
+// Pass 1: Create a copy of each node (value only), store mapping original → copy.
+// Pass 2: Use the map to wire up next and random pointers on the copies.
+// The map lets us look up "given an original node, what's its copy?" in O(1).
 //
 // TIME: O(n) — two passes through the list
 // SPACE: O(n) — dictionary for node mapping
@@ -39,7 +39,27 @@ public class CopyListWithRandomPointer
 
     public Node? CopyRandomList(Node? head)
     {
-        // TODO: Implement using hashmap
-        throw new NotImplementedException();
+        if (head == null) return null;
+
+        Dictionary<Node,Node> hashMap = new();
+
+        Node? curr = head;
+
+        while(curr != null)
+        {
+            hashMap[curr] = new Node(curr.val);
+            curr = curr.next;
+        }
+
+        curr = head;
+
+        while(curr != null)
+        {
+            hashMap[curr].next = curr.next != null ? hashMap[curr.next] : null;
+            hashMap[curr].random = curr.random != null ? hashMap[curr.random] : null;
+            curr = curr.next;
+        }
+
+        return hashMap[head];
     }
 }

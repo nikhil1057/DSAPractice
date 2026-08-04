@@ -9,10 +9,9 @@
 //
 // CATEGORY: Binary Search (Easy)
 //
-// HINTS:
-// - Classic binary search: maintain left and right pointers.
-// - Calculate mid, compare nums[mid] with target.
-// - If equal, return mid. If target is larger, search right half. Otherwise, search left half.
+// APPROACH: Classic binary search. Maintain left and right pointers, calculate mid,
+// compare nums[mid] with target. Halve the search space each iteration.
+// Using left + (right - left) / 2 to avoid integer overflow when computing mid.
 //
 // TIME: O(log n) — halving the search space each step
 // SPACE: O(1) — constant extra space
@@ -21,7 +20,18 @@ public class BinarySearch
 {
     public int Search(int[] nums, int target)
     {
-        // TODO: Implement binary search
-        throw new NotImplementedException();
+        int left = 0;
+        int right = nums.Length - 1;
+
+        while(left <= right)
+        {
+            int mid = left + ((right - left) / 2); //Taking distance between right and left and then adding it to left 
+
+            if(nums[mid] > target) right = mid - 1;
+            else if(nums[mid] < target) left = mid + 1;
+            else return mid;
+        }
+
+        return -1;
     }
 }

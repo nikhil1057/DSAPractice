@@ -9,10 +9,11 @@
 //
 // CATEGORY: Linked List (Medium)
 //
-// HINTS:
-// - Find the middle of the list using slow/fast pointers.
-// - Reverse the second half of the list.
-// - Merge the two halves by alternating nodes.
+// APPROACH: Three steps:
+// 1. Find middle using slow/fast pointers
+// 2. Reverse the second half (save reference BEFORE cutting)
+// 3. Cut the list (slow.next = null) to separate the two halves
+// 4. Merge two halves alternating (interleave)
 //
 // TIME: O(n) — three passes (find middle, reverse, merge)
 // SPACE: O(1) — in-place modification
@@ -32,7 +33,45 @@ public class ReorderList
 
     public void ReorderListMethod(ListNode? head)
     {
-        // TODO: Implement using find middle + reverse + merge
-        throw new NotImplementedException();
+        var slow = head;
+        var fast = head;
+
+        while(fast != null && fast.next != null)
+        {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        var second = Reverse(slow.next);
+        slow.next = null;  // Cut the list in two halves
+
+        //Merge Two Linked List Alternatively
+        var first = head;
+        while(second != null)
+        {
+            var temp1 = first.next;
+            var temp2 = second.next;
+            first.next = second;
+            second.next = temp1;
+            first = temp1;
+            second = temp2;
+        }
+    }
+
+    private ListNode Reverse(ListNode? head)
+    {
+        ListNode? next = null;
+        ListNode? prev = null;
+        ListNode? current = head;
+
+        while(current != null)
+        {
+            next = current.next; // Save the rest of the list
+            current.next = prev; // Reverse: point backwards
+            prev = current; // Move prev forward
+            current = next; // Move to next node
+        }
+
+        return prev;
     }
 }

@@ -23,21 +23,45 @@
 
 public class TimeBasedKeyValueStore
 {
+    Dictionary<String, List<(String,int)>> TimeMap;
+
     public TimeBasedKeyValueStore()
     {
-        // TODO: Initialize data structure
-        throw new NotImplementedException();
+        this.TimeMap = new Dictionary<string, List<(string, int)>>();
     }
 
     public void Set(string key, string value, int timestamp)
     {
-        // TODO: Store key-value at timestamp
-        throw new NotImplementedException();
+        var newTupleValue = (value, timestamp);
+
+        if (this.TimeMap.ContainsKey(key)) 
+            this.TimeMap[key].Add(newTupleValue);
+        else
+            this.TimeMap[key] = new List<(string, int)>{newTupleValue};
+
     }
 
     public string Get(string key, int timestamp)
     {
-        // TODO: Get value at or before timestamp using binary search
-        throw new NotImplementedException();
+        if(!this.TimeMap.ContainsKey(key)) return "";
+
+        var valueList = this.TimeMap[key];
+
+        int left = 0; int right = valueList.Count - 1;
+        string result = "";
+
+        while(left <= right)
+        {
+            int mid = left + ((right - left) /2);
+
+            if(timestamp >= valueList[mid].Item2)
+            {
+                result = valueList[mid].Item1;
+                left = mid + 1;
+            }
+            else right = mid - 1;
+        }
+
+        return result;
     }
 }

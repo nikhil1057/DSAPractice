@@ -22,7 +22,29 @@ public class EvaluateReversePolishNotation
 {
     public int EvalRPN(string[] tokens)
     {
-        // TODO: Implement using a stack
-        throw new NotImplementedException();
+        Stack<int> newStack = new();
+
+        for(int i = 0; i< tokens.Length; i++)
+        {
+            if(tokens[i] == "+" || tokens[i] == "-" || tokens[i] == "*" ||tokens[i] == "/")
+            {
+                int value1 = newStack.Pop();
+                int value2 = newStack.Pop();
+                int result = tokens[i] switch
+                {
+                    "+" => value1 + value2,
+                    "-" => value2 - value1,
+                    "*" => value1 * value2,
+                    "/" => value2 / value1,  // int division already truncates in C#
+                    _ => 0
+                };
+
+                newStack.Push(result);
+            }
+            else newStack.Push(int.Parse(tokens[i]));
+        }
+
+        return (int)newStack.Pop();
+
     }
 }

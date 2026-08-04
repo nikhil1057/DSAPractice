@@ -8,12 +8,9 @@
 # Valid operators are +, -, *, /. Each operand may be an integer or another expression.
 # Division between two integers truncates toward zero.
 #
-# CATEGORY: Stack (Medium)
-#
-# HINTS:
-# - Use a stack. Push numbers onto it.
-# - When you encounter an operator, pop two numbers, apply the operator, and push the result.
-# - Be careful with division: use int(a/b) to truncate toward zero in Python.
+# APPROACH: Use a stack. Push numbers onto it. When you encounter an operator,
+# pop two numbers (first popped = right operand, second popped = left operand),
+# apply the operator, and push the result back.
 #
 # TIME: O(n) — single pass through tokens
 # SPACE: O(n) — stack space
@@ -21,5 +18,25 @@
 
 class EvaluateReversePolishNotation:
     def eval_rpn(self, tokens: list[str]) -> int:
-        # TODO: Implement using a stack
-        pass
+        stack = []
+
+        for token in tokens:
+            if token in "+-*/":
+                value1 = stack.pop()  # right operand
+                value2 = stack.pop()  # left operand
+
+                result = 0
+                if token == "+":
+                    result = value2 + value1
+                elif token == "-":
+                    result = value2 - value1
+                elif token == "*":
+                    result = value2 * value1
+                elif token == "/":
+                    result = int(value2 / value1)  # truncate toward zero
+
+                stack.append(result)
+            else:
+                stack.append(int(token))
+
+        return stack.pop()

@@ -4,33 +4,46 @@
 # Design a time-based key-value data structure that can store multiple values for the
 # same key at different time stamps and retrieve the key's value at a certain timestamp.
 #
-# Implement the TimeMap class:
-# - TimeMap() Initializes the object.
-# - set(key, value, timestamp) Stores the key with the value at the given timestamp.
-# - get(key, timestamp) Returns a value such that set was called previously with
-#   timestamp_prev <= timestamp. If there are multiple such values, it returns the
-#   value associated with the largest timestamp_prev. If there are no values, returns "".
+# APPROACH:
+# - Store: Dictionary mapping key → list of (value, timestamp) tuples
+# - Set: Just append — timestamps are strictly increasing so list stays sorted
+# - Get: Binary search for the LARGEST timestamp ≤ given timestamp (rightmost valid)
 #
-# CATEGORY: Binary Search (Medium)
-#
-# HINTS:
-# - Use a dictionary mapping keys to a list of (timestamp, value) pairs.
-# - Since timestamps are strictly increasing for set calls, the list is already sorted.
-# - For get, use binary search to find the largest timestamp <= given timestamp.
+# WHY left <= right with result variable?
+# We're searching for the RIGHTMOST valid answer. If we used left = mid with left < right,
+# it would infinite loop (floor mid biases left). So we use left = mid + 1 and store
+# the answer separately. When no valid timestamp exists, result stays "".
 #
 # TIME: O(1) for set, O(log n) for get
 # SPACE: O(n) — storing all key-value-timestamp triples
 
+from collections import defaultdict
+
 
 class TimeBasedKeyValueStore:
     def __init__(self):
-        # TODO: Initialize data structure
-        pass
+        # defaultdict(list) auto-creates empty list for new keys — no if/else needed in set
+        self.TimeMap = defaultdict(list)
 
     def set(self, key: str, value: str, timestamp: int) -> None:
-        # TODO: Store key-value at timestamp
-        pass
+        # Just append — timestamps are guaranteed strictly increasing, so list stays sorted
+        self.TimeMap[key].append((value, timestamp))
 
     def get(self, key: str, timestamp: int) -> str:
-        # TODO: Get value at or before timestamp using binary search
-        pass
+        if key not in self.TimeMap:
+            return ""
+
+        values = self.TimeMap[key]
+        left, right = 0, len(values) - 1
+        result = ""  # stays "" if no timestamp ≤ target exists
+
+        while left <= right:
+            mid = (left + right) // 2
+
+            if values[mid][1] <= timestamp:
+                result = values[mid][0]  # valid! record this value, try to find bigger timestamp
+                left = mid + 1           # search right for a larger valid timestamp
+            else:
+                right = mid - 1          # timestamp too big, search left
+
+        return result

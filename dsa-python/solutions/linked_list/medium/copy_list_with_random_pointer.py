@@ -14,11 +14,10 @@
 #
 # CATEGORY: Linked List (Medium)
 #
-# HINTS:
-# - Use a hashmap to map original nodes to their copies.
-# - First pass: create all copy nodes and store in the map.
-# - Second pass: set next and random pointers using the map.
-# - Alternatively, interleave copies in the original list (O(1) space).
+# APPROACH: Two-pass with HashMap.
+# Pass 1: Create a copy of each node (value only), store mapping original → copy.
+# Pass 2: Use the map to wire up next and random pointers on the copies.
+# The map lets us look up "given an original node, what's its copy?" in O(1).
 #
 # TIME: O(n) — two passes through the list
 # SPACE: O(n) — hashmap for node mapping
@@ -33,5 +32,16 @@ class Node:
 
 class CopyListWithRandomPointer:
     def copy_random_list(self, head: Node | None) -> Node | None:
-        # TODO: Implement using hashmap or interleaving
-        pass
+        if not head:
+            return None
+        map = {}
+        curr = head
+        while curr:
+            map[curr] = Node(curr.val)
+            curr = curr.next
+        curr = head
+        while curr:
+            map[curr].next = map[curr.next] if curr.next else None
+            map[curr].random = map[curr.random] if curr.random else None
+            curr = curr.next
+        return map[head]

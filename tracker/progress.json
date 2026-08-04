@@ -1,0 +1,484 @@
+{
+  "progress": {
+    "w1_d1_p0": {
+      "done": true,
+      "date": "Sat Jul 18 2026"
+    },
+    "w1_d1_p1": {
+      "done": true,
+      "date": "Sat Jul 18 2026"
+    },
+    "w1_d1_p2": {
+      "done": true,
+      "date": "Sat Jul 18 2026"
+    },
+    "w1_d2_p0": {
+      "done": true,
+      "date": "Sun Jul 19 2026"
+    },
+    "w1_d2_p1": {
+      "done": true,
+      "date": "Sun Jul 19 2026"
+    },
+    "w1_d2_p2": {
+      "done": true,
+      "date": "Sun Jul 19 2026"
+    },
+    "w1_d3_p0": {
+      "done": true,
+      "date": "Sun Jul 19 2026"
+    },
+    "w1_d3_p1": {
+      "done": true,
+      "date": "Sun Jul 19 2026"
+    },
+    "w1_d3_p2": {
+      "done": true,
+      "date": "Sun Jul 19 2026"
+    },
+    "_seeded": true,
+    "w1_d4_p0": {
+      "done": true,
+      "date": "Sun Jul 19 2026"
+    },
+    "w1_d4_p1": {
+      "done": true,
+      "date": "Mon Jul 20 2026"
+    },
+    "w1_d4_p2": {
+      "done": true,
+      "date": "Fri Jul 24 2026"
+    },
+    "w1_d5_p0": {
+      "done": true,
+      "date": "Fri Jul 24 2026"
+    },
+    "w1_d5_p1": {
+      "done": true,
+      "date": "Fri Jul 24 2026"
+    },
+    "w1_d5_p2": {
+      "done": true,
+      "date": "Fri Jul 24 2026"
+    },
+    "w1_d6_p0": {
+      "done": true,
+      "date": "Fri Jul 24 2026"
+    },
+    "w1_d6_p1": {
+      "done": true,
+      "date": "Sat Aug 01 2026"
+    },
+    "w1_d6_p2": {
+      "done": true,
+      "date": "Sat Aug 01 2026"
+    },
+    "w1_d7_p0": {
+      "done": true,
+      "date": "Sat Aug 01 2026"
+    },
+    "w1_d7_p1": {
+      "done": true,
+      "date": "Sat Aug 01 2026"
+    },
+    "w1_d7_p2": {
+      "done": true,
+      "date": "Sat Aug 01 2026"
+    },
+    "w2_d8_p0": {
+      "done": true,
+      "date": "Sat Aug 01 2026"
+    },
+    "w2_d8_p1": {
+      "done": true,
+      "date": "Sat Aug 01 2026"
+    },
+    "w2_d8_p2": {
+      "done": true,
+      "date": "Sat Aug 01 2026"
+    },
+    "w2_d9_p0": {
+      "done": true,
+      "date": "Sat Aug 01 2026"
+    },
+    "w2_d9_p1": {
+      "done": true,
+      "date": "Sat Aug 01 2026"
+    },
+    "w2_d9_p2": {
+      "done": true,
+      "date": "Sat Aug 01 2026"
+    },
+    "w2_d10_p0": {
+      "done": true,
+      "date": "Sat Aug 01 2026"
+    },
+    "w2_d10_p1": {
+      "done": true,
+      "date": "Sun Aug 02 2026"
+    },
+    "w2_d10_p2": {
+      "done": true,
+      "date": "Sun Aug 02 2026"
+    },
+    "w2_d11_p0": {
+      "done": true,
+      "date": "Sun Aug 02 2026"
+    },
+    "w2_d11_p1": {
+      "done": true,
+      "date": "Tue Aug 04 2026"
+    },
+    "w2_d11_p2": {
+      "done": true,
+      "date": "Tue Aug 04 2026"
+    },
+    "w2_d12_p0": {
+      "done": true,
+      "date": "Tue Aug 04 2026"
+    }
+  },
+  "revision": {
+    "Contains Duplicate": {
+      "name": "Contains Duplicate",
+      "difficulty": "easy",
+      "category": "Arrays & Hashing",
+      "nextReview": 1784730801341,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Valid Anagram": {
+      "name": "Valid Anagram",
+      "difficulty": "easy",
+      "category": "Arrays & Hashing",
+      "nextReview": 1784730801341,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Two Sum": {
+      "name": "Two Sum",
+      "difficulty": "easy",
+      "category": "Arrays & Hashing",
+      "nextReview": 1784730801341,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Group Anagrams": {
+      "name": "Group Anagrams",
+      "difficulty": "medium",
+      "category": "Arrays & Hashing",
+      "nextReview": 1784730801341,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Top K Frequent Elements": {
+      "name": "Top K Frequent Elements",
+      "difficulty": "medium",
+      "category": "Arrays & Hashing",
+      "nextReview": 1784730801341,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Encode and Decode Strings": {
+      "name": "Encode and Decode Strings",
+      "difficulty": "medium",
+      "category": "Arrays & Hashing",
+      "nextReview": 1784730801341,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Product of Array Except Self": {
+      "name": "Product of Array Except Self",
+      "difficulty": "medium",
+      "category": "Arrays & Hashing",
+      "nextReview": 1784730801341,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Valid Sudoku": {
+      "name": "Valid Sudoku",
+      "difficulty": "medium",
+      "category": "Arrays & Hashing",
+      "nextReview": 1784730801341,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Longest Consecutive Sequence": {
+      "name": "Longest Consecutive Sequence",
+      "difficulty": "medium",
+      "category": "Arrays & Hashing",
+      "nextReview": 1784730801341,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Valid Palindrome": {
+      "name": "Valid Palindrome",
+      "difficulty": "easy",
+      "category": "Two Pointers",
+      "nextReview": 1784731848965,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Two Sum II": {
+      "name": "Two Sum II",
+      "difficulty": "medium",
+      "category": "Two Pointers",
+      "nextReview": 1784824086860,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "3Sum": {
+      "name": "3Sum",
+      "difficulty": "medium",
+      "category": "Two Pointers",
+      "nextReview": 1785152953912,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Container With Most Water": {
+      "name": "Container With Most Water",
+      "difficulty": "medium",
+      "category": "Two Pointers",
+      "nextReview": 1785154385639,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Trapping Rain Water": {
+      "name": "Trapping Rain Water",
+      "difficulty": "hard",
+      "category": "Two Pointers",
+      "nextReview": 1785158438021,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Longest Substring Without Repeating Characters": {
+      "name": "Longest Substring Without Repeating Characters",
+      "difficulty": "medium",
+      "category": "Sliding Window",
+      "nextReview": 1785162459370,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Longest Repeating Character Replacement": {
+      "name": "Longest Repeating Character Replacement",
+      "difficulty": "medium",
+      "category": "Sliding Window",
+      "nextReview": 1785162464053,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Permutation In String": {
+      "name": "Permutation In String",
+      "difficulty": "medium",
+      "category": "Sliding Window",
+      "nextReview": 1785791448846,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Minimum Window Substring": {
+      "name": "Minimum Window Substring",
+      "difficulty": "hard",
+      "category": "Sliding Window",
+      "nextReview": 1785791449740,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Sliding Window Maximum": {
+      "name": "Sliding Window Maximum",
+      "difficulty": "hard",
+      "category": "Sliding Window",
+      "nextReview": 1785791450810,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Valid Parentheses": {
+      "name": "Valid Parentheses",
+      "difficulty": "easy",
+      "category": "Stack",
+      "nextReview": 1785792206873,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Min Stack": {
+      "name": "Min Stack",
+      "difficulty": "medium",
+      "category": "Stack",
+      "nextReview": 1785794805853,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Evaluate Reverse Polish Notation": {
+      "name": "Evaluate Reverse Polish Notation",
+      "difficulty": "medium",
+      "category": "Stack",
+      "nextReview": 1785798564386,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Daily Temperatures": {
+      "name": "Daily Temperatures",
+      "difficulty": "medium",
+      "category": "Stack",
+      "nextReview": 1785798564953,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Car Fleet": {
+      "name": "Car Fleet",
+      "difficulty": "medium",
+      "category": "Stack",
+      "nextReview": 1785798566061,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Largest Rectangle In Histogram": {
+      "name": "Largest Rectangle In Histogram",
+      "difficulty": "hard",
+      "category": "Stack",
+      "nextReview": 1785839962133,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Binary Search": {
+      "name": "Binary Search",
+      "difficulty": "easy",
+      "category": "Binary Search",
+      "nextReview": 1785842773811,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Search a 2D Matrix": {
+      "name": "Search a 2D Matrix",
+      "difficulty": "medium",
+      "category": "Binary Search",
+      "nextReview": 1785844946192,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Koko Eating Bananas": {
+      "name": "Koko Eating Bananas",
+      "difficulty": "medium",
+      "category": "Binary Search",
+      "nextReview": 1785849343086,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Find Minimum In Rotated Sorted Array": {
+      "name": "Find Minimum In Rotated Sorted Array",
+      "difficulty": "medium",
+      "category": "Binary Search",
+      "nextReview": 1785930446714,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Search In Rotated Sorted Array": {
+      "name": "Search In Rotated Sorted Array",
+      "difficulty": "medium",
+      "category": "Binary Search",
+      "nextReview": 1785930447787,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Time Based Key Value Store": {
+      "name": "Time Based Key Value Store",
+      "difficulty": "medium",
+      "category": "Binary Search",
+      "nextReview": 1785934630232,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Median of Two Sorted Arrays": {
+      "name": "Median of Two Sorted Arrays",
+      "difficulty": "hard",
+      "category": "Binary Search",
+      "nextReview": 1786084283226,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Reorder List": {
+      "name": "Reorder List",
+      "difficulty": "medium",
+      "category": "Linked List",
+      "nextReview": 1786087343881,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Remove Nth Node From End of List": {
+      "name": "Remove Nth Node From End of List",
+      "difficulty": "medium",
+      "category": "Linked List",
+      "nextReview": 1786087344783,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    }
+  },
+  "sd_progress": {}
+}
