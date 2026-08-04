@@ -18,10 +18,10 @@ app.get('/api/progress', (req, res) => {
     try {
         const data = fs.existsSync(DB_FILE)
             ? JSON.parse(fs.readFileSync(DB_FILE, 'utf-8'))
-            : { progress: {}, revision: {} };
+            : { progress: {}, revision: {}, sd_progress: {} };
         res.json(data);
     } catch (err) {
-        res.json({ progress: {}, revision: {} });
+        res.json({ progress: {}, revision: {}, sd_progress: {} });
     }
 });
 

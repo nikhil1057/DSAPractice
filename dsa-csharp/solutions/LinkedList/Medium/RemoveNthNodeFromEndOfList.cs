@@ -6,12 +6,11 @@
 //
 // CATEGORY: Linked List (Medium)
 //
-// HINTS:
-// - Use two pointers with a gap of n between them.
-// - Advance the first pointer n steps ahead.
-// - Then move both pointers until the first reaches the end.
-// - The second pointer will be just before the node to remove.
-// - Use a dummy node to handle edge cases (removing the head).
+// APPROACH: Two pointers with a gap of n between them.
+// 1. Use a dummy node (handles edge case of removing head)
+// 2. Move fast pointer n steps ahead
+// 3. Move both until fast reaches end
+// 4. slow is now just before the node to remove → skip it
 //
 // TIME: O(n) — single pass
 // SPACE: O(1) — constant extra space
@@ -31,7 +30,21 @@ public class RemoveNthNodeFromEndOfList
 
     public ListNode? RemoveNthFromEnd(ListNode? head, int n)
     {
-        // TODO: Implement using two pointers with gap of n
-        throw new NotImplementedException();
+        ListNode? fast = head;
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+
+        for(int i = 0; i < n; i++) fast = fast.next;
+
+        ListNode slow = dummy;
+        while(fast != null)
+        {
+            fast = fast.next;
+            slow = slow.next;
+        }
+
+        slow.next = slow.next.next;
+
+        return dummy.next;
     }
 }

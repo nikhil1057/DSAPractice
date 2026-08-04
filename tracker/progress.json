@@ -96,6 +96,46 @@
     "w2_d8_p2": {
       "done": true,
       "date": "Sat Aug 01 2026"
+    },
+    "w2_d9_p0": {
+      "done": true,
+      "date": "Sat Aug 01 2026"
+    },
+    "w2_d9_p1": {
+      "done": true,
+      "date": "Sat Aug 01 2026"
+    },
+    "w2_d9_p2": {
+      "done": true,
+      "date": "Sat Aug 01 2026"
+    },
+    "w2_d10_p0": {
+      "done": true,
+      "date": "Sat Aug 01 2026"
+    },
+    "w2_d10_p1": {
+      "done": true,
+      "date": "Sun Aug 02 2026"
+    },
+    "w2_d10_p2": {
+      "done": true,
+      "date": "Sun Aug 02 2026"
+    },
+    "w2_d11_p0": {
+      "done": true,
+      "date": "Sun Aug 02 2026"
+    },
+    "w2_d11_p1": {
+      "done": true,
+      "date": "Tue Aug 04 2026"
+    },
+    "w2_d11_p2": {
+      "done": true,
+      "date": "Tue Aug 04 2026"
+    },
+    "w2_d12_p0": {
+      "done": true,
+      "date": "Tue Aug 04 2026"
     }
   },
   "revision": {
@@ -338,6 +378,107 @@
       "easyStreak": 0,
       "mastered": false,
       "reviews": 0
+    },
+    "Largest Rectangle In Histogram": {
+      "name": "Largest Rectangle In Histogram",
+      "difficulty": "hard",
+      "category": "Stack",
+      "nextReview": 1785839962133,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Binary Search": {
+      "name": "Binary Search",
+      "difficulty": "easy",
+      "category": "Binary Search",
+      "nextReview": 1785842773811,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Search a 2D Matrix": {
+      "name": "Search a 2D Matrix",
+      "difficulty": "medium",
+      "category": "Binary Search",
+      "nextReview": 1785844946192,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Koko Eating Bananas": {
+      "name": "Koko Eating Bananas",
+      "difficulty": "medium",
+      "category": "Binary Search",
+      "nextReview": 1785849343086,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Find Minimum In Rotated Sorted Array": {
+      "name": "Find Minimum In Rotated Sorted Array",
+      "difficulty": "medium",
+      "category": "Binary Search",
+      "nextReview": 1785930446714,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Search In Rotated Sorted Array": {
+      "name": "Search In Rotated Sorted Array",
+      "difficulty": "medium",
+      "category": "Binary Search",
+      "nextReview": 1785930447787,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Time Based Key Value Store": {
+      "name": "Time Based Key Value Store",
+      "difficulty": "medium",
+      "category": "Binary Search",
+      "nextReview": 1785934630232,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Median of Two Sorted Arrays": {
+      "name": "Median of Two Sorted Arrays",
+      "difficulty": "hard",
+      "category": "Binary Search",
+      "nextReview": 1786084283226,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Reorder List": {
+      "name": "Reorder List",
+      "difficulty": "medium",
+      "category": "Linked List",
+      "nextReview": 1786087343881,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Remove Nth Node From End of List": {
+      "name": "Remove Nth Node From End of List",
+      "difficulty": "medium",
+      "category": "Linked List",
+      "nextReview": 1786087344783,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
     }
-  }
+  },
+  "sd_progress": {}
 }

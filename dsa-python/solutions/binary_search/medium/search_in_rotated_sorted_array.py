@@ -6,16 +6,13 @@
 # Given the array nums after the possible rotation and an integer target, return the
 # index of target if it is in nums, or -1 if it is not in nums.
 #
-# You must write an algorithm with O(log n) runtime complexity.
+# APPROACH: Binary search. At any mid, one half is always sorted.
+# Figure out which half is sorted, then check if target falls in that sorted range.
+# If yes → search that half. If no → search the other half.
 #
-# CATEGORY: Binary Search (Medium)
-#
-# HINTS:
-# - Use binary search. Determine which half is sorted.
-# - If nums[left] <= nums[mid], the left half is sorted.
-#   Check if target is in [left, mid). If so, search left; otherwise search right.
-# - Otherwise, the right half is sorted.
-#   Check if target is in (mid, right]. If so, search right; otherwise search left.
+# WHY left <= right and mid ± 1?
+# We check nums[mid] == target FIRST. If it matches, return immediately.
+# If not, mid is NOT the answer — safe to discard with mid ± 1.
 #
 # TIME: O(log n) — binary search
 # SPACE: O(1) — constant extra space
@@ -23,5 +20,29 @@
 
 class SearchInRotatedSortedArray:
     def search(self, nums: list[int], target: int) -> int:
-        # TODO: Implement using modified binary search
-        pass
+        left, right = 0, len(nums) - 1
+
+        while left <= right:
+            mid = (left + right) // 2
+
+            # Found the target — return immediately
+            if nums[mid] == target:
+                return mid
+
+            # Determine which half is sorted
+            if nums[left] <= nums[mid]:
+                # LEFT half is sorted [left...mid]
+                # Is target in this sorted range?
+                if nums[left] <= target < nums[mid]:
+                    right = mid - 1  # yes → search left
+                else:
+                    left = mid + 1   # no → search right
+            else:
+                # RIGHT half is sorted [mid...right]
+                # Is target in this sorted range?
+                if nums[mid] < target <= nums[right]:
+                    left = mid + 1   # yes → search right
+                else:
+                    right = mid - 1  # no → search left
+
+        return -1  # target not found
