@@ -1,22 +1,36 @@
 // 543. Diameter of Binary Tree
 // https://leetcode.com/problems/diameter-of-binary-tree/
 //
-// Given the root of a binary tree, return the length of the diameter of the tree.
-// The diameter of a binary tree is the length of the longest path between any
-// two nodes in a tree. This path may or may not pass through the root.
-// The length of a path between two nodes is represented by the number of edges.
+// Given the root of a binary tree, return the length of the diameter.
+// Diameter = longest path between any two nodes (counted in edges).
 //
-// Example 1: Input: root = [1,2,3,4,5] Output: 3
-// Example 2: Input: root = [1,2] Output: 1
+// APPROACH: Postorder recursion. At each node, compute left and right heights.
+// Path THROUGH this node = left_height + right_height. Track max globally.
+// Return height (1 + max(left, right)) to parent for its calculation.
 //
-// Constraints:
-// - The number of nodes in the tree is in the range [1, 10^4].
-// - -100 <= Node.val <= 100
+// TIME: O(n) — visit every node once
+// SPACE: O(h) — recursion stack (h = height)
 
 public class DiameterOfBinaryTree
 {
     public int DiameterOfBinaryTreeMethod(TreeNode? root)
     {
-        throw new NotImplementedException();
+        int maxDiameter = 0;
+
+        Height(root, ref maxDiameter);
+
+        return maxDiameter;
+    }
+
+    private int Height(TreeNode? root, ref int maxDiameter)
+    {
+        if(root == null) return 0;
+
+        int left = Height(root.left, ref maxDiameter);
+        int right = Height(root.right, ref maxDiameter);
+
+        maxDiameter = Math.Max(maxDiameter, left + right);
+
+        return 1 + Math.Max(left, right);
     }
 }

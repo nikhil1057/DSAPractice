@@ -4,19 +4,24 @@
 // Given the roots of two binary trees root and subRoot, return true if there
 // is a subtree of root with the same structure and node values of subRoot.
 //
-// Example 1: Input: root = [3,4,5,1,2], subRoot = [4,1,2] Output: true
-// Example 2: Input: root = [3,4,5,1,2,null,null,null,null,0], subRoot = [4,1,2] Output: false
+// APPROACH: DFS through root. At each node, check if subtree matches using IsSameTree. If any match → true.
 //
-// Constraints:
-// - The number of nodes in the root tree is in the range [1, 2000].
-// - The number of nodes in the subRoot tree is in the range [1, 1000].
-// - -10^4 <= root.val <= 10^4
-// - -10^4 <= subRoot.val <= 10^4
+// TIME: O(m*n) worst case
+// SPACE: O(h)
 
 public class SubtreeOfAnotherTree
 {
     public bool IsSubtree(TreeNode? root, TreeNode? subRoot)
     {
-        throw new NotImplementedException();
+        if(root == null) return false;
+        if(IsSameTree(root, subRoot)) return true;
+        return IsSubtree(root.left , subRoot) || IsSubtree(root.right,subRoot);
+    }
+
+    private bool IsSameTree(TreeNode? p, TreeNode? q)
+    {
+        if(p == null && q== null) return true;
+        if(p == null || q == null) return false;
+        return (p.val == q.val) && IsSameTree(p.left,q.left) && IsSameTree(p.right,q.right);
     }
 }

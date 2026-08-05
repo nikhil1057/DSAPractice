@@ -4,13 +4,14 @@
 # Given the root of a binary tree, imagine yourself standing on the right side
 # of it, return the values of the nodes you can see ordered from top to bottom.
 #
-# Example 1: Input: root = [1,2,3,null,5,null,4] Output: [1,3,4]
-# Example 2: Input: root = [1,null,3] Output: [1,3]
-# Example 3: Input: root = [] Output: []
+# APPROACH: BFS level by level (same as Level Order Traversal).
+# For each level, only the LAST node is visible from the right side.
+# So just take level[-1] instead of the whole level.
 #
-# Constraints:
-# - The number of nodes in the tree is in the range [0, 100].
-# - -100 <= Node.val <= 100
+# TIME: O(n) — visit every node once
+# SPACE: O(n) — queue can hold up to n/2 nodes
+
+from collections import deque
 
 
 class TreeNode:
@@ -22,4 +23,23 @@ class TreeNode:
 
 class BinaryTreeRightSideView:
     def right_side_view(self, root: TreeNode | None) -> list[int]:
-        pass
+        if not root:
+            return []
+
+        result = []
+        queue = deque([root])
+
+        while queue:
+            level_size = len(queue)
+
+            for i in range(level_size):
+                node = queue.popleft()
+
+                # Last node in this level = rightmost visible
+                if i == level_size - 1:
+                    result.append(node.val)
+
+                if node.left: queue.append(node.left)
+                if node.right: queue.append(node.right)
+
+        return result

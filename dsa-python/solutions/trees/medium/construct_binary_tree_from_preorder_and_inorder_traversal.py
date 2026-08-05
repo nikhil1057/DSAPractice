@@ -5,18 +5,15 @@
 # traversal of a binary tree and inorder is the inorder traversal of the same
 # tree, construct and return the binary tree.
 #
-# Example 1: Input: preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]
-#   Output: [3,9,20,null,null,15,7]
-# Example 2: Input: preorder = [-1], inorder = [-1] Output: [-1]
+# APPROACH: Preorder's first element = root. Find root in inorder (using HashMap
+# for O(1) lookup) — everything left = left subtree, everything right = right subtree.
+# Recurse. preIndex tracks current position in preorder (advances with each node created).
 #
-# Constraints:
-# - 1 <= preorder.length <= 3000
-# - inorder.length == preorder.length
-# - -3000 <= preorder[i], inorder[i] <= 3000
-# - preorder and inorder consist of unique values.
-# - Each value of inorder also appears in preorder.
-# - preorder is guaranteed to be the preorder traversal of the tree.
-# - inorder is guaranteed to be the inorder traversal of the tree.
+# BRUTE → OPTIMIZED: Brute scans inorder with for loop O(n) per node = O(n²).
+# Optimized uses HashMap for O(1) lookup = O(n) total.
+#
+# TIME: O(n) — each node created once, O(1) lookup
+# SPACE: O(n) — HashMap + recursion stack
 
 
 class TreeNode:
@@ -28,4 +25,26 @@ class TreeNode:
 
 class ConstructBinaryTreeFromPreorderAndInorderTraversal:
     def build_tree(self, preorder: list[int], inorder: list[int]) -> TreeNode | None:
-        pass
+        inorder_map = {}
+        for i in range(len(inorder)):
+            inorder_map[inorder[i]] = i
+
+        pre_index = 0
+
+        def build(left, right):
+            nonlocal pre_index
+            if left > right:
+                return None
+
+            root_val = preorder[pre_index]
+            pre_index += 1
+
+            root = TreeNode(root_val)
+            mid = inorder_map[root_val]
+
+            root.left = build(left, mid - 1)
+            root.right = build(mid + 1, right)
+
+            return root
+
+        return build(0, len(inorder) - 1)

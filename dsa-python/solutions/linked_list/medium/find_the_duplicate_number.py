@@ -5,16 +5,12 @@
 # the range [1, n] inclusive. There is only one repeated number in nums, return this
 # repeated number.
 #
-# You must solve the problem without modifying the array nums and using only constant
-# extra space.
-#
-# CATEGORY: Linked List (Medium)
-#
-# HINTS:
-# - Treat the array as a linked list where nums[i] is the next pointer.
-# - Since there's a duplicate, there must be a cycle.
-# - Use Floyd's cycle detection (tortoise and hare) to find the cycle.
-# - Then find the entrance to the cycle, which is the duplicate number.
+# APPROACH: Floyd's Cycle Detection (Tortoise and Hare).
+# Treat array as a linked list: nums[i] = next pointer.
+# Duplicate means two indices point to the same "node" → cycle exists.
+# Phase 1: Find meeting point (slow/fast inside cycle).
+# Phase 2: Find cycle entrance (one pointer from start, one from meeting point,
+#           same speed — they meet at the duplicate).
 #
 # TIME: O(n) — Floyd's algorithm
 # SPACE: O(1) — constant extra space
@@ -22,5 +18,19 @@
 
 class FindTheDuplicateNumber:
     def find_duplicate(self, nums: list[int]) -> int:
-        # TODO: Implement using Floyd's cycle detection
-        pass
+        # Phase 1: Find meeting point inside the cycle
+        slow, fast = nums[0], nums[0]
+
+        while True:
+            slow = nums[slow]          # one hop
+            fast = nums[nums[fast]]    # two hops
+            if slow == fast:
+                break
+
+        # Phase 2: Find cycle entrance (= the duplicate)
+        slow2 = nums[0]
+        while slow2 != slow:
+            slow = nums[slow]
+            slow2 = nums[slow2]
+
+        return slow

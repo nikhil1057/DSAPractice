@@ -7,17 +7,27 @@
 // - The right subtree of a node contains only nodes with keys greater than the node's key.
 // - Both the left and right subtrees must also be binary search trees.
 //
-// Example 1: Input: root = [2,1,3] Output: true
-// Example 2: Input: root = [5,1,4,null,null,3,6] Output: false
-//
-// Constraints:
-// - The number of nodes in the tree is in the range [1, 10^4].
-// - -2^31 <= Node.val <= 2^31 - 1
+// APPROACH: DFS with min/max bounds. Pass valid range down. Left child's max = parent val.
+//           Right child's min = parent val. Use long to handle int edge cases.
+// TIME: O(n)
+// SPACE: O(h)
 
 public class ValidateBinarySearchTree
 {
     public bool IsValidBST(TreeNode? root)
     {
-        throw new NotImplementedException();
+        if(root == null) return true;
+        return isValid(root, long.MaxValue, long.MinValue);
+    }
+
+    private bool isValid(TreeNode root, long max, long min)
+    {
+        if (root == null) return true;
+
+        if(root.val <= min || root.val >= max) return false;
+
+        return
+        isValid(root.left, root.val, min) &&
+        isValid(root.right, max, root.val);
     }
 }

@@ -7,16 +7,13 @@
 # node in T that has both p and q as descendants (where we allow a node to be
 # a descendant of itself).
 #
-# Example 1: Input: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8 Output: 6
-# Example 2: Input: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 4 Output: 2
-# Example 3: Input: root = [2,1], p = 2, q = 1 Output: 2
+# APPROACH: Use BST property. At each node:
+# - Both p and q are smaller → LCA is in left subtree
+# - Both p and q are bigger → LCA is in right subtree
+# - One on each side (or one equals current) → current IS the LCA
 #
-# Constraints:
-# - The number of nodes in the tree is in the range [2, 10^5].
-# - -10^9 <= Node.val <= 10^9
-# - All Node.val are unique.
-# - p != q
-# - p and q will exist in the BST.
+# TIME: O(h) — traverse height of tree
+# SPACE: O(1) — iterative
 
 
 class TreeNode:
@@ -28,4 +25,7 @@ class TreeNode:
 
 class LowestCommonAncestorOfABinarySearchTree:
     def lowest_common_ancestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
-        pass
+        if not root: return None
+        if p.val < root.val and q.val < root.val: return self.lowest_common_ancestor(root.left, p, q)
+        elif p.val > root.val and q.val > root.val: return self.lowest_common_ancestor(root.right, p, q)
+        else: return root

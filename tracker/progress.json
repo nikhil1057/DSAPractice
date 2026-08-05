@@ -136,6 +136,74 @@
     "w2_d12_p0": {
       "done": true,
       "date": "Tue Aug 04 2026"
+    },
+    "w2_d12_p1": {
+      "done": true,
+      "date": "Tue Aug 04 2026"
+    },
+    "w2_d12_p2": {
+      "done": true,
+      "date": "Tue Aug 04 2026"
+    },
+    "w2_d13_p0": {
+      "done": true,
+      "date": "Tue Aug 04 2026"
+    },
+    "w2_d13_p1": {
+      "done": true,
+      "date": "Tue Aug 04 2026"
+    },
+    "w2_d13_p2": {
+      "done": true,
+      "date": "Wed Aug 05 2026"
+    },
+    "w2_d14_p0": {
+      "done": true,
+      "date": "Wed Aug 05 2026"
+    },
+    "w2_d14_p1": {
+      "done": true,
+      "date": "Wed Aug 05 2026"
+    },
+    "w2_d14_p2": {
+      "done": true,
+      "date": "Wed Aug 05 2026"
+    },
+    "w3_d15_p0": {
+      "done": true,
+      "date": "Wed Aug 05 2026"
+    },
+    "w3_d15_p1": {
+      "done": true,
+      "date": "Wed Aug 05 2026"
+    },
+    "w3_d15_p2": {
+      "done": true,
+      "date": "Wed Aug 05 2026"
+    },
+    "w3_d16_p0": {
+      "done": true,
+      "date": "Wed Aug 05 2026"
+    },
+    "w3_d16_p1": {
+      "done": true,
+      "date": "Wed Aug 05 2026"
+    },
+    "w3_d16_p2": {
+      "done": true,
+      "date": "Wed Aug 05 2026"
+    },
+    "w3_d17_p0": {
+      "done": true,
+      "date": "Wed Aug 05 2026"
+    },
+    "w3_d17_p1": {
+      "done": true,
+      "date": "Wed Aug 05 2026"
+    },
+    "w3_d17_p2": {
+      "done": true,
+      "date": "Wed Aug 05 2026"
     }
   },
   "revision": {
@@ -474,6 +542,176 @@
       "difficulty": "medium",
       "category": "Linked List",
       "nextReview": 1786087344783,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Copy List With Random Pointer": {
+      "name": "Copy List With Random Pointer",
+      "difficulty": "medium",
+      "category": "Linked List",
+      "nextReview": 1786089081689,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Find The Duplicate Number": {
+      "name": "Find The Duplicate Number",
+      "difficulty": "medium",
+      "category": "Linked List",
+      "nextReview": 1786092240836,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "LRU Cache": {
+      "name": "LRU Cache",
+      "difficulty": "medium",
+      "category": "Linked List",
+      "nextReview": 1786106178463,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Reverse Nodes In K Group": {
+      "name": "Reverse Nodes In K Group",
+      "difficulty": "hard",
+      "category": "Linked List",
+      "nextReview": 1786117595666,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Invert Binary Tree": {
+      "name": "Invert Binary Tree",
+      "difficulty": "easy",
+      "category": "Trees",
+      "nextReview": 1786166625354,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Maximum Depth of Binary Tree": {
+      "name": "Maximum Depth of Binary Tree",
+      "difficulty": "easy",
+      "category": "Trees",
+      "nextReview": 1786166626015,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Diameter of Binary Tree": {
+      "name": "Diameter of Binary Tree",
+      "difficulty": "easy",
+      "category": "Trees",
+      "nextReview": 1786166626735,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Balanced Binary Tree": {
+      "name": "Balanced Binary Tree",
+      "difficulty": "easy",
+      "category": "Trees",
+      "nextReview": 1786166627374,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Same Tree": {
+      "name": "Same Tree",
+      "difficulty": "easy",
+      "category": "Trees",
+      "nextReview": 1786168204916,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Subtree of Another Tree": {
+      "name": "Subtree of Another Tree",
+      "difficulty": "easy",
+      "category": "Trees",
+      "nextReview": 1786168206341,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Lowest Common Ancestor of a BST": {
+      "name": "Lowest Common Ancestor of a BST",
+      "difficulty": "medium",
+      "category": "Trees",
+      "nextReview": 1786168911634,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Binary Tree Level Order Traversal": {
+      "name": "Binary Tree Level Order Traversal",
+      "difficulty": "medium",
+      "category": "Trees",
+      "nextReview": 1786173555480,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Binary Tree Right Side View": {
+      "name": "Binary Tree Right Side View",
+      "difficulty": "medium",
+      "category": "Trees",
+      "nextReview": 1786174002207,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Count Good Nodes In Binary Tree": {
+      "name": "Count Good Nodes In Binary Tree",
+      "difficulty": "medium",
+      "category": "Trees",
+      "nextReview": 1786175108569,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Validate Binary Search Tree": {
+      "name": "Validate Binary Search Tree",
+      "difficulty": "medium",
+      "category": "Trees",
+      "nextReview": 1786176626754,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Kth Smallest Element In a BST": {
+      "name": "Kth Smallest Element In a BST",
+      "difficulty": "medium",
+      "category": "Trees",
+      "nextReview": 1786181456909,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Construct Binary Tree From Preorder And Inorder": {
+      "name": "Construct Binary Tree From Preorder And Inorder",
+      "difficulty": "medium",
+      "category": "Trees",
+      "nextReview": 1786183308893,
       "interval": "medium",
       "easyStreak": 0,
       "mastered": false,

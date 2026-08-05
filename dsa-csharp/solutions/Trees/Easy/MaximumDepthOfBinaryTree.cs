@@ -2,20 +2,18 @@
 // https://leetcode.com/problems/maximum-depth-of-binary-tree/
 //
 // Given the root of a binary tree, return its maximum depth.
-// A binary tree's maximum depth is the number of nodes along the longest
-// path from the root node down to the farthest leaf node.
 //
-// Example 1: Input: root = [3,9,20,null,null,15,7] Output: 3
-// Example 2: Input: root = [1,null,2] Output: 2
+// APPROACH: Recursion (postorder). Depth of a node = 1 + max(left depth, right depth).
+// Base case: null node has depth 0.
 //
-// Constraints:
-// - The number of nodes in the tree is in the range [0, 10^4].
-// - -100 <= Node.val <= 100
+// TIME: O(n) — visit every node once
+// SPACE: O(h) — recursion stack (h = height)
 
 public class MaximumDepthOfBinaryTree
 {
     public int MaxDepth(TreeNode? root)
     {
-        throw new NotImplementedException();
+        if (root == null) return 0;
+        return 1 + Math.Max(MaxDepth(root.left), MaxDepth(root.right));
     }
 }

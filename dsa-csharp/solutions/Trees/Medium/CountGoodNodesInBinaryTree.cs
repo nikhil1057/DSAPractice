@@ -17,6 +17,24 @@ public class CountGoodNodesInBinaryTree
 {
     public int GoodNodes(TreeNode root)
     {
-        throw new NotImplementedException();
+        int count = 0;
+        if(root == null) return count;
+
+        dfs(root, root.val, ref count);
+
+        return count;
+
+    }
+
+    private void dfs(TreeNode root, int maxSoFar, ref int count)
+    {
+        if(root == null) return;
+
+        if(maxSoFar <= root.val) count++;
+
+        int newMax = Math.Max(maxSoFar,root.val);
+
+        dfs(root.left, newMax, ref count);
+        dfs(root.right, newMax, ref count);
     }
 }
