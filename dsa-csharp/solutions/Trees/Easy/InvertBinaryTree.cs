@@ -2,16 +2,12 @@
 // https://leetcode.com/problems/invert-binary-tree/
 //
 // Given the root of a binary tree, invert the tree, and return its root.
-// Inverting a binary tree means swapping the left and right children of
-// every node in the tree.
 //
-// Example 1: Input: root = [4,2,7,1,3,6,9] Output: [4,7,2,9,6,3,1]
-// Example 2: Input: root = [2,1,3] Output: [2,3,1]
-// Example 3: Input: root = [] Output: []
+// APPROACH: Recursion (preorder). At each node, swap left and right children,
+// then recurse on both. Every subtree gets mirrored.
 //
-// Constraints:
-// - The number of nodes in the tree is in the range [0, 100].
-// - -100 <= Node.val <= 100
+// TIME: O(n) — visit every node once
+// SPACE: O(h) — recursion stack (h = height, worst case O(n) for skewed tree)
 
 public class TreeNode
 {
@@ -30,6 +26,13 @@ public class InvertBinaryTree
 {
     public TreeNode? InvertTree(TreeNode? root)
     {
-        throw new NotImplementedException();
+        if(root == null) return null;
+
+        (root.right,root.left) = (root.left,root.right);
+        InvertTree(root.left);
+        InvertTree(root.right);
+
+        return root;
+
     }
 }

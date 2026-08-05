@@ -152,6 +152,22 @@
     "w2_d13_p1": {
       "done": true,
       "date": "Tue Aug 04 2026"
+    },
+    "w2_d13_p2": {
+      "done": true,
+      "date": "Wed Aug 05 2026"
+    },
+    "w2_d14_p0": {
+      "done": true,
+      "date": "Wed Aug 05 2026"
+    },
+    "w2_d14_p1": {
+      "done": true,
+      "date": "Wed Aug 05 2026"
+    },
+    "w2_d14_p2": {
+      "done": true,
+      "date": "Wed Aug 05 2026"
     }
   },
   "revision": {
@@ -530,6 +546,46 @@
       "difficulty": "hard",
       "category": "Linked List",
       "nextReview": 1786117595666,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Invert Binary Tree": {
+      "name": "Invert Binary Tree",
+      "difficulty": "easy",
+      "category": "Trees",
+      "nextReview": 1786166625354,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Maximum Depth of Binary Tree": {
+      "name": "Maximum Depth of Binary Tree",
+      "difficulty": "easy",
+      "category": "Trees",
+      "nextReview": 1786166626015,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Diameter of Binary Tree": {
+      "name": "Diameter of Binary Tree",
+      "difficulty": "easy",
+      "category": "Trees",
+      "nextReview": 1786166626735,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Balanced Binary Tree": {
+      "name": "Balanced Binary Tree",
+      "difficulty": "easy",
+      "category": "Trees",
+      "nextReview": 1786166627374,
       "interval": "medium",
       "easyStreak": 0,
       "mastered": false,
