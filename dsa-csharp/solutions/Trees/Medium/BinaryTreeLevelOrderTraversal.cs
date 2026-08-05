@@ -4,18 +4,41 @@
 // Given the root of a binary tree, return the level order traversal of its
 // nodes' values (i.e., from left to right, level by level).
 //
-// Example 1: Input: root = [3,9,20,null,null,15,7] Output: [[3],[9,20],[15,7]]
-// Example 2: Input: root = [1] Output: [[1]]
-// Example 3: Input: root = [] Output: []
+// APPROACH: BFS with queue. Process nodes level by level using levelSize = queue.Count at start of each iteration.
 //
-// Constraints:
-// - The number of nodes in the tree is in the range [0, 2000].
-// - -1000 <= Node.val <= 1000
+// TIME: O(n)
+// SPACE: O(n)
 
 public class BinaryTreeLevelOrderTraversal
 {
     public IList<IList<int>> LevelOrder(TreeNode? root)
     {
-        throw new NotImplementedException();
+        List<IList<int>> result = new();
+
+        if(root == null) return result;
+
+        Queue<TreeNode?> queue = new();
+
+        queue.Enqueue(root);
+
+        while(queue.Count > 0)
+        {
+            int levelSize = queue.Count;
+            List<int> level = new();
+
+            for(int i = 0; i< levelSize; i++)
+            {
+                TreeNode? node = queue.Dequeue();
+
+                level.Add(node.val);
+
+                if(node.left != null) queue.Enqueue(node.left);
+                if(node.right != null) queue.Enqueue(node.right);
+            }
+
+            result.Add(level);
+        }
+
+        return result;
     }
 }

@@ -7,13 +7,10 @@
 # - The right subtree of a node contains only nodes with keys greater than the node's key.
 # - Both the left and right subtrees must also be binary search trees.
 #
-# Example 1: Input: root = [2,1,3] Output: true
-# Example 2: Input: root = [5,1,4,null,null,3,6] Output: false
-#   (The root node's value is 5 but its right child's value is 4.)
-#
-# Constraints:
-# - The number of nodes in the tree is in the range [1, 10^4].
-# - -2^31 <= Node.val <= 2^31 - 1
+# APPROACH: DFS with min/max bounds. Pass valid range (-inf, +inf) down.
+#           If node outside range, invalid. Left gets (min, node.val), right gets (node.val, max).
+# TIME: O(n)
+# SPACE: O(h)
 
 
 class TreeNode:
@@ -25,4 +22,10 @@ class TreeNode:
 
 class ValidateBinarySearchTree:
     def is_valid_bst(self, root: TreeNode | None) -> bool:
-        pass
+        if not root: return True
+
+        def isValid(node, min, max):
+            if not node: return True
+            if(node.val <= min or node.val >= max): return False
+            return isValid(node.left, min, node.val) and isValid(node.right, node.val, max)
+        return isValid(root, float('-inf'), float('inf'))

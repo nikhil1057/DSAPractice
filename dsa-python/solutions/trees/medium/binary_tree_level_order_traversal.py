@@ -4,13 +4,14 @@
 # Given the root of a binary tree, return the level order traversal of its
 # nodes' values (i.e., from left to right, level by level).
 #
-# Example 1: Input: root = [3,9,20,null,null,15,7] Output: [[3],[9,20],[15,7]]
-# Example 2: Input: root = [1] Output: [[1]]
-# Example 3: Input: root = [] Output: []
+# APPROACH: BFS using a queue. Process nodes level by level.
+# At each level, record size of queue (= nodes in this level),
+# process exactly that many, and add their children for the next level.
 #
-# Constraints:
-# - The number of nodes in the tree is in the range [0, 2000].
-# - -1000 <= Node.val <= 1000
+# TIME: O(n) — visit every node once
+# SPACE: O(n) — queue can hold up to n/2 nodes (widest level)
+
+from collections import deque
 
 
 class TreeNode:
@@ -22,4 +23,23 @@ class TreeNode:
 
 class BinaryTreeLevelOrderTraversal:
     def level_order(self, root: TreeNode | None) -> list[list[int]]:
-        pass
+        if not root:
+            return []
+
+        result = []
+        queue = deque([root])
+
+        while queue:
+            level_size = len(queue)
+            level = []
+
+            for i in range(level_size):
+                node = queue.popleft()
+                level.append(node.val)
+
+                if node.left: queue.append(node.left)
+                if node.right: queue.append(node.right)
+
+            result.append(level)
+
+        return result

@@ -126,6 +126,24 @@ cd tracker && node server.js
 | 876 | Middle of the Linked List | Easy | Floyd's (Fast/Slow) |
 | 1290 | Convert Binary Number in Linked List | Easy | Bitwise |
 
+### Trees
+
+| # | Problem | Difficulty | Techniques |
+|---|---------|-----------|-----------|
+| 100 | Same Tree | Easy | Recursion, Compare Both |
+| 102 | Binary Tree Level Order Traversal | Medium | BFS, Queue |
+| 104 | Maximum Depth of Binary Tree | Easy | Postorder Recursion |
+| 105 | Construct Tree from Preorder/Inorder | Medium | HashMap + Recursion |
+| 110 | Balanced Binary Tree | Easy | Postorder, Height Check |
+| 199 | Binary Tree Right Side View | Medium | BFS, Last Node Per Level |
+| 226 | Invert Binary Tree | Easy | Preorder, Swap Children |
+| 230 | Kth Smallest Element In BST | Medium | Inorder Traversal |
+| 235 | Lowest Common Ancestor of BST | Medium | BST Property, Traverse |
+| 543 | Diameter of Binary Tree | Easy | Postorder, Track Max(left+right) |
+| 572 | Subtree of Another Tree | Easy | DFS + Same Tree Check |
+| 98 | Validate Binary Search Tree | Medium | DFS, Min/Max Bounds |
+| 1448 | Count Good Nodes | Medium | DFS, Track Max on Path |
+
 ### Design
 
 | # | Problem | Difficulty | Techniques |
@@ -135,7 +153,7 @@ cd tracker && node server.js
 
 ## Progress
 
-**NeetCode 150:** 35 / 150 solved  
+**NeetCode 150:** 48 / 150 solved  
 **System Design:** Starting Aug 15 (111 items, 16 build projects)
 
 ## Timeline

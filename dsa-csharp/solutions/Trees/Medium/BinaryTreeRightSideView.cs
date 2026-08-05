@@ -4,18 +4,39 @@
 // Given the root of a binary tree, imagine yourself standing on the right side
 // of it, return the values of the nodes you can see ordered from top to bottom.
 //
-// Example 1: Input: root = [1,2,3,null,5,null,4] Output: [1,3,4]
-// Example 2: Input: root = [1,null,3] Output: [1,3]
-// Example 3: Input: root = [] Output: []
+// APPROACH: BFS level by level (same as Level Order Traversal).
+// For each level, only the LAST node is visible from the right side.
 //
-// Constraints:
-// - The number of nodes in the tree is in the range [0, 100].
-// - -100 <= Node.val <= 100
+// TIME: O(n) — visit every node once
+// SPACE: O(n) — queue can hold up to n/2 nodes
 
 public class BinaryTreeRightSideView
 {
     public IList<int> RightSideView(TreeNode? root)
     {
-        throw new NotImplementedException();
+        var result = new List<int>();
+        if (root == null) return result;
+
+        var queue = new Queue<TreeNode>();
+        queue.Enqueue(root);
+
+        while (queue.Count > 0)
+        {
+            int levelSize = queue.Count;
+
+            for (int i = 0; i < levelSize; i++)
+            {
+                TreeNode node = queue.Dequeue();
+
+                // Last node in this level = rightmost visible
+                if(i == levelSize - 1)
+                result.Add(node.val);
+
+                if (node.left != null) queue.Enqueue(node.left);
+                if (node.right != null) queue.Enqueue(node.right);
+            }
+        }
+
+        return result;
     }
 }
