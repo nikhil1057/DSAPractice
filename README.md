@@ -154,12 +154,5 @@ cd tracker && node server.js
 ## Progress
 
 **NeetCode 150:** 48 / 150 solved  
-**System Design:** Starting Aug 15 (111 items, 16 build projects)
+**System Design:** (111 items, 16 build projects)
 
-## Timeline
-
-| Phase | Dates | Focus |
-|---|---|---|
-| DSA (NeetCode 150) | Jul 18 - Sep 3 | 3 problems/day, Python + C# |
-| System Design (AlgoMaster) | Aug 15 - Nov 7 | Concepts → Tech → Patterns → Problems |
-| Interview Ready | November 2026 | DSA + System Design + Behavioral |
