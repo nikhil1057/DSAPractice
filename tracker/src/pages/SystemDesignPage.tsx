@@ -46,7 +46,7 @@ export function SystemDesignPage() {
   const pct = Math.round((stats.done / SD_TOTAL) * 100)
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
+    <div className="max-w-4xl mx-auto space-y-6 page-enter">
       {/* Header */}
       <header className="card p-6 overflow-hidden relative">
         <div className="absolute top-[-3rem] right-[-2rem] w-28 h-28 rounded-full border-2 border-[var(--border)] opacity-20 bg-emerald-100" />
@@ -151,11 +151,6 @@ export function SystemDesignPage() {
                               <span className={`flex-1 text-sm font-medium ${isDone ? 'line-through text-[var(--text-subtle)]' : ''}`}>
                                 {problem.name}
                               </span>
-                              {problem.build && (
-                                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-700 border border-amber-300">
-                                  BUILD
-                                </span>
-                              )}
                               <DifficultyBadge difficulty={problem.difficulty} />
                             </div>
                           )

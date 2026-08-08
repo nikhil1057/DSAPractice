@@ -70,7 +70,7 @@ export function DSAPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
+    <div className="max-w-4xl mx-auto space-y-6 page-enter">
       {/* Header */}
       <header className="card p-6">
         <h1 className="font-display font-bold text-2xl md:text-3xl">150 Problems</h1>

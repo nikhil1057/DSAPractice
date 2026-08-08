@@ -322,3 +322,213 @@ input:focus-visible,
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-subtle);
 }
+
+/* === ANIMATIONS === */
+
+/* Page enter transition */
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-enter {
+  animation: page-enter var(--duration-slow) ease-out;
+}
+
+/* Stagger children animation */
+@keyframes stagger-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stagger-in > * {
+  opacity: 0;
+  animation: stagger-in var(--duration-slow) ease-out forwards;
+}
+
+.stagger-in > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-in > *:nth-child(2) { animation-delay: 50ms; }
+.stagger-in > *:nth-child(3) { animation-delay: 100ms; }
+.stagger-in > *:nth-child(4) { animation-delay: 150ms; }
+.stagger-in > *:nth-child(5) { animation-delay: 200ms; }
+.stagger-in > *:nth-child(6) { animation-delay: 250ms; }
+.stagger-in > *:nth-child(7) { animation-delay: 300ms; }
+.stagger-in > *:nth-child(8) { animation-delay: 350ms; }
+
+/* Checkbox stamp effect */
+@keyframes stamp {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.35); }
+  70% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+.check-box.just-checked {
+  animation: stamp 300ms var(--ease-pop);
+}
+
+/* Confetti burst on solve */
+@keyframes confetti-pop {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--cx, 10px), var(--cy, -20px)) scale(0);
+  }
+}
+
+.confetti-particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: confetti-pop 600ms var(--ease-pop) forwards;
+}
+
+/* Breathing pulse for overdue items */
+@keyframes breathe {
+  0%, 100% { border-color: var(--border-light); }
+  50% { border-color: var(--in-progress); }
+}
+
+.breathe {
+  animation: breathe 2.5s ease-in-out infinite;
+}
+
+/* Progress bar shine */
+@keyframes shine {
+  0% { left: -30%; }
+  100% { left: 130%; }
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -30%;
+  width: 30%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation: shine 2s ease-in-out infinite;
+}
+
+.progress-fill {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Sidebar brand stamp-in */
+@keyframes stamp-in {
+  0% {
+    transform: rotate(-12deg) scale(0.8);
+    opacity: 0;
+  }
+  60% {
+    transform: rotate(2deg) scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+  }
+}
+
+.brand-stamp-in {
+  animation: stamp-in 500ms var(--ease-pop) both;
+}
+
+/* Stats counter roll */
+@keyframes count-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.count-up {
+  animation: count-up var(--duration-med) var(--ease-pop) both;
+}
+
+/* Toast enhanced */
+.toast.show {
+  animation: toast-in var(--duration-slow) var(--ease-pop) both;
+}
+
+@keyframes toast-in {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px) rotate(-1deg);
+  }
+  70% {
+    transform: translateX(-50%) translateY(-4px) rotate(0.5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) rotate(0deg);
+  }
+}
+
+/* Pattern health dot glow */
+@keyframes glow-green {
+  0%, 100% { box-shadow: 0 0 4px rgba(52, 211, 153, 0.4); }
+  50% { box-shadow: 0 0 10px rgba(52, 211, 153, 0.7); }
+}
+
+@keyframes glow-red {
+  0%, 100% { box-shadow: 0 0 4px rgba(248, 113, 113, 0.4); }
+  50% { box-shadow: 0 0 10px rgba(248, 113, 113, 0.7); }
+}
+
+.dot-glow-green {
+  animation: glow-green 3s ease-in-out infinite;
+}
+
+.dot-glow-red {
+  animation: glow-red 1.5s ease-in-out infinite;
+}
+
+/* Week accordion expand */
+@keyframes accordion-open {
+  from {
+    max-height: 0;
+    opacity: 0;
+  }
+  to {
+    max-height: 2000px;
+    opacity: 1;
+  }
+}
+
+.accordion-body {
+  overflow: hidden;
+  animation: accordion-open 400ms ease-out;
+}
+
+/* Hover float for interactive cards */
+.hover-float {
+  transition: transform var(--duration-med) var(--ease-pop), box-shadow var(--duration-med) var(--ease-pop);
+}
+
+.hover-float:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-pop-hover);
+}

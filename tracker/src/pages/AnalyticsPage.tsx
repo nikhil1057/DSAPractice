@@ -145,7 +145,7 @@ export function AnalyticsPage() {
   const formatDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 page-enter stagger-in">
       <h1 className="font-display font-black text-2xl">Analytics</h1>
 
       {/* Velocity Sparkline */}

@@ -51,5 +51,5 @@ if (fs.existsSync(DIST_DIR)) {
 }
 
 app.listen(PORT, () => {
-    console.log(`\n  🎯 DSA Tracker running at http://localhost:${PORT}\n`);
+    console.log(`\n  🎯 Basecamp running at http://localhost:${PORT}\n`);
 });

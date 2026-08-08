@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { LayoutDashboard, Code2, Layers, Zap, BarChart3, Download, Upload } from 'lucide-react'
+import { LayoutDashboard, Code2, Layers, Zap, Hammer, BarChart3, Download, Upload } from 'lucide-react'
 import clsx from 'clsx'
 import { useProgress } from '../state/ProgressContext'
 import { DSA_PLAN, DSA_TOTAL } from '../data/dsa-plan'
@@ -9,8 +9,9 @@ import { SM_PLAN } from '../data/sm-plan'
 const NAV_ITEMS = [
   { to: '/', icon: LayoutDashboard, label: 'Dashboard' },
   { to: '/dsa', icon: Code2, label: 'DSA' },
-  { to: '/system-design', icon: Layers, label: 'System Design' },
+  { to: '/design', icon: Layers, label: 'Design' },
   { to: '/stack-mastery', icon: Zap, label: 'Stack Mastery' },
+  { to: '/projects', icon: Hammer, label: 'Projects' },
   { to: '/analytics', icon: BarChart3, label: 'Analytics' },
 ]
 
@@ -53,12 +54,12 @@ export function Sidebar() {
       <aside className="hidden md:flex flex-col w-64 border-r-2 border-[var(--border)] bg-[var(--surface)] p-4 sticky top-0 h-screen overflow-y-auto">
         {/* Brand */}
         <div className="flex items-center gap-3 mb-8 px-2">
-          <div className="w-9 h-9 rounded-xl border-2 border-[var(--border)] bg-gradient-to-br from-[var(--accent)] to-[var(--track-sd)] grid place-items-center shadow-[3px_3px_0_0_#e2e8f0] text-white font-display font-extrabold text-sm">
-            T
+          <div className="w-9 h-9 rounded-xl border-2 border-[var(--border)] bg-gradient-to-br from-[var(--accent)] to-[var(--track-sd)] grid place-items-center shadow-[3px_3px_0_0_#e2e8f0] text-white font-display font-extrabold text-sm brand-stamp-in">
+            B
           </div>
           <div>
-            <div className="font-display font-bold text-sm leading-tight">DSA Tracker</div>
-            <div className="text-xs text-[var(--text-muted)]">Practice Dashboard</div>
+            <div className="font-display font-bold text-sm leading-tight">Basecamp</div>
+            <div className="text-xs text-[var(--text-muted)]">The summit awaits</div>
           </div>
         </div>
 

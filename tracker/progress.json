@@ -232,6 +232,14 @@
     "w3_d20_p0": {
       "done": true,
       "date": "Sat Aug 08 2026"
+    },
+    "w3_d20_p1": {
+      "done": true,
+      "date": "Sat Aug 08 2026"
+    },
+    "w3_d20_p2": {
+      "done": true,
+      "date": "Sat Aug 08 2026"
     }
   },
   "revision": {
@@ -810,6 +818,26 @@
       "difficulty": "easy",
       "category": "Heap",
       "nextReview": 1786448716572,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "K Closest Points to Origin": {
+      "name": "K Closest Points to Origin",
+      "difficulty": "medium",
+      "category": "Heap",
+      "nextReview": 1786451047345,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Kth Largest Element In An Array": {
+      "name": "Kth Largest Element In An Array",
+      "difficulty": "medium",
+      "category": "Heap",
+      "nextReview": 1786451356060,
       "interval": "medium",
       "easyStreak": 0,
       "mastered": false,
