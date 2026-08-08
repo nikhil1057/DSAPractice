@@ -15,7 +15,27 @@
 # - 1 <= stones.length <= 30
 # - 1 <= stones[i] <= 1000
 
+# APPROACH: Max-heap (via negation) — always smash the two heaviest
+# Negate values to simulate max-heap with Python's min-heap.
+# Pop two largest, push remainder if non-zero. Repeat until ≤1 stone.
+#
+# TIME: O(n log n) — each push/pop is O(log n), at most n iterations
+# SPACE: O(n) for the heap
 
+import heapq
 class LastStoneWeight:
     def last_stone_weight(self, stones: list[int]) -> int:
-        pass
+        if len(stones) == 1: return stones[0]
+        heap = []
+
+        for stone in stones:
+            heapq.heappush(heap, -stone)  # negate for max-heap
+        
+        while len(heap) > 1:
+            first = -heapq.heappop(heap)   # largest
+            second = -heapq.heappop(heap)  # second largest
+
+            if first != second:
+                heapq.heappush(heap, second - first)  # remainder (already negative)
+
+        return -heap[0] if heap else 0
