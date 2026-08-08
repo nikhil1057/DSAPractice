@@ -20,16 +20,49 @@
 # - word and prefix consist only of lowercase English letters.
 # - At most 3 * 10^4 calls in total will be made to insert, search, and startsWith.
 
+# APPROACH: Trie (Prefix Tree) using dictionary-based nodes
+# Each node stores a dict of children (char → TrieNode) and an is_end flag.
+# Insert walks/creates the path. Search/StartsWith reuse a _walk helper;
+# search checks is_end, startsWith just checks the path exists.
+#
+# TIME: O(m) for all operations, where m = length of word/prefix
+# SPACE: O(N * M) total, where N = number of words, M = avg length
+#        Shared prefixes reduce actual space usage.
+
+class TrieNode:
+    def __init__(self):
+        self.children = {}   # char → TrieNode
+        self.is_end = False  # True if a complete word ends at this node
 
 class ImplementTriePrefixTree:
     def __init__(self):
-        pass
+        self.root = TrieNode()  # root represents empty prefix ""
 
     def insert(self, word: str) -> None:
-        pass
+        node = self.root
+
+        for char in word:
+            # Create child node if this character path doesn't exist
+            if char not in node.children:
+                node.children[char] = TrieNode()
+            node = node.children[char]  # Move down to child
+
+        node.is_end = True  # Mark end of word
 
     def search(self, word: str) -> bool:
-        pass
+        node = self._walk(word)
+        # Must reach end of path AND be a complete word
+        return node is not None and node.is_end
 
     def starts_with(self, prefix: str) -> bool:
-        pass
+        # Just need the path to exist — don't care about is_end
+        return self._walk(prefix) is not None
+
+    def _walk(self, s: str):
+        """Walk the trie following string s. Return end node or None if path breaks."""
+        node = self.root
+        for char in s:
+            if char not in node.children:  # Path doesn't exist
+                return None
+            node = node.children[char]
+        return node

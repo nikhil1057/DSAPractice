@@ -21,12 +21,52 @@
 # - At most 10^4 calls will be made to addWord and search.
 
 
+# APPROACH: Trie + DFS for wildcard '.' matching
+# addWord: standard Trie insert — walk/create path, mark is_end
+# search: DFS — for normal chars, follow the path. For '.', branch into ALL
+# children and return True if any branch succeeds.
+#
+# TIME: addWord O(m), search O(m) normal, O(26^m) worst case (all dots)
+# SPACE: O(N * M) for the trie
+
+class TrieNode:
+    def __init__(self):
+        self.children = {}   # char → TrieNode
+        self.is_end = False  # True if a complete word ends here
+
 class DesignAddAndSearchWordsDataStructure:
     def __init__(self):
-        pass
+        self.root = TrieNode()
 
     def add_word(self, word: str) -> None:
-        pass
+        """Standard Trie insert — identical to Implement Trie."""
+        node = self.root
+        for char in word:
+            if char not in node.children:
+                node.children[char] = TrieNode()  # create new node
+            node = node.children[char]
+        node.is_end = True  # mark word boundary
 
     def search(self, word: str) -> bool:
-        pass
+        """Search with '.' wildcard support using DFS."""
+        def dfs(node, index):
+            # Base case: processed all characters — check if word ends here
+            if index == len(word):
+                return node.is_end
+
+            char = word[index]
+
+            if char == '.':
+                # Wildcard: try every child, return True if ANY matches
+                for child in node.children.values():
+                    if dfs(child, index + 1):
+                        return True
+                return False  # no child matched
+            else:
+                # Normal char: follow the path or fail
+                if char not in node.children:
+                    return False
+                return dfs(node.children[char], index + 1)
+
+        return dfs(self.root, 0)
+

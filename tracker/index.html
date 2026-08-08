@@ -19,6 +19,8 @@
             --accent-hover: #4e5acb;
             --accent-sd: #10b981;
             --accent-sd-hover: #059669;
+            --accent-sm: #f59e0b;
+            --accent-sm-hover: #d97706;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -58,6 +60,7 @@
         .section-btn:hover { color: var(--text); }
         .section-btn.active-dsa { background: var(--accent); color: white; }
         .section-btn.active-sd { background: var(--accent-sd); color: white; }
+        .section-btn.active-sm { background: var(--accent-sm); color: white; }
 
         .section-content { display: none; }
         .section-content.active { display: block; }
@@ -166,7 +169,12 @@
             accent-color: var(--accent-sd);
         }
         .problem .name { flex: 1; font-size: 13px; font-weight: 400; }
+        .problem .name a { color: inherit; text-decoration: none; border-bottom: 1px dashed var(--border-strong); transition: color 0.15s, border-color 0.15s; }
+        .problem .name a:hover { color: var(--accent); border-bottom-color: var(--accent); }
         .problem.done .name { color: var(--text-dim); text-decoration: line-through; }
+        .problem.done .name a { color: var(--text-dim); border-bottom-color: transparent; }
+        .redo-name a, .mock-item .redo-name a { color: inherit; text-decoration: none; border-bottom: 1px dashed var(--border-strong); transition: color 0.15s, border-color 0.15s; }
+        .redo-name a:hover, .mock-item .redo-name a:hover { color: var(--accent); border-bottom-color: var(--accent); }
         .problem .tag {
             font-size: 11px;
             color: var(--text-dim);
@@ -271,6 +279,126 @@
 
         .empty { padding: 32px; text-align: center; color: var(--text-dim); font-size: 13px; }
 
+        /* Pattern Health Grid */
+        .pattern-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 10px;
+            margin-top: 12px;
+        }
+        .pattern-cell {
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: border-color 0.15s;
+        }
+        .pattern-cell:hover { border-color: var(--border-strong); }
+        .pattern-dot {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .pattern-dot.green { background: #34d399; box-shadow: 0 0 6px rgba(52,211,153,0.4); }
+        .pattern-dot.yellow { background: #fbbf24; box-shadow: 0 0 6px rgba(251,191,36,0.4); }
+        .pattern-dot.red { background: #f87171; box-shadow: 0 0 6px rgba(248,113,113,0.4); }
+        .pattern-dot.gray { background: var(--text-dim); }
+        .pattern-name { font-size: 12px; font-weight: 500; color: var(--text); }
+        .pattern-days { font-size: 11px; color: var(--text-muted); margin-left: auto; }
+
+        /* Redo Queue Items */
+        .redo-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 14px;
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        .redo-item:hover { border-color: var(--border-strong); }
+        .redo-item.fade-out { opacity: 0; transform: translateX(20px); }
+        .redo-info { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .redo-name { font-size: 13px; font-weight: 500; }
+        .redo-meta { font-size: 11px; color: var(--text-muted); }
+        .redo-actions { display: flex; gap: 6px; align-items: center; }
+        .redo-badge {
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        .redo-badge.redo-1 { color: #34d399; background: rgba(52,211,153,0.1); }
+        .redo-badge.redo-2 { color: #fbbf24; background: rgba(251,191,36,0.1); }
+        .redo-badge.redo-3 { color: var(--accent); background: rgba(94,106,210,0.1); }
+        .redo-schedule { font-size: 11px; color: var(--text-dim); margin-top: 4px; display: block; width: 100%; padding-left: 0; }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            color: white;
+            z-index: 9999;
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            white-space: nowrap;
+        }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+        .toast.success { background: #059669; box-shadow: 0 4px 12px rgba(5,150,105,0.3); }
+        .toast.warning { background: #d97706; box-shadow: 0 4px 12px rgba(217,119,6,0.3); }
+        .toast.info { background: var(--accent); box-shadow: 0 4px 12px rgba(94,106,210,0.3); }
+
+        /* Revision Stats */
+        .rev-stats {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .rev-stat {
+            flex: 1;
+            min-width: 100px;
+            padding: 12px 16px;
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-align: center;
+        }
+        .rev-stat .value { font-size: 20px; font-weight: 600; margin-bottom: 2px; }
+        .rev-stat .value.mastered { color: #34d399; }
+        .rev-stat .value.in-progress { color: #fbbf24; }
+        .rev-stat .value.pending { color: var(--text-muted); }
+        .rev-stat .label { font-size: 11px; color: var(--text-muted); }
+
+        /* Mock challenge */
+        .mock-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 14px;
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            gap: 10px;
+        }
+        .mock-item:hover { border-color: var(--border-strong); }
+        .mock-number { font-size: 14px; font-weight: 600; color: var(--accent); min-width: 24px; }
+        .mock-timer { font-size: 12px; color: var(--text-muted); margin-top: 8px; padding: 8px 12px; background: var(--surface); border-radius: 6px; display: inline-block; }
+
         /* Footer controls */
         .footer {
             position: fixed;
@@ -307,6 +435,7 @@
     <div class="section-switcher">
         <button class="section-btn active-dsa" onclick="switchSection('dsa')">DSA</button>
         <button class="section-btn" onclick="switchSection('sd')">System Design</button>
+        <button class="section-btn" onclick="switchSection('sm')">Stack Mastery</button>
     </div>
 
     <!-- DSA Section -->
@@ -345,20 +474,40 @@
         </div>
 
         <div id="tab-revision" class="tab-content">
-            <div class="sr-info">
-                <h3>Spaced Repetition</h3>
-                <p>Rate each review. Intervals increase with confidence. Three consecutive easy reviews = mastered.</p>
-                <div class="sr-intervals">
-                    <div class="sr-interval">Hard → <span>1 day</span></div>
-                    <div class="sr-interval">OK → <span>3 days</span></div>
-                    <div class="sr-interval">Easy → <span>7 days</span></div>
-                    <div class="sr-interval">Mastered → <span>3× easy</span></div>
+            <!-- Revision Stats -->
+            <div class="rev-stats" id="rev-stats"></div>
+
+            <!-- Daily Redo Queue -->
+            <div class="rev-section">
+                <div class="sr-info">
+                    <h3>🔁 Daily Redo Queue</h3>
+                    <p>Blind redo at spaced intervals: 3 days → 7 days → 14 days. 3 successful redos = mastered.<br>
+                    <strong>✅ Redone</strong> = solved it cleanly, advances to next interval. <strong>😰 Struggled</strong> = resets to day 1 (redo again tomorrow).</p>
                 </div>
+                <div id="redo-queue"></div>
             </div>
-            <div class="rev-group"><h4>Overdue</h4><div id="rev-overdue"></div></div>
-            <div class="rev-group"><h4>Due Today</h4><div id="rev-today"></div></div>
-            <div class="rev-group"><h4>Upcoming</h4><div id="rev-upcoming"></div></div>
-            <div class="rev-group"><h4>Mastered</h4><div id="rev-mastered"></div></div>
+
+            <!-- Pattern Health -->
+            <div class="rev-section" style="margin-top: 32px;">
+                <div class="sr-info">
+                    <h3>🏥 Pattern Health</h3>
+                    <p>Freshness based on most recent solve/redo in each category. Green = last 3 days, Yellow = 4-7 days, Red = 7+ days stale.</p>
+                </div>
+                <div class="pattern-grid" id="pattern-health-grid"></div>
+            </div>
+
+            <!-- Weekend Mock -->
+            <div class="rev-section" style="margin-top: 32px;">
+                <div class="sr-info">
+                    <h3>🎯 Weekend Mock</h3>
+                    <p>Random 4 problems from different categories. Simulate interview pressure.</p>
+                </div>
+                <div id="mock-section">
+                    <button class="rev-btn primary" style="padding: 10px 20px; font-size: 13px;" onclick="generateMockSet()">Generate Mock Set</button>
+                    <div id="mock-problems" style="margin-top: 16px;"></div>
+                </div>
+                <div id="mock-history-section" style="margin-top: 16px;"></div>
+            </div>
         </div>
 
         <div id="tab-categories" class="tab-content">
@@ -401,6 +550,44 @@
 
         <div id="tab-sd-categories" class="tab-content">
             <div class="cat-grid" id="sd-cat-grid"></div>
+        </div>
+    </div>
+
+    <!-- Stack Mastery Section -->
+    <div id="section-sm" class="section-content">
+        <div class="header">
+            <h1>Stack Mastery</h1>
+            <p>.NET Deep + AI Engineer + Frontend · 13 weeks Phase 1 · Hands-on projects</p>
+        </div>
+
+        <div class="tabs" id="sm-tabs">
+            <button class="tab active" style="border-bottom-color: #f59e0b;" onclick="switchSMTab('sm-plan')">Plan</button>
+            <button class="tab" onclick="switchSMTab('sm-projects')">Projects</button>
+        </div>
+
+        <div id="tab-sm-plan" class="tab-content active">
+            <div class="progress-section">
+                <div class="progress-meta">
+                    <strong id="sm-progress-text">0 / 0</strong>
+                    <span style="color: var(--text-muted); font-size: 12px;">Phase 1: Aug 11 – Nov 9</span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" id="sm-progress-bar" style="width:0%; background: #f59e0b;"></div>
+                </div>
+            </div>
+
+            <div class="stats-row">
+                <div class="stat"><div class="value" style="color:#f59e0b;" id="sm-stat-done">0</div><div class="label">Done</div></div>
+                <div class="stat"><div class="value" id="sm-stat-dotnet">0</div><div class="label">.NET</div></div>
+                <div class="stat"><div class="value" id="sm-stat-ai">0</div><div class="label">AI/ML</div></div>
+                <div class="stat"><div class="value" id="sm-stat-fe">0</div><div class="label">Frontend</div></div>
+            </div>
+
+            <div id="sm-weeks-container"></div>
+        </div>
+
+        <div id="tab-sm-projects" class="tab-content">
+            <div id="sm-projects-container"></div>
         </div>
     </div>
 
@@ -591,11 +778,340 @@ const SD_PLAN = [
 
 const SD_TOTAL = 113; // Total SD items
 
+const EXTRA_PROBLEMS = [
+  { name: "Merge Two Sorted Lists", difficulty: "medium", category: "Linked List", solvedDate: "Jun 28 2026" },
+  { name: "Linked List Cycle", difficulty: "easy", category: "Linked List", solvedDate: "Jun 28 2026" },
+  { name: "Reverse Linked List", difficulty: "easy", category: "Linked List", solvedDate: "Jun 28 2026" },
+  { name: "Palindrome Linked List", difficulty: "easy", category: "Linked List", solvedDate: "Jun 28 2026" },
+  { name: "Middle of the Linked List", difficulty: "easy", category: "Linked List", solvedDate: "Jun 28 2026" },
+  { name: "Remove Linked List Elements", difficulty: "easy", category: "Linked List", solvedDate: "Jun 28 2026" },
+  { name: "Intersection of Two Linked Lists", difficulty: "easy", category: "Linked List", solvedDate: "Jun 28 2026" },
+  { name: "Remove Duplicates from Sorted List", difficulty: "easy", category: "Linked List", solvedDate: "Jun 27 2026" },
+  { name: "Design Linked List", difficulty: "medium", category: "Linked List", solvedDate: "Jun 27 2026" },
+  { name: "Convert Binary Number in Linked List", difficulty: "easy", category: "Linked List", solvedDate: "Jun 28 2026" },
+  { name: "Add Two Numbers", difficulty: "medium", category: "Linked List", solvedDate: "Jul 2 2026" },
+  { name: "Merge K Sorted Lists", difficulty: "hard", category: "Linked List", solvedDate: "Jul 5 2026" },
+  { name: "Design HashSet", difficulty: "easy", category: "Design", solvedDate: "Jun 28 2026" },
+  { name: "Design HashMap", difficulty: "easy", category: "Design", solvedDate: "Jun 28 2026" },
+  { name: "Majority Element", difficulty: "easy", category: "Arrays & Hashing", solvedDate: "Jul 2 2026" },
+  { name: "Majority Element II", difficulty: "medium", category: "Arrays & Hashing", solvedDate: "Jul 16 2026" },
+  { name: "Contiguous Array", difficulty: "medium", category: "Arrays & Hashing", solvedDate: "Jul 2 2026" },
+  { name: "Best Time to Buy and Sell Stock", difficulty: "easy", category: "Arrays & Hashing", solvedDate: "Jul 16 2026" },
+  { name: "Remove All Adjacent Duplicates In String", difficulty: "easy", category: "Stack", solvedDate: "Jul 8 2026" }
+];
+
+const REVISION_CATEGORIES = [
+  "Arrays & Hashing", "Two Pointers", "Sliding Window", "Stack", "Binary Search",
+  "Linked List", "Trees", "Tries", "Heap", "Backtracking", "Graphs", "Adv. Graphs",
+  "1-D DP", "2-D DP", "Greedy", "Intervals", "Math", "Bits"
+];
+
+// Stack Mastery Plan
+const SM_PLAN = [
+  { week: 1, title: ".NET: async/await Internals · AI: ML Math", track: "dotnet+ai", days: [
+    { day: 1, date: "Aug 11", items: [{ name: "async/await state machine (Sharplab)", track: "dotnet" },{ name: "Vectors, dot product, cosine similarity", track: "ai" }]},
+    { day: 2, date: "Aug 12", items: [{ name: "Task vs ValueTask benchmark", track: "dotnet" },{ name: "Matrix multiplication (NumPy)", track: "ai" }]},
+    { day: 3, date: "Aug 13", items: [{ name: "SynchronizationContext, ConfigureAwait", track: "dotnet" },{ name: "Derivatives, chain rule refresher", track: "ai" }]},
+    { day: 4, date: "Aug 14", items: [{ name: "TaskCompletionSource, custom awaitables", track: "dotnet" },{ name: "Partial derivatives, gradients", track: "ai" }]},
+    { day: 5, date: "Aug 15", items: [{ name: "ExecutionContext, AsyncLocal<T>", track: "dotnet" },{ name: "Loss functions: MSE, Cross-entropy", track: "ai" }]},
+    { day: 6, date: "Aug 16", items: [{ name: "Review + 1-page async summary", track: "dotnet" },{ name: "JS: Event loop, call stack, microtasks", track: "fe" }]}
+  ]},
+  { week: 2, title: ".NET: Threading · AI: Gradient Descent", track: "dotnet+ai", days: [
+    { day: 7, date: "Aug 18", items: [{ name: "ThreadPool internals, work stealing", track: "dotnet" },{ name: "Gradient descent explanation (Karpathy micrograd)", track: "ai" }]},
+    { day: 8, date: "Aug 19", items: [{ name: "CancellationToken patterns", track: "dotnet" },{ name: "Implement GD for linear regression", track: "ai" }]},
+    { day: 9, date: "Aug 20", items: [{ name: "Channels: producer-consumer", track: "dotnet" },{ name: "Learning rate experiments, convergence", track: "ai" }]},
+    { day: 10, date: "Aug 21", items: [{ name: "SemaphoreSlim, rate limiting", track: "dotnet" },{ name: "SGD vs Mini-batch GD", track: "ai" }]},
+    { day: 11, date: "Aug 22", items: [{ name: "IAsyncEnumerable, streaming", track: "dotnet" },{ name: "🔨 PROJECT: Linear Regression from scratch", track: "ai" }]},
+    { day: 12, date: "Aug 23", items: [{ name: "Review: async + threading model", track: "dotnet" },{ name: "JS: Closures, this binding, debounce/throttle", track: "fe" }]}
+  ]},
+  { week: 3, title: ".NET: GC & Memory · AI: Neural Networks", track: "dotnet+ai", days: [
+    { day: 13, date: "Aug 25", items: [{ name: "GC generations, LOH, pinning", track: "dotnet" },{ name: "Perceptron from scratch", track: "ai" }]},
+    { day: 14, date: "Aug 26", items: [{ name: "GC modes, dotnet-counters profiling", track: "dotnet" },{ name: "Multi-layer perceptron, forward pass", track: "ai" }]},
+    { day: 15, date: "Aug 27", items: [{ name: "Span<T>, Memory<T>, stackalloc", track: "dotnet" },{ name: "Backpropagation: chain rule applied", track: "ai" }]},
+    { day: 16, date: "Aug 28", items: [{ name: "ArrayPool<T>, MemoryPool<T>", track: "dotnet" },{ name: "Implement backprop in code", track: "ai" }]},
+    { day: 17, date: "Aug 29", items: [{ name: "ref struct, unsafe, high-perf parsing", track: "dotnet" },{ name: "Activation functions: ReLU, Sigmoid, Softmax", track: "ai" }]},
+    { day: 18, date: "Aug 30", items: [{ name: "Benchmark: memory optimization before/after", track: "dotnet" },{ name: "🔨 PROJECT: MNIST classifier (pure numpy)", track: "ai" },{ name: "JS: Prototypes, Object.create, implement new", track: "fe" }]}
+  ]},
+  { week: 4, title: ".NET: DI Container · AI: Optimizers & PyTorch", track: "dotnet+ai", days: [
+    { day: 19, date: "Sep 1", items: [{ name: "Build minimal DI container from scratch", track: "dotnet" },{ name: "Optimizers: SGD, Momentum, Adam", track: "ai" }]},
+    { day: 20, date: "Sep 2", items: [{ name: "Lifetimes: captive dependency bug demo", track: "dotnet" },{ name: "Implement Adam optimizer", track: "ai" }]},
+    { day: 21, date: "Sep 3", items: [{ name: "DI container with scopes", track: "dotnet" },{ name: "Regularization: L1, L2, Dropout", track: "ai" }]},
+    { day: 22, date: "Sep 4", items: [{ name: "Keyed services, IServiceScopeFactory", track: "dotnet" },{ name: "Batch Normalization", track: "ai" }]},
+    { day: 23, date: "Sep 5", items: [{ name: "Options pattern: IOptions vs Snapshot vs Monitor", track: "dotnet" },{ name: "PyTorch: tensors, autograd, nn.Module", track: "ai" }]},
+    { day: 24, date: "Sep 6", items: [{ name: "Review: DI lifecycle diagram", track: "dotnet" },{ name: "🔨 Rebuild MNIST in PyTorch (compare)", track: "ai" },{ name: "JS: Promise from scratch (A+ spec)", track: "fe" }]}
+  ]},
+  { week: 5, title: ".NET: Middleware · AI: Embeddings & CNNs", track: "dotnet+ai", days: [
+    { day: 25, date: "Sep 8", items: [{ name: "Middleware pipeline: Use/Map/Run internals", track: "dotnet" },{ name: "Word2Vec: Skip-gram, CBOW", track: "ai" }]},
+    { day: 26, date: "Sep 9", items: [{ name: "Custom middleware: timing + correlation ID", track: "dotnet" },{ name: "Train Word2Vec, explore analogies", track: "ai" }]},
+    { day: 27, date: "Sep 10", items: [{ name: "Middleware ordering bugs, exception handling", track: "dotnet" },{ name: "Sentence embeddings vs TF-IDF comparison", track: "ai" }]},
+    { day: 28, date: "Sep 11", items: [{ name: "Custom route constraints", track: "dotnet" },{ name: "CNNs: convolution, pooling, feature maps", track: "ai" }]},
+    { day: 29, date: "Sep 12", items: [{ name: "🔨 PROJECT: Middleware library (rate limit + logging)", track: "dotnet" },{ name: "1D CNN for text classification", track: "ai" }]},
+    { day: 30, date: "Sep 13", items: [{ name: "Review: full request lifecycle", track: "dotnet" },{ name: "TS: Generics, conditional types, infer", track: "fe" }]}
+  ]},
+  { week: 6, title: ".NET: EF Core Internals · AI: Transformers", track: "dotnet+ai", days: [
+    { day: 31, date: "Sep 15", items: [{ name: "Change Tracker states, DbContext lifecycle", track: "dotnet" },{ name: "Attention mechanism (read paper)", track: "ai" }]},
+    { day: 32, date: "Sep 16", items: [{ name: "Query pipeline: LINQ → Expression → SQL", track: "dotnet" },{ name: "Self-attention: Q, K, V from scratch", track: "ai" }]},
+    { day: 33, date: "Sep 17", items: [{ name: "Loading strategies, N+1 detection", track: "dotnet" },{ name: "Multi-head attention", track: "ai" }]},
+    { day: 34, date: "Sep 18", items: [{ name: "Compiled queries, interceptors", track: "dotnet" },{ name: "Positional encoding", track: "ai" }]},
+    { day: 35, date: "Sep 19", items: [{ name: "Migrations internals, concurrency tokens", track: "dotnet" },{ name: "Full Transformer encoder block from scratch", track: "ai" }]},
+    { day: 36, date: "Sep 20", items: [{ name: "Review: EF vs Dapper decision matrix", track: "dotnet" },{ name: "TS: Mapped types, template literals, discriminated unions", track: "fe" }]}
+  ]},
+  { week: 7, title: ".NET: EF Advanced · AI: GPT Architecture", track: "dotnet+ai", days: [
+    { day: 37, date: "Sep 22", items: [{ name: "Raw SQL, value converters, owned types", track: "dotnet" },{ name: "GPT decoder-only, causal masking (Karpathy)", track: "ai" }]},
+    { day: 38, date: "Sep 23", items: [{ name: "Performance: AsNoTracking, projection, batching", track: "dotnet" },{ name: "🔨 PROJECT: BPE tokenizer from scratch", track: "ai" }]},
+    { day: 39, date: "Sep 24", items: [{ name: "Multi-tenancy with EF query filters", track: "dotnet" },{ name: "KV Cache: naive vs cached generation", track: "ai" }]},
+    { day: 40, date: "Sep 25", items: [{ name: "DDD value objects with EF", track: "dotnet" },{ name: "Sampling: temperature, top-k, top-p", track: "ai" }]},
+    { day: 41, date: "Sep 26", items: [{ name: "Database-first vs Code-first", track: "dotnet" },{ name: "Scaling laws, context windows", track: "ai" }]},
+    { day: 42, date: "Sep 27", items: [{ name: "Review: EF Core decision guide", track: "dotnet" },{ name: "TS: Module augmentation, satisfies, variance", track: "fe" }]}
+  ]},
+  { week: 8, title: ".NET: ASP.NET Internals · AI: RAG Fundamentals", track: "dotnet+ai", days: [
+    { day: 43, date: "Sep 29", items: [{ name: "Kestrel server internals, HTTP/2", track: "dotnet" },{ name: "Prompt engineering patterns (10 patterns)", track: "ai" }]},
+    { day: 44, date: "Sep 30", items: [{ name: "Model binding, custom binders", track: "dotnet" },{ name: "Few-shot, Chain-of-thought, ReAct", track: "ai" }]},
+    { day: 45, date: "Oct 1", items: [{ name: "Filters: Action, Exception, Resource", track: "dotnet" },{ name: "RAG architecture overview", track: "ai" }]},
+    { day: 46, date: "Oct 2", items: [{ name: "Output caching, ETags", track: "dotnet" },{ name: "Chunking strategies (3 approaches)", track: "ai" }]},
+    { day: 47, date: "Oct 3", items: [{ name: "Minimal APIs vs Controllers tradeoffs", track: "dotnet" },{ name: "Vector stores: FAISS, ChromaDB, pgvector", track: "ai" }]},
+    { day: 48, date: "Oct 4", items: [{ name: "Review: ASP.NET request pipeline", track: "dotnet" },{ name: "DOM: Rendering pipeline, reflows, IntersectionObserver", track: "fe" }]}
+  ]},
+  { week: 9, title: ".NET: Distributed Patterns · AI: RAG Build", track: "dotnet+ai", days: [
+    { day: 49, date: "Oct 6", items: [{ name: "Outbox pattern with EF + background service", track: "dotnet" },{ name: "Dense vs sparse vs hybrid retrieval", track: "ai" }]},
+    { day: 50, date: "Oct 7", items: [{ name: "Saga pattern: orchestration vs choreography", track: "dotnet" },{ name: "Reranking with cross-encoders", track: "ai" }]},
+    { day: 51, date: "Oct 8", items: [{ name: "Idempotency keys + Redis deduplication", track: "dotnet" },{ name: "RAG evaluation: RAGAS metrics", track: "ai" }]},
+    { day: 52, date: "Oct 9", items: [{ name: "Eventual consistency, conflict resolution", track: "dotnet" },{ name: "Hallucination detection + citation", track: "ai" }]},
+    { day: 53, date: "Oct 10", items: [{ name: "Circuit breaker: Polly v8, bulkhead, timeout", track: "dotnet" },{ name: "🔨 PROJECT: Full RAG pipeline with eval", track: "ai" }]},
+    { day: 54, date: "Oct 11", items: [{ name: "Review: ProviderSearch + distributed patterns", track: "dotnet" },{ name: "DOM: Event delegation, custom events, passive", track: "fe" }]}
+  ]},
+  { week: 10, title: "Azure: Cosmos DB Deep · AI: Fine-tuning", track: "dotnet+ai", days: [
+    { day: 55, date: "Oct 13", items: [{ name: "Cosmos: Partition key strategy, physical vs logical", track: "dotnet" },{ name: "Fine-tune vs prompt vs RAG decision framework", track: "ai" }]},
+    { day: 56, date: "Oct 14", items: [{ name: "Cosmos: RU calculation, indexing cost", track: "dotnet" },{ name: "Data preparation for fine-tuning", track: "ai" }]},
+    { day: 57, date: "Oct 15", items: [{ name: "Cosmos: Consistency levels deep", track: "dotnet" },{ name: "LoRA: low-rank adaptation (read paper)", track: "ai" }]},
+    { day: 58, date: "Oct 16", items: [{ name: "Cosmos: Indexing policies, composite indexes", track: "dotnet" },{ name: "QLoRA setup with HuggingFace PEFT", track: "ai" }]},
+    { day: 59, date: "Oct 17", items: [{ name: "Cosmos: Change Feed processor", track: "dotnet" },{ name: "🔨 PROJECT: Fine-tune small model (Phi-3)", track: "ai" }]},
+    { day: 60, date: "Oct 18", items: [{ name: "Review: Cosmos decision guide", track: "dotnet" },{ name: "Web Workers, AbortController, Broadcast Channel", track: "fe" }]}
+  ]},
+  { week: 11, title: "Azure: Functions/Bus/Grid · AI: Evaluation", track: "dotnet+ai", days: [
+    { day: 61, date: "Oct 20", items: [{ name: "Functions: consumption vs premium, cold start", track: "dotnet" },{ name: "Eval metrics: BLEU, ROUGE, BERTScore", track: "ai" }]},
+    { day: 62, date: "Oct 21", items: [{ name: "Durable Functions: fan-out/fan-in patterns", track: "dotnet" },{ name: "LLM-as-judge evaluation pipeline", track: "ai" }]},
+    { day: 63, date: "Oct 22", items: [{ name: "Service Bus: topics, dead-letter, sessions", track: "dotnet" },{ name: "Human eval: annotation guidelines", track: "ai" }]},
+    { day: 64, date: "Oct 23", items: [{ name: "Event Grid vs Service Bus vs Event Hub", track: "dotnet" },{ name: "Benchmarking fine-tuned model", track: "ai" }]},
+    { day: 65, date: "Oct 24", items: [{ name: "APIM policies: caching, rate-limit, transform", track: "dotnet" },{ name: "A/B testing LLMs in production", track: "ai" }]},
+    { day: 66, date: "Oct 25", items: [{ name: "Review: Azure service selection", track: "dotnet" },{ name: "FE System Design: Component arch, state at scale", track: "fe" }]}
+  ]},
+  { week: 12, title: ".NET: Performance · AI: Agents", track: "dotnet+ai", days: [
+    { day: 67, date: "Oct 27", items: [{ name: "BenchmarkDotNet setup + profiling", track: "dotnet" },{ name: "Agent architectures: ReAct, Plan-and-Execute", track: "ai" }]},
+    { day: 68, date: "Oct 28", items: [{ name: "dotnet-trace, dotnet-dump in production", track: "dotnet" },{ name: "Tool use: function calling, structured output", track: "ai" }]},
+    { day: 69, date: "Oct 29", items: [{ name: "Object pooling, string interning, StringBuilder", track: "dotnet" },{ name: "Memory in agents: short/long-term, episodic", track: "ai" }]},
+    { day: 70, date: "Oct 30", items: [{ name: "Source generators for DTOs", track: "dotnet" },{ name: "Multi-agent patterns: debate, delegation", track: "ai" }]},
+    { day: 71, date: "Oct 31", items: [{ name: "Zero-alloc patterns: ref struct, stackalloc", track: "dotnet" },{ name: "🔨 PROJECT: Agent with tools + memory", track: "ai" }]},
+    { day: 72, date: "Nov 1", items: [{ name: "Review: performance checklist", track: "dotnet" },{ name: "FE: Performance audit, Core Web Vitals, Lighthouse", track: "fe" }]}
+  ]},
+  { week: 13, title: "Review + Mock Interviews + Capstone", track: "all", days: [
+    { day: 73, date: "Nov 3", items: [{ name: "Mock: explain async/await internals (5 min)", track: "dotnet" },{ name: "Mock: explain transformer architecture", track: "ai" }]},
+    { day: 74, date: "Nov 4", items: [{ name: "Mock: whiteboard ProviderSearch architecture", track: "dotnet" },{ name: "Mock: RAG vs fine-tuning decision", track: "ai" }]},
+    { day: 75, date: "Nov 5", items: [{ name: "Mock: optimize slow EF query live", track: "dotnet" },{ name: "Mock: design AI document classification system", track: "ai" }]},
+    { day: 76, date: "Nov 6", items: [{ name: "Mock: design resilient microservice", track: "dotnet" },{ name: "Mock: evaluate and improve RAG pipeline", track: "ai" }]},
+    { day: 77, date: "Nov 7", items: [{ name: "Mock: Cosmos partition strategy for 10M docs", track: "dotnet" },{ name: "🔨 CAPSTONE: Healthcare AI Agent (.NET + RAG)", track: "ai" }]},
+    { day: 78, date: "Nov 8", items: [{ name: "Phase 1 retrospective", track: "dotnet" },{ name: "Gap identification + Phase 2 planning", track: "ai" },{ name: "Framework refresh sprint (Angular or Vue)", track: "fe" }]}
+  ]}
+];
+
+const SM_PROJECTS = [
+  { name: "Linear Regression from scratch", week: 2, track: "ai", status: "pending" },
+  { name: "MNIST classifier (pure numpy)", week: 3, track: "ai", status: "pending" },
+  { name: "Build a DI Container from scratch", week: 4, track: "dotnet", status: "pending" },
+  { name: "Custom Middleware Library (rate limiter + logging)", week: 5, track: "dotnet", status: "pending" },
+  { name: "EF Core: Multi-tenant query system", week: 7, track: "dotnet", status: "pending" },
+  { name: "BPE Tokenizer from scratch", week: 7, track: "ai", status: "pending" },
+  { name: "Outbox Pattern + Saga implementation", week: 9, track: "dotnet", status: "pending" },
+  { name: "Full RAG pipeline with eval", week: 9, track: "ai", status: "pending" },
+  { name: "Cosmos DB Change Feed processor", week: 10, track: "dotnet", status: "pending" },
+  { name: "Fine-tune small model (Phi-3/Llama)", week: 10, track: "ai", status: "pending" },
+  { name: "High-perf API with BenchmarkDotNet (zero-alloc)", week: 12, track: "dotnet", status: "pending" },
+  { name: "Agent with tools + memory", week: 12, track: "ai", status: "pending" },
+  { name: "Healthcare AI Agent — Capstone (.NET + RAG)", week: 13, track: "both", status: "pending" }
+];
+
+let _sm_progress = {};
+const smOpenWeeks = new Set();
+
+// LeetCode URL map — maps problem name to LeetCode URL
+const LEETCODE_URLS = {
+  // Arrays & Hashing
+  "Contains Duplicate": "https://leetcode.com/problems/contains-duplicate/",
+  "Valid Anagram": "https://leetcode.com/problems/valid-anagram/",
+  "Two Sum": "https://leetcode.com/problems/two-sum/",
+  "Group Anagrams": "https://leetcode.com/problems/group-anagrams/",
+  "Top K Frequent Elements": "https://leetcode.com/problems/top-k-frequent-elements/",
+  "Encode and Decode Strings": "https://leetcode.com/problems/encode-and-decode-strings/",
+  "Product of Array Except Self": "https://leetcode.com/problems/product-of-array-except-self/",
+  "Valid Sudoku": "https://leetcode.com/problems/valid-sudoku/",
+  "Longest Consecutive Sequence": "https://leetcode.com/problems/longest-consecutive-sequence/",
+  // Two Pointers
+  "Valid Palindrome": "https://leetcode.com/problems/valid-palindrome/",
+  "Two Sum II": "https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/",
+  "3Sum": "https://leetcode.com/problems/3sum/",
+  "Container With Most Water": "https://leetcode.com/problems/container-with-most-water/",
+  "Trapping Rain Water": "https://leetcode.com/problems/trapping-rain-water/",
+  // Sliding Window
+  "Longest Substring Without Repeating Characters": "https://leetcode.com/problems/longest-substring-without-repeating-characters/",
+  "Longest Repeating Character Replacement": "https://leetcode.com/problems/longest-repeating-character-replacement/",
+  "Permutation In String": "https://leetcode.com/problems/permutation-in-string/",
+  "Minimum Window Substring": "https://leetcode.com/problems/minimum-window-substring/",
+  "Sliding Window Maximum": "https://leetcode.com/problems/sliding-window-maximum/",
+  // Stack
+  "Valid Parentheses": "https://leetcode.com/problems/valid-parentheses/",
+  "Min Stack": "https://leetcode.com/problems/min-stack/",
+  "Evaluate Reverse Polish Notation": "https://leetcode.com/problems/evaluate-reverse-polish-notation/",
+  "Daily Temperatures": "https://leetcode.com/problems/daily-temperatures/",
+  "Car Fleet": "https://leetcode.com/problems/car-fleet/",
+  "Largest Rectangle In Histogram": "https://leetcode.com/problems/largest-rectangle-in-histogram/",
+  // Binary Search
+  "Binary Search": "https://leetcode.com/problems/binary-search/",
+  "Search a 2D Matrix": "https://leetcode.com/problems/search-a-2d-matrix/",
+  "Koko Eating Bananas": "https://leetcode.com/problems/koko-eating-bananas/",
+  "Find Minimum In Rotated Sorted Array": "https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/",
+  "Search In Rotated Sorted Array": "https://leetcode.com/problems/search-in-rotated-sorted-array/",
+  "Time Based Key Value Store": "https://leetcode.com/problems/time-based-key-value-store/",
+  "Median of Two Sorted Arrays": "https://leetcode.com/problems/median-of-two-sorted-arrays/",
+  // Linked List
+  "Reorder List": "https://leetcode.com/problems/reorder-list/",
+  "Remove Nth Node From End of List": "https://leetcode.com/problems/remove-nth-node-from-end-of-list/",
+  "Copy List With Random Pointer": "https://leetcode.com/problems/copy-list-with-random-pointer/",
+  "Find The Duplicate Number": "https://leetcode.com/problems/find-the-duplicate-number/",
+  "LRU Cache": "https://leetcode.com/problems/lru-cache/",
+  "Reverse Nodes In K Group": "https://leetcode.com/problems/reverse-nodes-in-k-group/",
+  // Trees
+  "Invert Binary Tree": "https://leetcode.com/problems/invert-binary-tree/",
+  "Maximum Depth of Binary Tree": "https://leetcode.com/problems/maximum-depth-of-binary-tree/",
+  "Diameter of Binary Tree": "https://leetcode.com/problems/diameter-of-binary-tree/",
+  "Balanced Binary Tree": "https://leetcode.com/problems/balanced-binary-tree/",
+  "Same Tree": "https://leetcode.com/problems/same-tree/",
+  "Subtree of Another Tree": "https://leetcode.com/problems/subtree-of-another-tree/",
+  "Lowest Common Ancestor of a BST": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/",
+  "Binary Tree Level Order Traversal": "https://leetcode.com/problems/binary-tree-level-order-traversal/",
+  "Binary Tree Right Side View": "https://leetcode.com/problems/binary-tree-right-side-view/",
+  "Count Good Nodes In Binary Tree": "https://leetcode.com/problems/count-good-nodes-in-binary-tree/",
+  "Validate Binary Search Tree": "https://leetcode.com/problems/validate-binary-search-tree/",
+  "Kth Smallest Element In a BST": "https://leetcode.com/problems/kth-smallest-element-in-a-bst/",
+  "Construct Binary Tree From Preorder And Inorder": "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/",
+  "Binary Tree Maximum Path Sum": "https://leetcode.com/problems/binary-tree-maximum-path-sum/",
+  "Serialize And Deserialize Binary Tree": "https://leetcode.com/problems/serialize-and-deserialize-binary-tree/",
+  // Tries
+  "Implement Trie Prefix Tree": "https://leetcode.com/problems/implement-trie-prefix-tree/",
+  "Design Add And Search Words": "https://leetcode.com/problems/design-add-and-search-words-data-structure/",
+  "Word Search II": "https://leetcode.com/problems/word-search-ii/",
+  // Heap / Priority Queue
+  "Kth Largest Element In a Stream": "https://leetcode.com/problems/kth-largest-element-in-a-stream/",
+  "Last Stone Weight": "https://leetcode.com/problems/last-stone-weight/",
+  "K Closest Points to Origin": "https://leetcode.com/problems/k-closest-points-to-origin/",
+  "Kth Largest Element In An Array": "https://leetcode.com/problems/kth-largest-element-in-an-array/",
+  "Task Scheduler": "https://leetcode.com/problems/task-scheduler/",
+  "Design Twitter": "https://leetcode.com/problems/design-twitter/",
+  "Find Median From Data Stream": "https://leetcode.com/problems/find-median-from-data-stream/",
+  // Backtracking
+  "Subsets": "https://leetcode.com/problems/subsets/",
+  "Combination Sum": "https://leetcode.com/problems/combination-sum/",
+  "Combination Sum II": "https://leetcode.com/problems/combination-sum-ii/",
+  "Permutations": "https://leetcode.com/problems/permutations/",
+  "Subsets II": "https://leetcode.com/problems/subsets-ii/",
+  "Generate Parentheses": "https://leetcode.com/problems/generate-parentheses/",
+  "Word Search": "https://leetcode.com/problems/word-search/",
+  "Palindrome Partitioning": "https://leetcode.com/problems/palindrome-partitioning/",
+  "Letter Combinations of a Phone Number": "https://leetcode.com/problems/letter-combinations-of-a-phone-number/",
+  "N Queens": "https://leetcode.com/problems/n-queens/",
+  // Graphs
+  "Number of Islands": "https://leetcode.com/problems/number-of-islands/",
+  "Max Area of Island": "https://leetcode.com/problems/max-area-of-island/",
+  "Clone Graph": "https://leetcode.com/problems/clone-graph/",
+  "Walls And Gates": "https://leetcode.com/problems/walls-and-gates/",
+  "Rotting Oranges": "https://leetcode.com/problems/rotting-oranges/",
+  "Pacific Atlantic Water Flow": "https://leetcode.com/problems/pacific-atlantic-water-flow/",
+  "Surrounded Regions": "https://leetcode.com/problems/surrounded-regions/",
+  "Course Schedule": "https://leetcode.com/problems/course-schedule/",
+  "Course Schedule II": "https://leetcode.com/problems/course-schedule-ii/",
+  "Graph Valid Tree": "https://leetcode.com/problems/graph-valid-tree/",
+  "Number of Connected Components": "https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/",
+  "Redundant Connection": "https://leetcode.com/problems/redundant-connection/",
+  "Word Ladder": "https://leetcode.com/problems/word-ladder/",
+  // Advanced Graphs
+  "Network Delay Time": "https://leetcode.com/problems/network-delay-time/",
+  "Reconstruct Itinerary": "https://leetcode.com/problems/reconstruct-itinerary/",
+  "Min Cost to Connect All Points": "https://leetcode.com/problems/min-cost-to-connect-all-points/",
+  "Swim In Rising Water": "https://leetcode.com/problems/swim-in-rising-water/",
+  "Alien Dictionary": "https://leetcode.com/problems/alien-dictionary/",
+  "Cheapest Flights Within K Stops": "https://leetcode.com/problems/cheapest-flights-within-k-stops/",
+  // 1-D DP
+  "Climbing Stairs": "https://leetcode.com/problems/climbing-stairs/",
+  "Min Cost Climbing Stairs": "https://leetcode.com/problems/min-cost-climbing-stairs/",
+  "House Robber": "https://leetcode.com/problems/house-robber/",
+  "House Robber II": "https://leetcode.com/problems/house-robber-ii/",
+  "Longest Palindromic Substring": "https://leetcode.com/problems/longest-palindromic-substring/",
+  "Palindromic Substrings": "https://leetcode.com/problems/palindromic-substrings/",
+  "Decode Ways": "https://leetcode.com/problems/decode-ways/",
+  "Coin Change": "https://leetcode.com/problems/coin-change/",
+  "Maximum Product Subarray": "https://leetcode.com/problems/maximum-product-subarray/",
+  "Word Break": "https://leetcode.com/problems/word-break/",
+  "Longest Increasing Subsequence": "https://leetcode.com/problems/longest-increasing-subsequence/",
+  "Partition Equal Subset Sum": "https://leetcode.com/problems/partition-equal-subset-sum/",
+  // 2-D DP
+  "Unique Paths": "https://leetcode.com/problems/unique-paths/",
+  "Longest Common Subsequence": "https://leetcode.com/problems/longest-common-subsequence/",
+  "Buy/Sell Stock With Cooldown": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/",
+  "Coin Change II": "https://leetcode.com/problems/coin-change-ii/",
+  "Target Sum": "https://leetcode.com/problems/target-sum/",
+  "Interleaving String": "https://leetcode.com/problems/interleaving-string/",
+  "Longest Increasing Path In a Matrix": "https://leetcode.com/problems/longest-increasing-path-in-a-matrix/",
+  "Distinct Subsequences": "https://leetcode.com/problems/distinct-subsequences/",
+  "Edit Distance": "https://leetcode.com/problems/edit-distance/",
+  "Burst Balloons": "https://leetcode.com/problems/burst-balloons/",
+  "Regular Expression Matching": "https://leetcode.com/problems/regular-expression-matching/",
+  // Greedy
+  "Maximum Subarray": "https://leetcode.com/problems/maximum-subarray/",
+  "Jump Game": "https://leetcode.com/problems/jump-game/",
+  "Jump Game II": "https://leetcode.com/problems/jump-game-ii/",
+  "Gas Station": "https://leetcode.com/problems/gas-station/",
+  "Hand of Straights": "https://leetcode.com/problems/hand-of-straights/",
+  "Merge Triplets to Form Target Triplet": "https://leetcode.com/problems/merge-triplets-to-form-target-triplet/",
+  "Partition Labels": "https://leetcode.com/problems/partition-labels/",
+  "Valid Parenthesis String": "https://leetcode.com/problems/valid-parenthesis-string/",
+  // Intervals
+  "Insert Interval": "https://leetcode.com/problems/insert-interval/",
+  "Merge Intervals": "https://leetcode.com/problems/merge-intervals/",
+  "Non Overlapping Intervals": "https://leetcode.com/problems/non-overlapping-intervals/",
+  "Meeting Rooms": "https://leetcode.com/problems/meeting-rooms/",
+  "Meeting Rooms II": "https://leetcode.com/problems/meeting-rooms-ii/",
+  "Minimum Interval to Include Each Query": "https://leetcode.com/problems/minimum-interval-to-include-each-query/",
+  // Math & Geometry
+  "Rotate Image": "https://leetcode.com/problems/rotate-image/",
+  "Spiral Matrix": "https://leetcode.com/problems/spiral-matrix/",
+  "Set Matrix Zeroes": "https://leetcode.com/problems/set-matrix-zeroes/",
+  "Happy Number": "https://leetcode.com/problems/happy-number/",
+  "Plus One": "https://leetcode.com/problems/plus-one/",
+  "Pow(x, n)": "https://leetcode.com/problems/powx-n/",
+  "Multiply Strings": "https://leetcode.com/problems/multiply-strings/",
+  "Detect Squares": "https://leetcode.com/problems/detect-squares/",
+  // Bit Manipulation
+  "Single Number": "https://leetcode.com/problems/single-number/",
+  "Number of 1 Bits": "https://leetcode.com/problems/number-of-1-bits/",
+  "Counting Bits": "https://leetcode.com/problems/counting-bits/",
+  "Reverse Bits": "https://leetcode.com/problems/reverse-bits/",
+  "Missing Number": "https://leetcode.com/problems/missing-number/",
+  "Sum of Two Integers": "https://leetcode.com/problems/sum-of-two-integers/",
+  "Reverse Integer": "https://leetcode.com/problems/reverse-integer/"
+};
+
+// Helper to wrap a problem name in a link if URL exists
+function linkify(name) {
+  const url = LEETCODE_URLS[name];
+  if (url) return `<a href="${url}" target="_blank" rel="noopener">${name}</a>`;
+  return name;
+}
+
 const SR = { hard: 1, medium: 3, easy: 7 };
 const MASTERY = 3;
 let _progress = {};
 let _revision = {};
 let _sd_progress = {};
+let _revision_v2 = { redos: {}, mock_history: [] };
 const openWeeks = new Set();
 const sdOpenWeeks = new Set();
 let currentSection = 'dsa';
@@ -608,6 +1124,8 @@ async function loadFromServer() {
         _progress = data.progress || {};
         _revision = data.revision || {};
         _sd_progress = data.sd_progress || {};
+        _sm_progress = data.sm_progress || {};
+        _revision_v2 = data.revision_v2 || { redos: {}, mock_history: [] };
     } catch (e) { console.error('Failed to load:', e); }
 }
 
@@ -616,7 +1134,7 @@ async function saveToServer() {
         await fetch('/api/progress', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ progress: _progress, revision: _revision, sd_progress: _sd_progress })
+            body: JSON.stringify({ progress: _progress, revision: _revision, sd_progress: _sd_progress, sm_progress: _sm_progress, revision_v2: _revision_v2 })
         });
     } catch (e) { console.error('Failed to save:', e); }
 }
@@ -630,22 +1148,115 @@ const REV_STORE = 'revision';
 function switchSection(section) {
     currentSection = section;
     document.querySelectorAll('.section-btn').forEach(el => {
-        el.classList.remove('active-dsa', 'active-sd');
+        el.classList.remove('active-dsa', 'active-sd', 'active-sm');
     });
     document.querySelectorAll('.section-content').forEach(el => el.classList.remove('active'));
 
     if (section === 'dsa') {
         document.querySelector('[onclick="switchSection(\'dsa\')"]').classList.add('active-dsa');
         document.getElementById('section-dsa').classList.add('active');
-    } else {
+    } else if (section === 'sd') {
         document.querySelector('[onclick="switchSection(\'sd\')"]').classList.add('active-sd');
         document.getElementById('section-sd').classList.add('active');
         renderSD();
+    } else if (section === 'sm') {
+        document.querySelector('[onclick="switchSection(\'sm\')"]').classList.add('active-sm');
+        document.getElementById('section-sm').classList.add('active');
+        renderSM();
     }
 }
 
+// --- Stack Mastery Section ---
+function renderSM() {
+    const container = document.getElementById('sm-weeks-container');
+    container.innerHTML = '';
+    let total = 0, done = 0, dotnet = 0, ai = 0, fe = 0;
+
+    SM_PLAN.forEach(week => {
+        const el = document.createElement('div');
+        el.className = 'week';
+        let ws = 0, wt = 0, body = '';
+
+        week.days.forEach(day => {
+            body += `<div class="day-label">Day ${day.day} · ${day.date}</div>`;
+            day.items.forEach((item, i) => {
+                const id = `sm_w${week.week}_d${day.day}_i${i}`;
+                const isDone = _sm_progress[id];
+                if (isDone) { done++; ws++; if (item.track==='dotnet') dotnet++; else if (item.track==='ai') ai++; else fe++; }
+                wt++;
+                total++;
+                const trackColor = item.track === 'dotnet' ? '#5e6ad2' : item.track === 'ai' ? '#10b981' : '#f59e0b';
+                const trackLabel = item.track === 'dotnet' ? '.NET' : item.track === 'ai' ? 'AI' : 'FE';
+                const isProject = item.name.includes('PROJECT') || item.name.includes('CAPSTONE');
+                body += `<div class="problem ${isDone?'done':''}" style="${isProject?'border-left:3px solid '+trackColor:''}">
+                    <input type="checkbox" ${isDone?'checked':''} onchange="toggleSM('${id}',this.checked)">
+                    <span class="name">${item.name}</span>
+                    <span class="tag" style="color:${trackColor};background:${trackColor}15;">${trackLabel}</span>
+                </div>`;
+            });
+        });
+
+        el.innerHTML = `<div class="week-header" onclick="toggleSMWeek(${week.week})"><h3>Week ${week.week} — ${week.title}</h3><span class="meta">${ws}/${wt}</span></div><div class="week-body">${body}</div>`;
+        if (smOpenWeeks.has(week.week)) el.classList.add('open');
+        container.appendChild(el);
+    });
+
+    document.getElementById('sm-progress-text').textContent = `${done} / ${total}`;
+    document.getElementById('sm-progress-bar').style.width = `${total?(done/total)*100:0}%`;
+    document.getElementById('sm-stat-done').textContent = done;
+    document.getElementById('sm-stat-dotnet').textContent = dotnet;
+    document.getElementById('sm-stat-ai').textContent = ai;
+    document.getElementById('sm-stat-fe').textContent = fe;
+
+    renderSMProjects();
+}
+
+function toggleSM(id, checked) {
+    if (checked) { _sm_progress[id] = { done: true, date: new Date().toDateString() }; }
+    else { delete _sm_progress[id]; }
+    saveToServer();
+    renderSM();
+}
+
+function toggleSMWeek(w) {
+    if (smOpenWeeks.has(w)) smOpenWeeks.delete(w); else smOpenWeeks.add(w);
+    renderSM();
+}
+
+function switchSMTab(t) {
+    document.querySelectorAll('#sm-tabs .tab').forEach(el => { el.classList.remove('active'); el.style.borderBottomColor = 'transparent'; });
+    document.querySelectorAll('#section-sm > .tab-content').forEach(el => el.classList.remove('active'));
+    const btn = document.querySelector(`#sm-tabs [onclick="switchSMTab('${t}')"]`);
+    btn.classList.add('active');
+    btn.style.borderBottomColor = '#f59e0b';
+    document.getElementById(`tab-${t}`).classList.add('active');
+}
+
+function renderSMProjects() {
+    const container = document.getElementById('sm-projects-container');
+    container.innerHTML = SM_PROJECTS.map((p, i) => {
+        const trackColor = p.track === 'dotnet' ? '#5e6ad2' : p.track === 'ai' ? '#10b981' : '#f59e0b';
+        const trackLabel = p.track === 'dotnet' ? '.NET' : p.track === 'ai' ? 'AI/ML' : 'Both';
+        const isDone = _sm_progress[`sm_project_${i}`];
+        return `<div class="mock-item" style="border-left: 3px solid ${trackColor}; ${isDone?'opacity:0.5':''}">
+            <input type="checkbox" ${isDone?'checked':''} onchange="toggleSMProject(${i}, this.checked)" style="accent-color:${trackColor}">
+            <span class="mock-number">W${p.week}</span>
+            <span class="redo-name">${p.name}</span>
+            <span class="tag" style="color:${trackColor};background:${trackColor}15;">${trackLabel}</span>
+        </div>`;
+    }).join('');
+}
+
+function toggleSMProject(idx, checked) {
+    const id = `sm_project_${idx}`;
+    if (checked) { _sm_progress[id] = { done: true, date: new Date().toDateString() }; }
+    else { delete _sm_progress[id]; }
+    saveToServer();
+    renderSMProjects();
+}
+
 function resetProgress() {
-    if (confirm('Reset all progress?')) { _progress = {}; _revision = {}; _sd_progress = {}; saveToServer().then(() => location.reload()); }
+    if (confirm('Reset all progress?')) { _progress = {}; _revision = {}; _sd_progress = {}; _sm_progress = {}; _revision_v2 = { redos: {}, mock_history: [] }; saveToServer().then(() => location.reload()); }
 }
 
 function switchTab(t) {
@@ -686,7 +1297,7 @@ function render() {
                 wt++;
                 body += `<div class="problem ${done?'done':''}">
                     <input type="checkbox" ${done?'checked':''} onchange="toggle('${id}',this.checked,'${p.name.replace(/'/g,"\\'")}','${p.difficulty}','${p.category}')">
-                    <span class="name">${p.name}</span>
+                    <span class="name">${linkify(p.name)}</span>
                     <span class="tag">${p.category}</span>
                     <span class="diff diff-${p.difficulty}">${p.difficulty}</span>
                 </div>`;
@@ -705,9 +1316,8 @@ function render() {
     document.getElementById('stat-medium').textContent = med;
     document.getElementById('stat-hard').textContent = hard;
 
-    const rev = load(REV_STORE);
-    const due = Object.values(rev).filter(r => !r.mastered && r.nextReview <= Date.now()).length;
-    document.getElementById('stat-revision').textContent = due;
+    const dueCount = getProblemsForRedo().length;
+    document.getElementById('stat-revision').textContent = dueCount;
 
     // Streak
     const dates = new Set(Object.values(progress).map(v => v.date).filter(Boolean));
@@ -730,46 +1340,315 @@ function toggle(id, checked, name, diff, cat) {
 }
 
 function renderRevision() {
-    const rev = load(REV_STORE);
-    const now = Date.now();
-    const todayEnd = new Date(); todayEnd.setHours(23,59,59,999);
-    const in3d = todayEnd.getTime() + 3*86400000;
-    const overdue=[], dueToday=[], upcoming=[], mastered=[];
-
-    Object.values(rev).forEach(r => {
-        if (r.mastered) mastered.push(r);
-        else if (r.nextReview <= now) overdue.push(r);
-        else if (r.nextReview <= todayEnd.getTime()) dueToday.push(r);
-        else if (r.nextReview <= in3d) upcoming.push(r);
-    });
-
-    const card = (r, status) => {
-        const days = Math.ceil((r.nextReview - now) / 86400000);
-        const label = status==='overdue' ? `${Math.abs(days)}d overdue` : status==='today' ? 'Today' : `in ${days}d`;
-        return `<div class="rev-item">
-            <span><span class="rev-name">${r.name}</span> <span class="diff diff-${r.difficulty}" style="margin-left:8px">${r.difficulty}</span></span>
-            <div class="rev-actions">
-                <span class="rev-badge ${status}">${label}</span>
-                <button class="rev-btn" onclick="review('${r.name.replace(/'/g,"\\'")}','hard')">Hard</button>
-                <button class="rev-btn" onclick="review('${r.name.replace(/'/g,"\\'")}','medium')">OK</button>
-                <button class="rev-btn primary" onclick="review('${r.name.replace(/'/g,"\\'")}','easy')">Easy</button>
-            </div>
-        </div>`;
-    };
-
-    document.getElementById('rev-overdue').innerHTML = overdue.length ? overdue.map(r=>card(r,'overdue')).join('') : '<div class="empty">Nothing overdue</div>';
-    document.getElementById('rev-today').innerHTML = dueToday.length ? dueToday.map(r=>card(r,'today')).join('') : '<div class="empty">All caught up</div>';
-    document.getElementById('rev-upcoming').innerHTML = upcoming.length ? upcoming.map(r=>card(r,'upcoming')).join('') : '<div class="empty">Nothing upcoming</div>';
-    document.getElementById('rev-mastered').innerHTML = mastered.length ? mastered.map(r=>`<div class="rev-item"><span class="rev-name">${r.name}</span><span class="rev-badge mastered">Mastered</span></div>`).join('') : '<div class="empty">Keep reviewing to master problems</div>';
+    renderRevisionStats();
+    renderRedoQueue();
+    renderPatternHealth();
+    renderMockHistory();
 }
 
-function review(name, rating) {
-    const rev = load(REV_STORE);
-    const r = rev[name]; if (!r) return;
-    r.reviews++; r.interval = rating;
-    r.nextReview = Date.now() + SR[rating]*86400000;
-    if (rating==='easy') { r.easyStreak++; if (r.easyStreak>=MASTERY) r.mastered=true; } else r.easyStreak=0;
-    save(REV_STORE, rev); renderRevision(); render();
+function renderRevisionStats() {
+    const container = document.getElementById('rev-stats');
+    const solved = getAllSolvedProblems();
+    let mastered = 0, inProgress = 0, pending = 0;
+
+    solved.forEach(p => {
+        const r = _revision_v2.redos[p.name];
+        if (r && r.redo_count >= 3) mastered++;
+        else if (r && r.redo_count > 0) inProgress++;
+        else pending++;
+    });
+
+    container.innerHTML = `
+        <div class="rev-stat"><div class="value mastered">${mastered}</div><div class="label">Mastered (3/3)</div></div>
+        <div class="rev-stat"><div class="value in-progress">${inProgress}</div><div class="label">In Progress</div></div>
+        <div class="rev-stat"><div class="value pending">${pending}</div><div class="label">Not Started</div></div>
+        <div class="rev-stat"><div class="value" style="color: var(--text);">${solved.length}</div><div class="label">Total Solved</div></div>
+    `;
+}
+
+// --- Revision V2: Gather all solved problems ---
+function getAllSolvedProblems() {
+    const solved = [];
+    // From NeetCode PLAN
+    PLAN.forEach(week => {
+        week.days.forEach(day => {
+            day.problems.forEach((p, i) => {
+                const id = `w${week.week}_d${day.day}_p${i}`;
+                if (_progress[id]) {
+                    solved.push({
+                        name: p.name,
+                        difficulty: p.difficulty,
+                        category: p.category,
+                        solvedDate: _progress[id].date
+                    });
+                }
+            });
+        });
+    });
+    // From EXTRA_PROBLEMS
+    EXTRA_PROBLEMS.forEach(p => {
+        solved.push({
+            name: p.name,
+            difficulty: p.difficulty,
+            category: p.category,
+            solvedDate: p.solvedDate
+        });
+    });
+    return solved;
+}
+
+function parseDateStr(dateStr) {
+    return new Date(dateStr).getTime();
+}
+
+function daysBetween(ts1, ts2) {
+    return Math.floor(Math.abs(ts2 - ts1) / 86400000);
+}
+
+// --- Daily Redo Queue ---
+function getRedoIntervals() {
+    // After solve: 3 days → first redo
+    // After first redo: 7 days → second redo
+    // After second redo: 14 days → third redo
+    // After 3 successful redos = mastered
+    return [3, 7, 14];
+}
+
+function getProblemsForRedo() {
+    const now = Date.now();
+    const today = new Date();
+    today.setHours(0,0,0,0);
+    const todayTs = today.getTime();
+    const intervals = getRedoIntervals();
+    const solved = getAllSolvedProblems();
+    const due = [];
+
+    solved.forEach(p => {
+        const redoData = _revision_v2.redos[p.name];
+        const redoCount = redoData ? redoData.redo_count : 0;
+
+        // If mastered (3 successful redos), skip
+        if (redoCount >= 3) return;
+
+        let baseDate, requiredInterval;
+        if (redoCount === 0) {
+            // Never redone: due 3 days after solve
+            baseDate = parseDateStr(p.solvedDate);
+            requiredInterval = intervals[0];
+        } else {
+            // Use last_redo as base and next interval
+            baseDate = parseDateStr(redoData.last_redo);
+            requiredInterval = intervals[Math.min(redoCount, intervals.length - 1)];
+        }
+
+        const dueDate = baseDate + (requiredInterval * 86400000);
+        if (dueDate <= now + 86400000) { // due today or overdue
+            due.push({
+                ...p,
+                redo_count: redoCount,
+                due_date: dueDate,
+                overdue_days: Math.max(0, daysBetween(dueDate, now))
+            });
+        }
+    });
+
+    // Sort by most overdue first, then limit to 3
+    due.sort((a, b) => a.due_date - b.due_date);
+    return due.slice(0, 3);
+}
+
+function renderRedoQueue() {
+    const container = document.getElementById('redo-queue');
+    const dueProblems = getProblemsForRedo();
+
+    if (dueProblems.length === 0) {
+        container.innerHTML = '<div class="empty">No problems due for redo today. Great job! 🎉</div>';
+        return;
+    }
+
+    container.innerHTML = dueProblems.map(p => {
+        const redoLabel = p.redo_count === 0 ? '1st redo' : p.redo_count === 1 ? '2nd redo' : '3rd redo';
+        const badgeClass = p.redo_count === 0 ? 'redo-1' : p.redo_count === 1 ? 'redo-2' : 'redo-3';
+        const overdueText = p.overdue_days > 0 ? `⚠️ ${p.overdue_days} day${p.overdue_days > 1 ? 's' : ''} overdue` : '📅 Due today';
+        const intervals = getRedoIntervals();
+        const nextInterval = p.redo_count < 2 ? intervals[p.redo_count + 1] : null;
+        const progressDots = [0,1,2].map(i => `<span style="display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:3px;background:${i < p.redo_count ? '#34d399' : 'var(--border-strong)'}"></span>`).join('');
+        return `<div class="redo-item">
+            <div class="redo-info">
+                <span class="redo-name">${linkify(p.name)}</span>
+                <span class="tag">${p.category}</span>
+                <span class="diff diff-${p.difficulty}">${p.difficulty}</span>
+                <span class="redo-badge ${badgeClass}">${redoLabel}</span>
+            </div>
+            <div class="redo-actions">
+                <button class="rev-btn" onclick="markStruggled('${p.name.replace(/'/g,"\\'")}')">😰 Struggled</button>
+                <button class="rev-btn primary" onclick="markRedone('${p.name.replace(/'/g,"\\'")}')">✅ Redone</button>
+            </div>
+            <span class="redo-schedule">${progressDots} ${overdueText}${nextInterval ? ` · Next redo in ${nextInterval}d if passed` : ' · Last redo — will be mastered!'}</span>
+        </div>`;
+    }).join('');
+}
+
+function markRedone(name) {
+    if (!_revision_v2.redos[name]) {
+        _revision_v2.redos[name] = { redo_count: 0, last_redo: null, next_redo: null };
+    }
+    const r = _revision_v2.redos[name];
+    r.redo_count++;
+    r.last_redo = new Date().toDateString();
+    const intervals = getRedoIntervals();
+    if (r.redo_count >= 3) {
+        r.next_redo = null; // mastered
+        showToast(`🏆 "${name}" mastered! No more redos needed.`, 'success');
+    } else {
+        const nextInterval = intervals[Math.min(r.redo_count, intervals.length - 1)];
+        const next = new Date();
+        next.setDate(next.getDate() + nextInterval);
+        r.next_redo = next.toDateString();
+        showToast(`✅ "${name}" — redo ${r.redo_count}/3 done. Next in ${nextInterval} days.`, 'success');
+    }
+    saveToServer();
+    renderRevision();
+}
+
+function markStruggled(name) {
+    if (!_revision_v2.redos[name]) {
+        _revision_v2.redos[name] = { redo_count: 0, last_redo: null, next_redo: null };
+    }
+    const r = _revision_v2.redos[name];
+    // Reset: set redo_count to 0, schedule redo for tomorrow (1 day)
+    r.redo_count = 0;
+    r.last_redo = new Date().toDateString();
+    const next = new Date();
+    next.setDate(next.getDate() + 1);
+    r.next_redo = next.toDateString();
+    showToast(`😰 "${name}" reset — will show again tomorrow. You got this!`, 'warning');
+    saveToServer();
+    renderRevision();
+}
+
+// --- Toast Notification ---
+function showToast(message, type = 'info') {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.className = `toast ${type}`;
+    // Force reflow to restart animation
+    void toast.offsetWidth;
+    toast.classList.add('show');
+    setTimeout(() => { toast.classList.remove('show'); }, 3500);
+}
+
+// --- Pattern Health ---
+function renderPatternHealth() {
+    const container = document.getElementById('pattern-health-grid');
+    const now = Date.now();
+    const solved = getAllSolvedProblems();
+
+    // Find most recent solve per category
+    const categoryLastSolve = {};
+    solved.forEach(p => {
+        const ts = parseDateStr(p.solvedDate);
+        if (!categoryLastSolve[p.category] || ts > categoryLastSolve[p.category]) {
+            categoryLastSolve[p.category] = ts;
+        }
+    });
+
+    // Also account for redo dates
+    Object.entries(_revision_v2.redos).forEach(([name, data]) => {
+        if (data.last_redo) {
+            const p = solved.find(s => s.name === name);
+            if (p) {
+                const ts = parseDateStr(data.last_redo);
+                if (!categoryLastSolve[p.category] || ts > categoryLastSolve[p.category]) {
+                    categoryLastSolve[p.category] = ts;
+                }
+            }
+        }
+    });
+
+    container.innerHTML = REVISION_CATEGORIES.map(cat => {
+        const lastSolve = categoryLastSolve[cat];
+        let dotClass = 'gray';
+        let daysAgo = '—';
+
+        if (lastSolve) {
+            const days = daysBetween(lastSolve, now);
+            daysAgo = days === 0 ? 'today' : `${days}d ago`;
+            if (days <= 3) dotClass = 'green';
+            else if (days <= 7) dotClass = 'yellow';
+            else dotClass = 'red';
+        }
+
+        return `<div class="pattern-cell">
+            <div class="pattern-dot ${dotClass}"></div>
+            <span class="pattern-name">${cat}</span>
+            <span class="pattern-days">${daysAgo}</span>
+        </div>`;
+    }).join('');
+}
+
+// --- Weekend Mock ---
+function generateMockSet() {
+    const solved = getAllSolvedProblems();
+    // Group by category
+    const byCategory = {};
+    solved.forEach(p => {
+        if (!byCategory[p.category]) byCategory[p.category] = [];
+        byCategory[p.category].push(p);
+    });
+
+    // Pick 4 random categories that have solved problems
+    const availableCategories = Object.keys(byCategory);
+    const shuffled = availableCategories.sort(() => Math.random() - 0.5);
+    const selected = shuffled.slice(0, 4);
+
+    const mockProblems = selected.map(cat => {
+        const problems = byCategory[cat];
+        return problems[Math.floor(Math.random() * problems.length)];
+    });
+
+    // Save to history
+    _revision_v2.mock_history.unshift({
+        date: new Date().toISOString(),
+        problems: mockProblems.map(p => p.name)
+    });
+    // Keep last 10 mocks
+    if (_revision_v2.mock_history.length > 10) _revision_v2.mock_history = _revision_v2.mock_history.slice(0, 10);
+    saveToServer();
+
+    // Render the mock set
+    const container = document.getElementById('mock-problems');
+    container.innerHTML = `
+        <div class="mock-timer">⏱️ Suggested time: 1 hour 30 minutes</div>
+        ${mockProblems.map((p, i) => `<div class="mock-item" style="margin-top: 8px;">
+            <span class="mock-number">${i + 1}</span>
+            <span class="redo-name">${linkify(p.name)}</span>
+            <span class="tag">${p.category}</span>
+            <span class="diff diff-${p.difficulty}">${p.difficulty}</span>
+        </div>`).join('')}
+    `;
+    renderMockHistory();
+}
+
+function renderMockHistory() {
+    const container = document.getElementById('mock-history-section');
+    if (!_revision_v2.mock_history || _revision_v2.mock_history.length === 0) {
+        container.innerHTML = '';
+        return;
+    }
+
+    container.innerHTML = `
+        <div class="rev-group" style="margin-top: 16px;">
+            <h4>Mock History</h4>
+            ${_revision_v2.mock_history.slice(0, 5).map(mock => {
+                const date = new Date(mock.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                return `<div class="redo-item" style="flex-direction: column; align-items: flex-start; gap: 4px;">
+                    <span class="redo-meta">${date}</span>
+                    <span class="redo-name" style="font-size: 12px;">${mock.problems.map(n => linkify(n)).join(' · ')}</span>
+                </div>`;
+            }).join('')}
+        </div>
+    `;
 }
 
 function renderCategories() {
@@ -813,7 +1692,7 @@ function renderSD() {
                 wt++;
                 body += `<div class="problem sd-item ${done?'done':''}">
                     <input type="checkbox" ${done?'checked':''} onchange="toggleSD('${id}',this.checked,'${p.name.replace(/'/g,"\\'")}','${p.difficulty}','${p.category}')">
-                    <span class="name">${p.name}</span>${p.build ? '<span class="build-badge">🔨 BUILD</span>' : ''}
+                    <span class="name">${linkify(p.name)}</span>${p.build ? '<span class="build-badge">🔨 BUILD</span>' : ''}
                     <span class="tag">${p.category}</span>
                     <span class="diff diff-${p.difficulty}">${p.difficulty}</span>
                 </div>`;
@@ -862,7 +1741,7 @@ function renderSDCategories() {
 
 // --- Export / Import ---
 function exportData() {
-    const data = { progress: _progress, revision: _revision, sd_progress: _sd_progress, exported: new Date().toISOString() };
+    const data = { progress: _progress, revision: _revision, sd_progress: _sd_progress, revision_v2: _revision_v2, exported: new Date().toISOString() };
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
@@ -880,6 +1759,7 @@ function importData(event) {
             if (data.progress) _progress = data.progress;
             if (data.revision) _revision = data.revision;
             if (data.sd_progress) _sd_progress = data.sd_progress;
+            if (data.revision_v2) _revision_v2 = data.revision_v2;
             saveToServer().then(() => location.reload());
         } catch (err) { alert('Invalid backup file'); }
     };
@@ -921,5 +1801,6 @@ async function seedIfNeeded() {
     render();
 })();
 </script>
+<div class="toast" id="toast"></div>
 </body>
 </html>

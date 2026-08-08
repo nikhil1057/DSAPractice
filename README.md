@@ -1,7 +1,6 @@
 # DSA & System Design Practice
 
-Daily DSA practice in Python and C# with tests. Following **NeetCode 150** roadmap.  
-System Design study following **AlgoMaster** course (starting Aug 15).
+Daily DSA practice in Python and C# with tests. Following **NeetCode 150** roadmap.
 
 ## Structure
 
@@ -12,9 +11,7 @@ System Design study following **AlgoMaster** course (starting Aug 15).
 ├── dsa-csharp/
 │   └── solutions/                 ← C# solutions by category
 ├── dsa-csharp-tests/              ← xUnit test cases
-├── tracker/                       ← Progress tracker UI (localhost:3150)
-├── PLAN.md                        ← NeetCode 150 study plan (7 weeks)
-└── SD-PLAN.md                     ← System Design study plan (12 weeks)
+└── tracker/                       ← Progress tracker UI (localhost:3150)
 ```
 
 ## Running Tests
@@ -38,7 +35,6 @@ dotnet test --filter "ClassName"         # Run specific test class
 ```bash
 cd tracker && node server.js
 # Open http://localhost:3150
-# Tabs: DSA (NeetCode 150) | System Design (AlgoMaster)
 ```
 
 ## Problems Solved
@@ -135,14 +131,24 @@ cd tracker && node server.js
 | 104 | Maximum Depth of Binary Tree | Easy | Postorder Recursion |
 | 105 | Construct Tree from Preorder/Inorder | Medium | HashMap + Recursion |
 | 110 | Balanced Binary Tree | Easy | Postorder, Height Check |
+| 124 | Binary Tree Maximum Path Sum | Hard | Postorder, Track Global Max |
 | 199 | Binary Tree Right Side View | Medium | BFS, Last Node Per Level |
 | 226 | Invert Binary Tree | Easy | Preorder, Swap Children |
 | 230 | Kth Smallest Element In BST | Medium | Inorder Traversal |
 | 235 | Lowest Common Ancestor of BST | Medium | BST Property, Traverse |
+| 297 | Serialize and Deserialize Binary Tree | Hard | BFS/Preorder + Queue |
 | 543 | Diameter of Binary Tree | Easy | Postorder, Track Max(left+right) |
 | 572 | Subtree of Another Tree | Easy | DFS + Same Tree Check |
 | 98 | Validate Binary Search Tree | Medium | DFS, Min/Max Bounds |
 | 1448 | Count Good Nodes | Medium | DFS, Track Max on Path |
+
+### Tries
+
+| # | Problem | Difficulty | Techniques |
+|---|---------|-----------|-----------|
+| 208 | Implement Trie (Prefix Tree) | Medium | Dict-based nodes, is_end flag |
+| 211 | Design Add and Search Words | Medium | Trie + DFS for '.' wildcard |
+| 212 | Word Search II | Hard | Trie + Backtracking, Pruning |
 
 ### Design
 
@@ -153,13 +159,4 @@ cd tracker && node server.js
 
 ## Progress
 
-**NeetCode 150:** 48 / 150 solved  
-**System Design:** Starting Aug 15 (111 items, 16 build projects)
-
-## Timeline
-
-| Phase | Dates | Focus |
-|---|---|---|
-| DSA (NeetCode 150) | Jul 18 - Sep 3 | 3 problems/day, Python + C# |
-| System Design (AlgoMaster) | Aug 15 - Nov 7 | Concepts → Tech → Patterns → Problems |
-| Interview Ready | November 2026 | DSA + System Design + Behavioral |
+**NeetCode 150:** 51 / 150 solved

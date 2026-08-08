@@ -204,6 +204,18 @@
     "w3_d17_p2": {
       "done": true,
       "date": "Wed Aug 05 2026"
+    },
+    "w3_d18_p0": {
+      "done": true,
+      "date": "Wed Aug 05 2026"
+    },
+    "w3_d18_p1": {
+      "done": true,
+      "date": "Wed Aug 05 2026"
+    },
+    "w3_d18_p2": {
+      "done": true,
+      "date": "Fri Aug 07 2026"
     }
   },
   "revision": {
@@ -716,7 +728,72 @@
       "easyStreak": 0,
       "mastered": false,
       "reviews": 0
+    },
+    "Binary Tree Maximum Path Sum": {
+      "name": "Binary Tree Maximum Path Sum",
+      "difficulty": "hard",
+      "category": "Trees",
+      "nextReview": 1786195631749,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Serialize And Deserialize Binary Tree": {
+      "name": "Serialize And Deserialize Binary Tree",
+      "difficulty": "hard",
+      "category": "Trees",
+      "nextReview": 1786195632141,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Implement Trie Prefix Tree": {
+      "name": "Implement Trie Prefix Tree",
+      "difficulty": "medium",
+      "category": "Tries",
+      "nextReview": 1786340136650,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
     }
   },
-  "sd_progress": {}
+  "sd_progress": {},
+  "revision_v2": {
+    "redos": {
+      "Remove Duplicates from Sorted List": {
+        "redo_count": 1,
+        "last_redo": "Thu Aug 06 2026",
+        "next_redo": "Thu Aug 13 2026"
+      },
+      "Design Linked List": {
+        "redo_count": 1,
+        "last_redo": "Fri Aug 07 2026",
+        "next_redo": "Fri Aug 14 2026"
+      },
+      "Merge Two Sorted Lists": {
+        "redo_count": 1,
+        "last_redo": "Fri Aug 07 2026",
+        "next_redo": "Fri Aug 14 2026"
+      },
+      "Linked List Cycle": {
+        "redo_count": 1,
+        "last_redo": "Fri Aug 07 2026",
+        "next_redo": "Fri Aug 14 2026"
+      },
+      "Reverse Linked List": {
+        "redo_count": 1,
+        "last_redo": "Fri Aug 07 2026",
+        "next_redo": "Fri Aug 14 2026"
+      },
+      "Palindrome Linked List": {
+        "redo_count": 1,
+        "last_redo": "Fri Aug 07 2026",
+        "next_redo": "Fri Aug 14 2026"
+      }
+    },
+    "mock_history": []
+  }
 }

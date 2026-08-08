@@ -1,21 +1,17 @@
 # 297. Serialize and Deserialize Binary Tree
 # https://leetcode.com/problems/serialize-and-deserialize-binary-tree/
 #
-# Serialization is the process of converting a data structure or object into a
-# sequence of bits so that it can be stored in a file or memory buffer, or
-# transmitted across a network connection link to be reconstructed later.
+# Design an algorithm to serialize and deserialize a binary tree.
 #
-# Design an algorithm to serialize and deserialize a binary tree. There is no
-# restriction on how your serialization/deserialization algorithm should work.
-# You just need to ensure that a binary tree can be serialized to a string and
-# this string can be deserialized to the original tree structure.
+# APPROACH: Preorder DFS with "null" markers for empty nodes.
+# Serialize: preorder traversal, append "null" for None nodes, join by comma.
+# Deserialize: split by comma, read values one by one, recursively build
+# left then right. "null" means return None (subtree is done).
 #
-# Example 1: Input: root = [1,2,3,null,null,4,5] Output: [1,2,3,null,null,4,5]
-# Example 2: Input: root = [] Output: []
+# Single preorder + null markers is enough to uniquely reconstruct the tree.
 #
-# Constraints:
-# - The number of nodes in the tree is in the range [0, 10^4].
-# - -1000 <= Node.val <= 1000
+# TIME: O(n) — visit every node once for both serialize and deserialize
+# SPACE: O(n) — storing the serialized string / recursion stack
 
 
 class TreeNode:
@@ -27,7 +23,33 @@ class TreeNode:
 
 class Codec:
     def serialize(self, root: TreeNode | None) -> str:
-        pass
+        result = []
+
+        def dfs(node):
+            if not node:
+                result.append("null")
+                return
+            result.append(str(node.val))  # convert to string for join
+            dfs(node.left)
+            dfs(node.right)
+
+        dfs(root)
+        return ','.join(result)
 
     def deserialize(self, data: str) -> TreeNode | None:
-        pass
+        values = data.split(",")
+        index = 0
+
+        def dfs():
+            nonlocal index
+            if values[index] == "null":
+                index += 1
+                return None
+
+            node = TreeNode(int(values[index]))
+            index += 1
+            node.left = dfs()
+            node.right = dfs()
+            return node
+
+        return dfs()
