@@ -13,10 +13,32 @@
 // - 1 <= k <= points.length <= 10^4
 // - -10^4 <= xi, yi <= 10^4
 
+// APPROACH: Max-heap of size k (keep k closest points)
+// Use max-heap (via reversed comparer) so the farthest of the k is at top.
+// For each point, push to heap. If size > k, pop the farthest.
+// Result: heap holds the k closest points.
+//
+// TIME: O(n log k) — push/pop is O(log k) for each of n points
+// SPACE: O(k) for the heap
+
 public class KClosestPointsToOrigin
 {
     public int[][] KClosest(int[][] points, int k)
     {
-        throw new NotImplementedException();
+        // Max-heap: farthest point at top (easiest to evict)
+        PriorityQueue<int[],int> heap = new PriorityQueue<int[], int>(Comparer<int>.Create((a,b) => b - a));
+
+        foreach(int[] row in points)
+        {
+            int dist = row[0] * row[0] + row[1] * row[1];  // x² + y² (no sqrt needed)
+            heap.Enqueue(row, dist);
+            if(heap.Count > k) heap.Dequeue();  // evict farthest
+        }
+
+        // Collect remaining k points
+        var result = new int[k][];
+        for(int i = 0; i < k; i++)
+            result[i] = heap.Dequeue();
+        return result;
     }
 }

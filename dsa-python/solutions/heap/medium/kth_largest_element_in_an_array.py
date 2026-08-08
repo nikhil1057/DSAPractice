@@ -12,7 +12,21 @@
 # - 1 <= k <= nums.length <= 10^5
 # - -10^4 <= nums[i] <= 10^4
 
+# APPROACH: Min-heap of size k
+# Keep only the k largest elements in a min-heap.
+# Top of heap = smallest of the k largest = kth largest overall.
+#
+# TIME: O(n log k) — push/pop is O(log k) for each of n elements
+# SPACE: O(k) for the heap
 
+import heapq
 class KthLargestElementInAnArray:
     def find_kth_largest(self, nums: list[int], k: int) -> int:
-        pass
+        heap = []  # min-heap of size k
+
+        for num in nums:
+            heapq.heappush(heap, num)
+            if len(heap) > k:
+                heapq.heappop(heap)  # evict smallest, keep top k
+
+        return heap[0]  # top of min-heap = kth largest

@@ -12,10 +12,25 @@
 // - 1 <= k <= nums.length <= 10^5
 // - -10^4 <= nums[i] <= 10^4
 
+// APPROACH: Min-heap of size k
+// Keep only the k largest elements in a min-heap.
+// Top of heap = smallest of the k largest = kth largest overall.
+//
+// TIME: O(n log k) — push/pop is O(log k) for each of n elements
+// SPACE: O(k) for the heap
+
 public class KthLargestElementInAnArray
 {
     public int FindKthLargest(int[] nums, int k)
     {
-        throw new NotImplementedException();
+        PriorityQueue<int,int> heap = new();  // min-heap by default
+
+        foreach(int num in nums)
+        {
+            heap.Enqueue(num, num);
+            if(heap.Count > k) heap.Dequeue();  // evict smallest, keep top k
+        }
+
+        return heap.Peek();  // top of min-heap = kth largest
     }
 }
