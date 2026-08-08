@@ -22,15 +22,34 @@
 // - -10^4 <= val <= 10^4
 // - At most 10^4 calls will be made to Add.
 
+// APPROACH: Min-heap of size k
+// Keep only the k largest elements in a min-heap. The top (smallest of the k)
+// is always the kth largest overall. On add: push, if size > k pop smallest.
+//
+// TIME: O(n log k) init, O(log k) per Add
+// SPACE: O(k) for the heap
+
 public class KthLargestElementInAStream
 {
+    private PriorityQueue<int,int> _heap;  // min-heap by default
+    private int _k;
+
     public KthLargestElementInAStream(int k, int[] nums)
     {
-        throw new NotImplementedException();
+        _k = k;
+        _heap = new PriorityQueue<int, int>();
+
+        foreach(int num in nums)
+        {
+            _heap.Enqueue(num, num);
+            if(_heap.Count > _k) _heap.Dequeue();  // evict smallest, keep top k
+        }
     }
 
     public int Add(int val)
     {
-        throw new NotImplementedException();
+        _heap.Enqueue(val, val);
+        if(_heap.Count > _k) _heap.Dequeue();  // maintain size k
+        return _heap.Peek();  // top of min-heap = kth largest
     }
 }

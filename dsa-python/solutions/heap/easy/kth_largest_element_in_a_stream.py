@@ -24,10 +24,27 @@
 # - It is guaranteed that there will be at least k elements in the array when
 #   you search for the kth element.
 
+# APPROACH: Min-heap of size k
+# Keep only the k largest elements in a min-heap. The top (smallest of the k)
+# is always the kth largest overall. On add: push, if size > k pop smallest.
+#
+# TIME: O(n log k) init, O(log k) per add
+# SPACE: O(k) for the heap
+
+import heapq
 
 class KthLargestElementInAStream:
     def __init__(self, k: int, nums: list[int]):
-        pass
+        self.k = k
+        self.heap = []  # min-heap holding the top k elements
+
+        for num in nums:
+            heapq.heappush(self.heap, num)
+            if(len(self.heap) > self.k):
+                heapq.heappop(self.heap)  # evict smallest, keep top k
 
     def add(self, val: int) -> int:
-        pass
+        heapq.heappush(self.heap, val)
+        if(len(self.heap) > self.k):
+            heapq.heappop(self.heap)  # maintain size k
+        return self.heap[0]  # top of min-heap = kth largest

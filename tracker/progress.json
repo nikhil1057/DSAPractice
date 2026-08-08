@@ -204,6 +204,34 @@
     "w3_d17_p2": {
       "done": true,
       "date": "Wed Aug 05 2026"
+    },
+    "w3_d18_p0": {
+      "done": true,
+      "date": "Wed Aug 05 2026"
+    },
+    "w3_d18_p1": {
+      "done": true,
+      "date": "Wed Aug 05 2026"
+    },
+    "w3_d18_p2": {
+      "done": true,
+      "date": "Fri Aug 07 2026"
+    },
+    "w3_d19_p0": {
+      "done": true,
+      "date": "Sat Aug 08 2026"
+    },
+    "w3_d19_p1": {
+      "done": true,
+      "date": "Sat Aug 08 2026"
+    },
+    "w3_d19_p2": {
+      "done": true,
+      "date": "Sat Aug 08 2026"
+    },
+    "w3_d20_p0": {
+      "done": true,
+      "date": "Sat Aug 08 2026"
     }
   },
   "revision": {
@@ -716,7 +744,117 @@
       "easyStreak": 0,
       "mastered": false,
       "reviews": 0
+    },
+    "Binary Tree Maximum Path Sum": {
+      "name": "Binary Tree Maximum Path Sum",
+      "difficulty": "hard",
+      "category": "Trees",
+      "nextReview": 1786195631749,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Serialize And Deserialize Binary Tree": {
+      "name": "Serialize And Deserialize Binary Tree",
+      "difficulty": "hard",
+      "category": "Trees",
+      "nextReview": 1786195632141,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Implement Trie Prefix Tree": {
+      "name": "Implement Trie Prefix Tree",
+      "difficulty": "medium",
+      "category": "Tries",
+      "nextReview": 1786340136650,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Design Add And Search Words": {
+      "name": "Design Add And Search Words",
+      "difficulty": "medium",
+      "category": "Tries",
+      "nextReview": 1786442580815,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Word Search II": {
+      "name": "Word Search II",
+      "difficulty": "hard",
+      "category": "Tries",
+      "nextReview": 1786442585037,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Kth Largest Element In a Stream": {
+      "name": "Kth Largest Element In a Stream",
+      "difficulty": "easy",
+      "category": "Heap",
+      "nextReview": 1786447368556,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
+    },
+    "Last Stone Weight": {
+      "name": "Last Stone Weight",
+      "difficulty": "easy",
+      "category": "Heap",
+      "nextReview": 1786448716572,
+      "interval": "medium",
+      "easyStreak": 0,
+      "mastered": false,
+      "reviews": 0
     }
   },
-  "sd_progress": {}
+  "revision_v2": {
+    "redos": {
+      "Remove Duplicates from Sorted List": {
+        "redo_count": 1,
+        "last_redo": "Thu Aug 06 2026",
+        "next_redo": "Thu Aug 13 2026"
+      },
+      "Design Linked List": {
+        "redo_count": 1,
+        "last_redo": "Fri Aug 07 2026",
+        "next_redo": "Fri Aug 14 2026"
+      },
+      "Merge Two Sorted Lists": {
+        "redo_count": 1,
+        "last_redo": "Fri Aug 07 2026",
+        "next_redo": "Fri Aug 14 2026"
+      },
+      "Linked List Cycle": {
+        "redo_count": 1,
+        "last_redo": "Fri Aug 07 2026",
+        "next_redo": "Fri Aug 14 2026"
+      },
+      "Reverse Linked List": {
+        "redo_count": 1,
+        "last_redo": "Fri Aug 07 2026",
+        "next_redo": "Fri Aug 14 2026"
+      },
+      "Palindrome Linked List": {
+        "redo_count": 1,
+        "last_redo": "Fri Aug 07 2026",
+        "next_redo": "Fri Aug 14 2026"
+      }
+    },
+    "mock_history": []
+  },
+  "sd_progress": {},
+  "sm_progress": {},
+  "settings": {
+    "start_date": "2026-07-18",
+    "daily_target": 3
+  }
 }
