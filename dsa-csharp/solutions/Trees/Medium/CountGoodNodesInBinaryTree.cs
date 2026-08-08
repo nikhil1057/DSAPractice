@@ -1,17 +1,15 @@
 // 1448. Count Good Nodes in Binary Tree
 // https://leetcode.com/problems/count-good-nodes-in-binary-tree/
 //
-// Given a binary tree root, a node X in the tree is named good if in the path
-// from root to X there are no nodes with a value greater than X.
-// Return the number of good nodes in the binary tree.
+// Given a binary tree root, a node X is "good" if no node on the path from
+// root to X has a value greater than X. Return the count of good nodes.
 //
-// Example 1: Input: root = [3,1,4,3,null,1,5] Output: 4
-// Example 2: Input: root = [3,3,null,4,2] Output: 3
-// Example 3: Input: root = [1] Output: 1
+// APPROACH: DFS, carry maxSoFar (max value on path from root to current node).
+// If node.val >= maxSoFar → it's a good node (no greater value above it).
+// Update maxSoFar and recurse on children.
 //
-// Constraints:
-// - The number of nodes in the binary tree is in the range [1, 10^5].
-// - Each node's value is between [-10^4, 10^4].
+// TIME: O(n) — visit every node once
+// SPACE: O(h) — recursion stack
 
 public class CountGoodNodesInBinaryTree
 {
